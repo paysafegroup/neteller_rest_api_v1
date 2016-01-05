@@ -36,24 +36,26 @@
 <script>
     var embed = new Apiary.Embed({
         header: '.myHeader',
-        subdomain: 'netellerrestapiv1',
+        subdomain: 'netellerrestapi',
         tableOfContents: '.tableOfContents.section',
         humanColumn: '.humanColumn.content',
         preferences: {
             permalinks: true,
             fluidHumanColumn: true,
-            collapseMachineColumnByDefault: true,
+            collapseMachineColumnByDefault: false,
+            displayUriParametersInHumanColumn: false,
+            displayHttpMethods: false,
             defaultHost: 'production'
         },
         theme: {
             tableOfContents: {
                 section: {
-                    color: '#373737',
+                    color: '#6B6B6B',
                     fontFamily: 'Tahoma,sans-serif',
                     fontSize: '15px',
 
                     item: {
-                        color: '#578129',
+                        color: '#8FC52B',
                         fontFamily: 'Tahoma,sans-serif',
                         fontSize: '15px'
                     }
@@ -80,22 +82,23 @@
                             p: {
                                 fontSize: '14px',
                                 a: {
-                                    color: '#3BA2C2',
-                                    borderBottom: '2px solid #3BA2C2'
+                                    color: '#8FC52B',
+                                    borderBottom: '2px solid #8FC52B'
                                 }
                             },
                             a: {
-                                color: '#3BA2C2',
-                                borderBottom: '2px solid #3BA2C2'
+                                color: '#8FC52B',
+                                borderBottom: '2px solid #3BA2C2',
+                                fontWeight: 'normal'
                             },
                             pre: {
                                 code: {
-                                    color: '#578129',
+//                                    color: '#8FC52B',
                                     fontSize: '12px'
                                 }
                             },
                             code: {
-                                color: '#578129',
+//                                color: '#8FC52B',
                                 fontSize: '12px'
                             },
                             table: {
@@ -119,7 +122,7 @@
                             submit: {
                                 button: {
                                     color: '#FFFFFF',
-                                    backgroundColor: '#008ACA',
+                                    backgroundColor: '#8FC52B',
                                     fontFamily: 'Tahoma,sans-serif',
                                     fontSize: '14px'
                                 }
@@ -130,11 +133,10 @@
             }
         },
         hosts: [
-            'proxy',
+            'mock',
             'production'
         ]
     });
 </script>
 </body>
 </html>
-
