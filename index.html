@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NETELLER REST API v1</title>
+    <script src="https://api.apiary.io/seeds/embed.js"></script>
+    <!-- Inline Styles -->
+    <style>
+        html, body {
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .humanColumn.content {
+            color: #6b6b6b;
+        }
+
+        .myHeader {
+            float: left;
+            width: 100%;
+            height: 100px;
+            background-image: url(https://storage.neteller.com/assets/logo-skrill.png);
+            background-repeat: no-repeat;
+            background-position: 30px center;
+        }
+    </style>
+    <!-- /Inline Styles -->
+</head>
+<body>
+<!-- Header -->
+<header class="myHeader">
+</header>
+<!-- /Header -->
+<script>
+    var embed = new Apiary.Embed({
+        header: '.myHeader',
+        subdomain: 'netellerrestapi',
+        tableOfContents: '.tableOfContents.section',
+        humanColumn: '.humanColumn.content',
+        preferences: {
+            permalinks: true,
+            fluidHumanColumn: true,
+            collapseMachineColumnByDefault: true,
+            defaultHost: 'production'
+        },
+        theme: {
+            tableOfContents: {
+                section: {
+                    color: '#373737',
+                    fontFamily: 'Tahoma,sans-serif',
+                    fontSize: '15px',
+
+                    item: {
+                        color: '#578129',
+                        fontFamily: 'Tahoma,sans-serif',
+                        fontSize: '15px'
+                    }
+                }
+            },
+            humanColumn: {
+                content: {
+                    color: '#6B6B6B',
+                    fontFamily: 'Tahoma,sans-serif',
+                    fontSize: '14px',
+                    apiName: {
+                        color: '#6B6B6B',
+                        fontFamily: 'Tahoma,sans-serif',
+                        fontSize: '36px'
+                    },
+                    section: {
+                        apiDescription: {
+                            h1: {
+                                fontSize: '18px'
+                            },
+                            h2: {
+                                fontSize: '16px'
+                            },
+                            p: {
+                                fontSize: '14px',
+                                a: {
+                                    color: '#3BA2C2',
+                                    borderBottom: '2px solid #3BA2C2'
+                                }
+                            },
+                            a: {
+                                color: '#3BA2C2',
+                                borderBottom: '2px solid #3BA2C2'
+                            },
+                            pre: {
+                                code: {
+                                    color: '#578129',
+                                    fontSize: '12px'
+                                }
+                            },
+                            code: {
+                                color: '#578129',
+                                fontSize: '12px'
+                            },
+                            table: {
+                                fontSize: '14px'
+                            },
+                            blockquote: {
+                                fontFamily: 'Verdana, Geneva, sans-serif',
+                                fontWeight: 'bold',
+                                fontSize: '12px',
+                                border: '2px solid #6B6B6B',
+                                padding: '15px'
+                            }
+                        }
+                    }
+                }
+            },
+            machineColumn: {
+                console: {
+                    form: {
+                        buttons: {
+                            submit: {
+                                button: {
+                                    color: '#FFFFFF',
+                                    backgroundColor: '#008ACA',
+                                    fontFamily: 'Tahoma,sans-serif',
+                                    fontSize: '14px'
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        hosts: [
+            'proxy',
+            'production'
+        ]
+    });
+</script>
+</body>
+</html>
+
