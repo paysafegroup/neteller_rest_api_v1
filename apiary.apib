@@ -49,7 +49,7 @@ response object notation.
 |           |                 |- Added payment method for NETELLERgo! \(paysafecard\)|
 |           |                 |- Removed deprecated payment method for NETELLERgo! \(ukash\)|
 |           |                 |- Added new currency: Emirati Dirham \(AED\)|
-|           |                 |**_2015-09-15**|
+|           |                 |**_2015-09-15_**|
 |           |                 |- Added payment methods for NETELLERgo! \(qiwi, yandex, webmoney\)|
 |           |                 |- Added F/X support for orders presented in different currencies|
 |           |                 |- Added support for one-step payments in NETELLERgo!|
@@ -121,7 +121,7 @@ response object notation.
 |           |                 |- Added support for resource expansion|
 |           |                 |- Added new currencies: Malaysian Riggit \(MYR\), Moroccan Dirham \(MAD\), Tunisia Dinar \(TND\) and Swiss Franc \(CHF\)|
 |           |                 |- Added error codes: 20102<|
-|           |                 |- **2014-04-15**|
+|           |                 |- **_2014-04-15_**|
 |           |                 |- Modified authentication to OAUTH2 authentication using client_credentials|
 |           |                 |- Added subscription billing support|
 |           |                 |- Added error codes: 20100, 20101|
@@ -2972,7 +2972,7 @@ querying with your merchant reference ID and not the NETELLER Transaction ID.
             Authorization: Bearer YOUR\_ACCESS\_TOKEN`
 
 
-+ Response 201 (application/json)
++ Response 200 (application/json)
 
     + Attributes
     
@@ -3053,7 +3053,7 @@ This API request returns a list of [payment](#payment) objects.
             Authorization: Bearer YOUR_ACCESS_TOKEN`
 
 
-+ Response 201 (application/json)
++ Response 200 (application/json)
 
     + Attributes
     
@@ -3310,7 +3310,7 @@ a GET request on the order id:
             Authorization: Bearer YOUR_ACCESS_TOKEN
             
 
-+ Response 201 (application/json)
++ Response 200 (application/json)
 
     + Body
 
@@ -3412,7 +3412,7 @@ a GET request on the order id:
             Authorization: Bearer YOUR_ACCESS_TOKEN`
 
             
-+ Response 201 (application/json)
++ Response 200 (application/json)
 
     + Body
 
@@ -3720,17 +3720,18 @@ like to confirm and NETELLER will return a MATCH or NO_MATCH result for each.
             Authorization: Bearer {access_token}
 
             
-+ Response 200 (application/json)
++ Response 404 (application/json)
+
+    + Headers
+    
+            X-Application-Status-Code: 5269
 
     + Body
 
             {
                 "error": {
                     "code": "5269",
-                    "message": "Entity Not Found",
-                    "details": [
-                        "The ID(s) specified in the URL do not correspond to the values in the system."
-                    ]
+                    "message": "Entity Not Found"
                 }
             }
                 
@@ -3850,7 +3851,7 @@ You can then enroll your customers by creating a new 'Subscription' request and 
             } 
 
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
     + Body
 
@@ -3943,7 +3944,7 @@ You can then enroll your customers by creating a new 'Subscription' request and 
             Authorization: Bearer YOUR_ACCESS_TOKEN
 
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
 
     + Body
@@ -4111,7 +4112,7 @@ In order to create a subscription you must first obtain member authorization for
             }
 
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
     + Body
 
