@@ -38,7 +38,7 @@ response object notation.
 
 |API Version|Minor Version    |Patch / Description|
 |---        |---              |---|
-|**v1**     |**2015-04-28**   |**_2015-01-24_**|
+|**v1**     |**2015-04-28**   |**_2016-01-24_**|
 |           |                 |- Added new scope for account\_basic\_profile and updated the accountProfile object to restrict values returned|
 |           |                 |- Added new customer verify endpoint|
 |           |                 |- Added new payment list endpoint|
@@ -3042,8 +3042,8 @@ This API request returns a list of [payment](#payment) objects.
             + `desc`
             
     
-    + limit (optional) - The number of records to be returned. Default = 10; Max = 100.
-    + offset (optional) - Allows you to fetch the next set of resources.
+    + limit (optional, number) - The number of records to be returned. Default = 10; Max = 100.
+    + offset (optional, number) - Allows you to fetch the next set of resources.
     
 + Request (application/json)
 
