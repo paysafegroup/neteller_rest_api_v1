@@ -3017,6 +3017,7 @@ querying with your merchant reference ID and not the NETELLER Transaction ID.
                 ]
             }
 
+
 ## List payments [GET /payments/?&startDate={startDate}&endDate={endDate}&sortOrder={sortOrder}&limit={limit}&offset={offset}]
 
 The payments lookup function can be used to retrieve a listing of transactions associated with your account.
@@ -3039,13 +3040,17 @@ This API request returns a list of [payment](#payment) objects.
         + Members
             + `asc`
             + `desc`
-
+            
+    
+    + limit (optional) - The number of records to be returned. Default = 10; Max = 100.
+    + offset (optional) - Allows you to fetch the next set of resources.
+    
 + Request (application/json)
 
 
     + Headers
         
-            Authorization: Bearer YOUR\_ACCESS\_TOKEN`
+            Authorization: Bearer YOUR_ACCESS_TOKEN`
 
 
 + Response 201 (application/json)
