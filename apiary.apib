@@ -36,6 +36,9 @@ response object notation.
 
 ## Release Notes
 
+> Please see the section on Versioning to find out how to verify which Minor Version of the API you are using.  You 
+> can choose to upgrade to a newer version at anytime through API Settings of your merchant dashboard.
+
 |API Version|Minor Version    |Patch / Description|
 |---        |---              |---|
 |**v1**     |**2015-04-28**   |**_2016-01-24_**|
@@ -180,6 +183,11 @@ The first time you make an API request, NETELLER will automatically record the t
 <br/><br/>
 The API version will influence the request/response object structure as well as the functionality that is available through the API.   A new version of the API will only be introduced if we roll out a backwards incompatible change that may impact your existing integrations.  As your API version can be maintained through the merchant portal, you can manage when to upgrade to the latest version, helping ensure your integration is not disrupted as new functionality becomes available.
 
+> You can update your API version from the merchant dashboard.  This is a manual process.  NETELLER recommends you check back
+> periodically to see if new versions are available as there may be key enhancements that have been released that
+> would improve your integration.
+> ![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/api_version_upgrade.png)
+
 _Outdated minor versions of the API will be supported for 12 months, after which point they may be deprecated and you will be required to upgrade to a newer version._
 
 ### Major Version
@@ -211,7 +219,7 @@ _When working with the REST API, you should treat any identity fields returned b
 ## Pagination
 
 REST calls that return multiple resources will wrap the response as a JSON array named 'list'. By default, 10 items will be returned at a time and you can navigate to the next page of data using the returned HATEOAS links.
-Any list results will also include a meta data section that will identify the number of record included in the collection,
+Any list results will also include a meta data section that will identify the number of records included in the collection,
 the number of records per page (limit) and current page number.
 <br/><br/>
 For example, if a request to look up subscriptions identifies that there are 134 subscriptions and you have set your limit to 15, the first 15 items will be returned with navigation links to the next 15 items in the list \(items 16-30\). If you navigate to the next page using the provided HATEOAS link, you will now retrieve items 16-30 with a new navigation link provided to return to the previous page, as well as a link to continue to the next page of items._
