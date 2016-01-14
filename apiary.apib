@@ -211,6 +211,8 @@ _When working with the REST API, you should treat any identity fields returned b
 ## Pagination
 
 REST calls that return multiple resources will wrap the response as a JSON array named 'list'. By default, 10 items will be returned at a time and you can navigate to the next page of data using the returned HATEOAS links.
+Any list results will also include a meta data section that will identify the number of record included in the collection,
+the number of records per page (limit) and current page number.
 <br/><br/>
 For example, if a request to look up subscriptions identifies that there are 134 subscriptions and you have set your limit to 15, the first 15 items will be returned with navigation links to the next 15 items in the list \(items 16-30\). If you navigate to the next page using the provided HATEOAS link, you will now retrieve items 16-30 with a new navigation link provided to return to the previous page, as well as a link to continue to the next page of items._
 
@@ -225,6 +227,11 @@ Sample Response with List Data
 
 ```apib
 {
+    "meta": {
+        "numberOfRecords": 77,
+        "limit": 10,
+        "page": 2
+    },
     "list": [
         {
             "planId": "MONTHLYGREENPLAN",
@@ -404,7 +411,7 @@ The client must be capable of interacting with the resource owner's user agent \
 
 **OAUTH2 Workflow Diagram**
 
-![](https://github.com/netellerapi/apiary/raw/master/images/OAUTH2-Workflow-Diagram.jpg)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/OAUTH2-Workflow-Diagram.jpg)
 
 
 #### Obtain an access token using the client_credentials grant type
@@ -536,11 +543,11 @@ The following flows will be presented:
  
 Member Authentication - Member will need to verify their identify using their standard credentials.
 
-![](https://github.com/netellerapi/apiary/raw/master/images/auth_code-grant-type-1.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/auth_code-grant-type-1.png)
 
 Member will be prompted to authorize the requested permissions.
 
-![](https://github.com/netellerapi/apiary/raw/master/images/auth_code-grant-type-2.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/auth_code-grant-type-2.png)
 
 **Authorization Response Structure**
 
@@ -764,7 +771,7 @@ Some API methods will limit their response data dependent upon which authorized 
 A webhook allows you to define an HTTP callback that will be POST to when an event occurs that you would like to be notified of.  You can define the notification URL and select which events you wish to be notified of from your merchant account portal.
 > Webhooks will be sent whenever the state of the resource changes. Certain activity may lead to the same event being sent more than once.
 
-![](https://github.com/netellerapi/apiary/raw/master/images/merchant-dashboard-webhooks.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/merchant-dashboard-webhooks.png)
 
 **Responding to a webhook**
 
@@ -925,19 +932,19 @@ application. The same steps should be completed on both sandbox [https://test.me
 
 If the API is not enabled, please contact [NETELLER Merchant Support](mailto:merchantsupport@optimalpayments.com) to have it enabled.
 
-![](https://github.com/netellerapi/apiary/raw/master/images/api-enabled.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/api-enabled.png)
 
 ### 2) Register the IP addresses that will be allowed to access the API
 
 _When registering your secure API IP addresses, you must ensure you are using the IP\(s\) of your networks outbound gateway. If you are working within a corporate network, or are sitting behind a proxy, you may have to contact your administrator to help identify the appropriate IP address\(es\)_
 
-![](https://github.com/netellerapi/apiary/raw/master/images/ip-whitelisted.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/ip-whitelisted.png)
 
 ### 3) Register your application to obtain your API credentials
 
 Your must register your application by providing the appropriate detail about its name, where it will be hosted, and what the primary contact email is to be. You may also choose to upload an application logo that will provide your customers brand recognition if you are planning to implement the authorization flow.
 
-![](https://github.com/netellerapi/apiary/raw/master/images/application-added.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/application-added.png)
 
 You are now ready to obtain an access token to use in your REST API request. Please refer to the 'Authentication' section for more information on how to obtain an access token. 
 
@@ -1006,9 +1013,9 @@ See [Obtain an access token using the auth\_code grant type](#authcodegrant)for 
 GET https://test.api.neteller.com/v1/oauth2/authorize?client_id=AAABRbRHwWkslo-u&redirect_uri=http://requestb.in/1kk4mrn1&scope=subscription_payment&response_type=code
 ```
 
-![](https://github.com/netellerapi/apiary/raw/master/images/member-authorization-1.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/member-authorization-1.png)
 
-![](https://github.com/netellerapi/apiary/raw/master/images/member-authorization-2.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/member-authorization-2.png)
 
 Upon successful authorization, you will be returned the authorization code on your specified redirect uri along with the customer id.    The customer id can be used to identify the customer when you request to enrol them with the /subscription endpoint.
 
@@ -1110,7 +1117,7 @@ Postman-Token: 5b2d14b3-963f-6ca4-d008-2952a013f7b8
 
 Customers that have a subscription will be able to see the subscription details in their member account settings.
 
-![](https://github.com/netellerapi/apiary/raw/master/images/member-subscription-details.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/member-subscription-details.png)
 
 
 ### Setup Webhooks to receive updates about subscription payments
@@ -1119,11 +1126,11 @@ A webhook allows you to define an HTTP callback that will be POST to when an eve
  
 See [Webhooks](#Webhooks) for more information.
 
-![](https://github.com/netellerapi/apiary/raw/master/images/setup-webhooks.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/setup-webhooks.png)
 
 You can trigger sample webhook event through the Test Webhooks function to ensure your service is properly exposed to capture the event.
 
-![](https://github.com/netellerapi/apiary/raw/master/images/trigger-sample-webhook.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/trigger-sample-webhook.png)
 
 ### Billing Process
 
@@ -1133,11 +1140,11 @@ NETELLER will automatically attempt to collect payment for all your subscription
 
 In the unlikely event that NETELLER is unable to collect payment for the current period billing, you will receive an email notification with an attached CSV file detailing any failed payments for the current day.
 
-![](https://github.com/netellerapi/apiary/raw/master/images/failed-charge-notification-email.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/failed-charge-notification-email.png)
 
 **Sample CSV attachment:**
 
-![](https://github.com/netellerapi/apiary/raw/master/images/sample-csv-attachment.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/sample-csv-attachment.png)
 
 ***
 
@@ -1295,9 +1302,9 @@ Cache-Control: no-cache
 
 NETELLER will respond with a unique order id, details of the order request, and a HATEOAS link for the *hosted\_payment* flow that you redirect your customer to.
 
-![](https://github.com/netellerapi/apiary/raw/master/images/go-1-choose-payment.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/go-1-choose-payment.png)
 
-![](https://github.com/netellerapi/apiary/raw/master/images/go-2-success.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/go-2-success.png)
 
 Once NETELLER has completed the request, the customer will be directed to the appropriate redirection url as supplied in your create order request.
 
@@ -2314,21 +2321,21 @@ Permitted Values
 
 |Type               |Value                                                       |Logo           |Supported Processing Currencies
 |---                |---                                                         |---            |---
-|neteller           |The NETELLER account holders email address \(preferred\)<br/>**OR**<br/>The account holders 12 digit NETELLER account ID| ![](https://github.com/netellerapi/apiary/raw/master/images/payment_icons/neteller.png)  |See Currencies
-|voucher            |paysafecard                                                 |![](https://github.com/netellerapi/apiary/raw/master/images/payment_icons/paysafecard.png)               |EUR, GBP, CHF, BGN, CZK, DKK, HRK, HUF, NOK, PLN, RON, SEK
-|onlinebanking      |sofortbanking                                               |![](https://github.com/netellerapi/apiary/raw/master/images/payment_icons/sofort.png)                    |EUR
-|onlinebanking      |poli                                                        |![](https://github.com/netellerapi/apiary/raw/master/images/payment_icons/poli.png)                      |AUD
-|onlinebanking      |giropay                                                     |![](https://github.com/netellerapi/apiary/raw/master/images/payment_icons/giropay.png)                   |EUR
-|onlinebanking      |ideal                                                       |![](https://github.com/netellerapi/apiary/raw/master/images/payment_icons/ideal.png)                     |EUR
-|onlinebanking      |bradesco                                                    |![](https://github.com/netellerapi/apiary/raw/master/images/payment_icons/bradesco.png)                  |USD<br/>Max $500 transaction, $3000 month per customer
-|onlinebanking      |itau                                                        |![](https://github.com/netellerapi/apiary/raw/master/images/payment_icons/itau.png)                      |USD
-|onlinebanking      |bancodobrasil                                               |![](https://github.com/netellerapi/apiary/raw/master/images/payment_icons/banco-do-brasil.png)           |USD<br/>Max $500 transaction, $3000 month per customer
-|onlinebanking      |webpay                                                      |![](https://github.com/netellerapi/apiary/raw/master/images/payment_icons/webpay.png)                    |USD
-|onlinebanking      |qiwi                                                        |![](https://github.com/netellerapi/apiary/raw/master/images/payment_icons/qiwi.png)                      |RUB
-|onlinebanking      |webmoney                                                    |![](https://github.com/netellerapi/apiary/raw/master/images/payment_icons/webmoney.png)                  |RUB
-|onlinebanking      |yandex                                                      |![](https://github.com/netellerapi/apiary/raw/master/images/payment_icons/yandex_en.png)                 |RUB
-|digitalcurrency    |bitcoin                                                     |![](https://github.com/netellerapi/apiary/raw/master/images/payment_icons/bitcoin.png)                   |GBP, USD, EUR
-|carrierbilling     |boku                                                        |![](https://github.com/netellerapi/apiary/raw/master/images/payment_icons/boku.png)                      |DKK, SEK, CHF, GBP
+|neteller           |The NETELLER account holders email address \(preferred\)<br/>**OR**<br/>The account holders 12 digit NETELLER account ID| ![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/neteller.png)  |See Currencies
+|voucher            |paysafecard                                                 |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/paysafecard.png)               |EUR, GBP, CHF, BGN, CZK, DKK, HRK, HUF, NOK, PLN, RON, SEK
+|onlinebanking      |sofortbanking                                               |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/sofort.png)                    |EUR
+|onlinebanking      |poli                                                        |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/poli.png)                      |AUD
+|onlinebanking      |giropay                                                     |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/giropay.png)                   |EUR
+|onlinebanking      |ideal                                                       |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/ideal.png)                     |EUR
+|onlinebanking      |bradesco                                                    |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/bradesco.png)                  |USD<br/>Max $500 transaction, $3000 month per customer
+|onlinebanking      |itau                                                        |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/itau.png)                      |USD
+|onlinebanking      |bancodobrasil                                               |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/banco-do-brasil.png)           |USD<br/>Max $500 transaction, $3000 month per customer
+|onlinebanking      |webpay                                                      |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/webpay.png)                    |USD
+|onlinebanking      |qiwi                                                        |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/qiwi.png)                      |RUB
+|onlinebanking      |webmoney                                                    |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/webmoney.png)                  |RUB
+|onlinebanking      |yandex                                                      |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/yandex_en.png)                 |RUB
+|digitalcurrency    |bitcoin                                                     |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/bitcoin.png)                   |GBP, USD, EUR
+|carrierbilling     |boku                                                        |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/boku.png)                      |DKK, SEK, CHF, GBP
 
 
 ```apib
@@ -2976,8 +2983,8 @@ querying with your merchant reference ID and not the NETELLER Transaction ID.
 
     + Attributes
     
-        + customer (object, required) -The associated customer information for the payment (if applicable).
-        + billingDetail (object, optional) -The associated billingDetail for the transaction (if applicable).
+        + customer (object, required) - The associated customer information for the payment (if applicable).
+        + billingDetail (object, optional) - The associated billingDetail for the transaction (if applicable). NETELLERgo! orders should always return billing details.
         + transaction (object, required) - Details about the payment.
         + links ([string], optional) - Array of HATEOAS links (if applicable).
 
@@ -3067,6 +3074,11 @@ This API request returns a list of [payment](#payment) objects.
     + Body
 
             {
+                "meta": {
+                    "numberOfRecords": 77,
+                    "limit": 10,
+                    "page": 1
+                },
                 "list": [{
                     "customer": {
                         "link": {
@@ -3112,7 +3124,7 @@ This API request returns a list of [payment](#payment) objects.
 Order processing utilizes a hosted payment solution, also known as NETELLERgo!.  This hosted solution allows you 
 to begin collecting payments from your customers with minimal custom development.  
 
-![](https://github.com/netellerapi/apiary/raw/master/images/go-de-options.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/go-de-options.png)
 
 > Contact the NETELLER Merchant Support team to have additional payment methods enabled for your merchant account, 
 > or to find out what payment methods are available for a particular country.   See the paymentMethod object 
@@ -3471,7 +3483,7 @@ with profile information you have already collected.
 If you supplied a valid linkBackUrl, the member will have the option of returning back to your site immediately upon completion of the account signup flow.
 
 Sample account confirmation screen
-![](https://github.com/netellerapi/apiary/raw/master/images/Create-a-customer-linkBack.png)
+![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/Create-a-customer-linkBack.png)
 
 |||
 |---|---|
@@ -3874,7 +3886,7 @@ You can then enroll your customers by creating a new 'Subscription' request and 
             }
 
 
-## Lookup all your plans [GET /plans/{planId}]
+## Lookup a plan [GET /plans/{planId}]
 
 |||
 |---|---|
@@ -4035,6 +4047,11 @@ You can then enroll your customers by creating a new 'Subscription' request and 
     + Body
     
                 {
+                    "meta": {
+                        "numberOfRecords": 5,
+                        "limit": 10,
+                        "page": 1
+                    },                
                     "list": [
                         {
                             "planId": "MONTHLYGREENPLAN",
@@ -4056,17 +4073,12 @@ You can then enroll your customers by creating a new 'Subscription' request and 
                     ],
                     "links": [
                         {
-                            "url": "https://api.neteller.com/v1/plans?sessionid=234243242&limit=10&offset=10",
+                            "url": "https://api.neteller.com/v1/plans?sessionid=234243242&limit=10&offset=0",
                             "rel": "self",
                             "method": "GET"
                         },
                         {
-                            "url": "https://api.neteller.com/v1/plans?sessionid=234243242&limit=10&offset=0",
-                            "rel": "prev_offset",
-                            "method": "GET"
-                        },
-                        {
-                            "url": "https://api.neteller.com/v1/plans?sessionid=234243242&limit=10&offset=20",
+                            "url": "https://api.neteller.com/v1/plans?sessionid=234243242&limit=10&offset=10",
                             "rel": "next_offset",
                             "method": "GET"
                         }
@@ -4364,6 +4376,11 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
     + Body
     
             {
+                "meta": {
+                    "numberOfRecords": 14,
+                    "limit": 10,
+                    "page": 2
+                },            
                 "list": [
                     {
                         "subscriptionId": "SUB_0d676b4b-0ab3-4d78-af25-e452ab431e522",
@@ -4518,6 +4535,11 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
     + Body
     
             {
+                "meta": {
+                    "numberOfRecords": 16,
+                    "limit": 10,
+                    "page": 2
+                }, 
                 "list": [
                     {
                         "invoiceId": "INV_259e0052-a345-48e9-835c-4f6a8dcaeeb9",
