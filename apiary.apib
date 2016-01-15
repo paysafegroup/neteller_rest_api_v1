@@ -541,10 +541,10 @@ GET https://api.neteller.com/v1/oauth2/authorize?client_id=YOUR_APPLICATION_ID&r
 |lang            |          |OPTIONAL: preferred language to render the authorization flow in. see [Languages](#Languages) for complete list|
 
 
-The following request sample shows how to ask for authorization for enrolling a member in a subscription plan so you can receive automated recurring payments..
+The following request sample shows how to ask for authorization to obtain a members balance to show on your cashier page.
 
 ```apib
-GET https://api.neteller.com/v1/oauth2/authorize?client_id=AAABRbRHwWkslo-a&redirect_uri=https://www.mysite.com/cashier&scope=subscription_payment&response_type=code
+GET https://api.neteller.com/v1/oauth2/authorize?client_id=AAABRbRHwWkslo-a&redirect_uri=https://www.mysite.com/cashier&scope=account_available_balance&response_type=code
 ```
 
 The following flows will be presented:
@@ -2581,6 +2581,11 @@ A device that you have successfully authenticated to your NETELLER account from.
 
 ## Obtain an access token using client credentials [POST /oauth2/token?{grant_type}=client_credentials]
 
+The Authorization header should be constructed to pass a base64 encoded version of these values (client_id:client_secret).  If you are testing using cURL or a browser client, you can specify the HTTP Basic credentials by using the client\_id as your username and client\_secret as your password.
+
+> The client_secret for your application should not be shared with anyone or embedded in any code that you will distribute.  This exclusion also extends to an app binary that could be de-compiled.  This API call should only be made using server-side code over TLS.
+ 
+
 + Parameters
 
     + grant\_type (required, string) - Type of grant \(must be client\_credentials\)
@@ -3835,6 +3840,8 @@ You can then enroll your customers by creating a new 'Subscription' request and 
 
 ## Create a plan [POST /plans]
 
+Creating a subscription plan allows you to define a plan for having automatic payments transferred to your merchant account on a fixed schedule.
+
 |||
 |---|---|
 |**Scope required to initiate request**|none|
@@ -3989,6 +3996,9 @@ You can then enroll your customers by creating a new 'Subscription' request and 
 
 
 ## Delete a plan [DELETE /plans/{planId}]
+
+You can only delete a subscription plan that has not been offered to any members.  Once you have enrolled members in a subscription plan, you may choose to cancel the plan to prevent any further subscriptions from being created.  
+Any existing subscriptions on a cancelled plan will continue to be charged until the end of their term
 
 |||
 |---|---|
