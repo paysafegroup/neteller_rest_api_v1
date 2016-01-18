@@ -2581,7 +2581,9 @@ A device that you have successfully authenticated to your NETELLER account from.
 
 ## Obtain an access token using client credentials [POST /oauth2/token?{grant_type}=client_credentials]
 
-The Authorization header should be constructed to pass a base64 encoded version of these values (client_id:client_secret).  If you are testing using cURL or a browser client, you can specify the HTTP Basic credentials by using the client\_id as your username and client\_secret as your password.
+The Authorization header should be constructed to pass a base64 encoded version of these values (client\_id:client\_secret).  
+If you are testing using cURL or a browser client, you can specify the HTTP Basic credentials by using the client\_id as your 
+username and client\_secret as your password.
 
 > The client_secret for your application should not be shared with anyone or embedded in any code that you will distribute.  This exclusion also extends to an app binary that could be de-compiled.  This API call should only be made using server-side code over TLS.
  
@@ -2612,6 +2614,25 @@ The Authorization header should be constructed to pass a base64 encoded version 
 
 ## Obtain an authorization code [GET /oauth2/authorize?client_id={client_id}&redirect_uri={YOUR_REDIRECT_URL}&scope={scope}&lang={lang}]
 
+The authorization grant flow has two parts and utilizes two authorization server endpoints.  
+
+1) Authorization Endpoint - used to obtain authorization (auth_code) from the resource owner via user-agent redirection.  
+Your application redirects the member to NETELLER where they are asked to grant the requested permissions.  if the member approves, 
+NETELLER will post back to your redirect uri with a unique authorization code that represents this members acknowledgement of your request.
+
+2) Token Endpoint - used to exchange the auth\_code, or previously issued refresh\_token for an new access token to use with your 
+REST API calls.  This process can be repeated until authorization is revoked by the member or until different permissions are required.
+ 
+The flow consists of the following steps:
+ 
+* The client app requests authorization by redirecting the user to the authorization endpoint (NETELLER OAuth dialog). 
+* The resource owner (member) must verify their identity via a hosted authentication page.
+* The resource owner (member) is prompted to authorize the application.  The requested scope (permissions) are displayed and the member must Allow or Deny the authorization.
+* If the member authorized the requested scope, an auth_code is returned to your redirect uri.  This code will have a limited lifetime for you to complete the callback to redeem the access_token.
+* Now you need to authorize your app.  Call the token endpoint with a grant type of 'authorization_code' and provide the auth_code from (4). If successful, an access_token is returned that can be used to make API requests on the users behalf.
+ 
+> When invoking this flow, you must pass in the redirect\_uri that the user's browser will be redirected back to once app authorization is completed. The redirect_uri must be the same URI you specify when registering your web application OR must be the same one that was passed in the original authorization call.
+
 + Parameters
 
     + client\_id (required, string) - Your APP client id
@@ -2622,6 +2643,13 @@ The Authorization header should be constructed to pass a base64 encoded version 
     + scope (required, string) - The supplied scope parameter will indicate the level of access you require for your app. 
     
         <br/><br/>The scope parameter MUST be supplied.  If your application requires multiple scopes then you should supply a comma separated list.  Eg. scope=perm1,perm2
+        
+        + Members
+            + `account_basic_profile`
+            + `account_enhanced_profile`
+            + `account_available_balance`
+            + `account_contacts`
+            + `subscription_payment`
         
     + lang (optional, string) - The preferred language to render the authorization flow in.
     
@@ -2643,10 +2671,81 @@ The Authorization header should be constructed to pass a base64 encoded version 
             + `ru_RU` - Russian
             + `sv_SE` - Swedish
             + `tr_TR` - Turkish
+
+ 
++ Request Obtain authorization (text/html)
+
++ Response 201 (application/json)
+
+### Exchange your authorization code for an access token [POST /oauth2/token?grant_type=authorization_code&code={YOUR_AUTHORIZATION_CODE}&redirect_uri={YOUR_REDIRECT_URI}]
+
+Once you have received member authorization, you can exchange your authorization_code for an access token.  
+
++ Parameters
+
+    + grant\_type (required, string) - The type of grant
+    + code (required,string) - Set to the auth_code previously received from the authorization server.
+    + redirect\_uri (optional, string) - The TLS enabled redirection uri that will be returned to. 
+    
+        This value must match the uri used to obtain authorization, If not supplied during the authorization flow then the redirect\_uri will be the registered redirect uri for your application \(as set in the merchant.com portal under the APPS section\) and should not be passed.
  
 + Request Obtain authorization (application/json)
 
+    + Parameters
+    
+        + grant\_type: authorization_code
+        + code: 0.AgAAAUnPnWEeAAAAB1jwsOAq6iK0G2op1zi_sQC3KE22.oD4wHNZjuF5tWOZh2ozEpi2E7BE
+
+    + Headers
+        
+            Authorization: Basic YOUR_BASE64_ENCODED_CREDENTIALS
+
+
 + Response 201 (application/json)
+
+    + Body
+    
+            {
+                "accessToken": "0.AQAAAUgUGIk5AAAAAAAEk-CgJxQeNBiq7ES8yQaLITPU.JGrVsVsiy3ASoQsYED9VkJv25eY",
+                "tokenType": "Bearer",
+                "expiresIn": 300,
+                "refreshToken": "0.AgAAAUgUGIkyAAAAB1jwsODI5PCkVNOZul5AJ01mYtdh.ezGCYhN5YD22-BCOPX6U-muc72o",
+                "scope": "subscription_payment"
+            }
+
+
+### Exchange your refresh token for an access token [POST /oauth2/token?grant_type={grant_type}&refresh_token={refresh_token}]
+
+If the previously issued access token has expired (obtained from the authorization grant flow) 
+and you receive a HTTP 401 - Unauthorized error, you can utilize the refresh token that was issued to you with the 
+initial authorization response to obtain a new one.
+
++ Parameters
+
+    + grant_type (required, string) - The type of grant
+    + refresh_token (required,string) - The refresh token previously issued to the client
+
++ Request Obtain authorization (application/json)
+
+    + Parameters
+    
+        + grant\_type: refresh_token
+        + refresh\_token: 0.AgAAAUnPnWEeAAAAB1jwsOAq6iK0G2op1zi_sQC3KE22.oD4wHNZjuF5tWOZh2ozEpi2E7BE
+
+    + Headers
+        
+            Authorization: Basic YOUR_BASE64_ENCODED_CREDENTIALS
+
++ Response 201 (application/json)
+
+    + Body
+        
+            {
+               "accessToken": "0.AQAAAUfvtyJyAAAAAAA27oALPWxe111yJMNH3HEa6l_o.EddShan6OS7sQX28UhYz5cz_LHE",
+               "expiresIn": 300,
+               "tokenType": "Bearer",
+               "scope": "subscription_payment, account_available_balance"
+            }
 
 
 # Payments [/]
