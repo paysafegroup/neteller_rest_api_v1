@@ -1698,7 +1698,7 @@ These errors are specific to the NETELLER REST API.
 
 |Element                 |Type                   |Description                 
 |---                     |---                    |---
-|lang                    |string<br/>`length=5`  |The preferred language of the member. See [Languages](#languages) for complete list.
+|lang                    |string<br/>`length=5`  |The preferred language of the member. See [Languages](http://paysafegroup.github.io/neteller_rest_api_v1/#/introduction/technical-introduction/languages) for complete list.
 |currency                |string<br/>`length=3`  |The preferred wallet currency of the member. See [Currencies](#currencies) for complete list.
 
 ```apib
@@ -2612,9 +2612,11 @@ username and client\_secret as your password.
       
 
 
-## Obtain an authorization code [GET /oauth2/authorize?client_id={client_id}&redirect_uri={YOUR_REDIRECT_URL}&scope={scope}&lang={lang}]
+## Obtain an access token using auth code [GET /oauth2/authorize?client_id={client_id}&redirect_uri={YOUR_REDIRECT_URL}&scope={scope}&lang={lang}]
 
 The authorization grant flow has two parts and utilizes two authorization server endpoints.  
+
+> Refer to the OAUTH Authenitcation overview in the Technical Introduction for more information.
 
 1) Authorization Endpoint - used to obtain authorization (auth_code) from the resource owner via user-agent redirection.  
 Your application redirects the member to NETELLER where they are asked to grant the requested permissions.  if the member approves, 
@@ -2628,8 +2630,6 @@ NETELLER will post back to your redirect uri with a unique authorization code th
 REST API calls.  This process can be repeated until authorization is revoked by the member or until different permissions are required.
  
 > When invoking this flow, you must pass in the redirect\_uri that the user's browser will be redirected back to once app authorization is completed. The redirect_uri must be the same URI you specify when registering your web application OR must be the same one that was passed in the original authorization call.
-
-
 
 
 + Parameters
