@@ -367,7 +367,6 @@ then add the **'expand=plan'** parameter to your request and you will see the se
     "status": "active",
     "startDate": "2014-06-01T00:00:00Z",
     "endDate": "2014-12-31T00:00:00Z",
-    "termEndDate": "2014-12-31",
     "currentPeriodStart": "2014-07-01T00:00:00Z",
     "currentPeriodEnd": "2014-07-31T00:00:00Z",
     "cancelAtPeriodEnd": false,
@@ -1696,10 +1695,10 @@ These errors are specific to the NETELLER REST API.
 
 ## accountPreferences
 
-|Element                 |Type                   |Description                 
-|---                     |---                    |---
-|lang                    |string<br/>`length=5`  |The preferred language of the member. See [Languages](http://paysafegroup.github.io/neteller_rest_api_v1/#/introduction/technical-introduction/languages) for complete list.
-|currency                |string<br/>`length=3`  |The preferred wallet currency of the member. See [Currencies](#currencies) for complete list.
+|Element                 |Type                   |Description|
+|---                     |---                    |---|
+|lang                    |string<br/>`length=5`  |The preferred language of the member. See [Languages](http://paysafegroup.github.io/neteller_rest_api_v1/#/introduction/technical-introduction/languages) for complete list.|
+|currency                |string<br/>`length=3`  |The preferred wallet currency of the member. See [Currencies](#currencies) for complete list.|
 
 ```apib
 {
@@ -1712,23 +1711,23 @@ These errors are specific to the NETELLER REST API.
 
 ## accountProfile
 
-|Element                 |Type                                           |Description                 
-|---                     |---                                            |---                           
-|email                   |string<br/>`length<=100`                       |The account email address.
-|accountId               |string<br/>`length=15`                         |The 12 digit NETELLER account number.
-|firstName               |string<br/>`length<=25`                        |`required scope: account_basic_profile`<br/>The clients first name, or given name.
-|lastName                |string<br/>`length<=25`                        |`required scope: account_basic_profile`<br/>The clients last name, or family name.
-|address1                |string<br/>`length<=35`                        |`required scope: account_enhanced_profile`<br/>|The clients residential, or street address.
-|address2                |string<br/>`length<=35`                        |`required scope: account_enhanced_profile`<br/>|Continuation of the clients residential, or street address.
-|address3                |string<br/>`length<=35`                        |`required scope: account_enhanced_profile`<br/>|Continuation of the clients residential, or street address.
-|city                    |string<br/>`length<=50`                        |`required scope: account_enhanced_profile`<br/>|The clients city of residence.
-|countrySubdivisionCode  |string<br/>`length=2`                          |`required scope: account_enhanced_profile`<br/>|The ISO 3166-2 code indicating the state/province/district or other value denoting the clients country subdivision \(e.g. BE=Berlin. 13=Tôkyô \[Tokyo\], AB=Alberta\)
-|country                 |string<br/>`length=2`                          |`required scope: account_basic_profile`<br/>|The ISO 3166-1 Alpha 2-code for the clients country of residence \(e.g. Germany = DE, JP=Japan. CA=Canada\).
-|postCode                |string<br/>`length<=10`                        |`required scope: account_enhanced_profile`<br/>|The zip code, or postal code, of the clients residence.
-|contactDetails          |array of [contactDetail](#contactDetail)       |`required scope: account_contacts`<br/>An array of contact numbers.  Can accept up to 2 phone numbers, the first number will be considered primary. Phone numbers should contain no special characters.
-|gender                  |string<br/>`length=1`                          |`required scope: account_enhanced_profile`<br/>m - male, f - female
-|dateOfBirth             |[date](#date)                                  |`required scope: account_basic_profile`<br/>The clients date of birth.
-|accountPreferences      |[accountPreferences][#accountPreferences]      |`required scope: account_enhanced_profile`<br/>The clients preferred language, currency.
+|Element                 |Type                                           |Description|
+|---                     |---                                            |---|                  
+|email                   |string<br/>`length<=100`                       |The account email address.|
+|accountId               |string<br/>`length=15`                         |The 12 digit NETELLER account number.|
+|firstName               |string<br/>`length<=25`                        |`required scope: account_basic_profile`<br/>The clients first name, or given name.|
+|lastName                |string<br/>`length<=25`                        |`required scope: account_basic_profile`<br/>The clients last name, or family name.|
+|address1                |string<br/>`length<=35`                        |`required scope: account_enhanced_profile`<br/>|The clients residential, or street address.|
+|address2                |string<br/>`length<=35`                        |`required scope: account_enhanced_profile`<br/>|Continuation of the clients residential, or street address.|
+|address3                |string<br/>`length<=35`                        |`required scope: account_enhanced_profile`<br/>|Continuation of the clients residential, or street address.|
+|city                    |string<br/>`length<=50`                        |`required scope: account_enhanced_profile`<br/>|The clients city of residence.|
+|countrySubdivisionCode  |string<br/>`length=2`                          |`required scope: account_enhanced_profile`<br/>|The ISO 3166-2 code indicating the state/province/district or other value denoting the clients country subdivision \(e.g. BE=Berlin. 13=Tôkyô \[Tokyo\], AB=Alberta\)|
+|country                 |string<br/>`length=2`                          |`required scope: account_basic_profile`<br/>|The ISO 3166-1 Alpha 2-code for the clients country of residence \(e.g. Germany = DE, JP=Japan. CA=Canada\).|
+|postCode                |string<br/>`length<=10`                        |`required scope: account_enhanced_profile`<br/>|The zip code, or postal code, of the clients residence.|
+|contactDetails          |array of [contactDetail](#contactDetail)       |`required scope: account_contacts`<br/>An array of contact numbers.  Can accept up to 2 phone numbers, the first number will be considered primary. Phone numbers should contain no special characters.|
+|gender                  |string<br/>`length=1`                          |`required scope: account_enhanced_profile`<br/>m - male, f - female|
+|dateOfBirth             |[date](#date)                                  |`required scope: account_basic_profile`<br/>The clients date of birth.|
+|accountPreferences      |[accountPreferences][#accountPreferences]      |`required scope: account_enhanced_profile`<br/>The clients preferred language, currency.|
 
 ```apib
 {
@@ -1769,10 +1768,10 @@ These errors are specific to the NETELLER REST API.
 
 ## attribute
 
-|Element                 |Type                       |Description                 
-|---                     |---                        |---
-|key                     |string<br/>`length<=50`    |This is a unique identifier for an attribute.
-|value                   |string<br/>`length<=100`   |The value for this attribute.
+|Element                 |Type                       |Description|
+|---                     |---                        |---|
+|key                     |string<br/>`length<=50`    |This is a unique identifier for an attribute.|
+|value                   |string<br/>`length<=100`   |The value for this attribute.|
 
 ```apib
 {
@@ -1785,10 +1784,10 @@ These errors are specific to the NETELLER REST API.
 
 ## balance
 
-|Element                 |Type                       |Description                 
-|---                     |---                        |---
-|amount                  |string<br/>`length<=100`   |The amount in the smallest unit of currency.
-|currency                |string<br/>`length<=15`    |The associated currency.
+|Element                 |Type                       |Description|
+|---                     |---                        |---|
+|amount                  |string<br/>`length<=100`   |The amount in the smallest unit of currency.|
+|currency                |string<br/>`length<=15`    |The associated currency.|
 
 ```apib
 {
@@ -1801,19 +1800,19 @@ These errors are specific to the NETELLER REST API.
 
 ## billingDetail
 
-|Element                 |Type                       |Description                 
-|---                     |---                        |---                          
-|email                   |string<br/>`length<=100`   |The account email address.
-|firstName               |string<br/>`length<=25`    |The clients first name, or given name.
-|lastName                |string<br/>`length<=25`    |The clients last name, or family name.
-|address1                |string<br/>`length<=35`    |The clients residential, or street address.
-|address2                |string<br/>`length<=35`    |Continuation of the clients residential, or street address.
-|address3                |string<br/>`length<=35`    |Continuation of the clients residential, or street address.
-|city                    |string<br/>`length<=50`    |The clients city of residence.
-|countrySubdivisionCode  |string<br/>`length=2`      |The ISO 3166-2 code indicating the state/province/district or other value denoting the clients country subdivision \(e.g. BE=Berlin. 13=Tôkyô \[Tokyo\], AB=Alberta\)
-|country                 |string<br/>`length=2`      |The ISO 3166-1 Alpha 2-code for the clients country of residence \(e.g. Germany = DE, JP=Japan. CA=Canada\)
-|postCode                |string<br/>`length<=10`    |The zip code, or postal code, of the clients residence.
-|lang                    |string<br/>`length=5`      |The preferred language of communication. See [Languages](#languages) for complete list.
+|Element                 |Type                       |Description|
+|---                     |---                        |---|                
+|email                   |string<br/>`length<=100`   |The account email address.|
+|firstName               |string<br/>`length<=25`    |The clients first name, or given name.|
+|lastName                |string<br/>`length<=25`    |The clients last name, or family name.|
+|address1                |string<br/>`length<=35`    |The clients residential, or street address.|
+|address2                |string<br/>`length<=35`    |Continuation of the clients residential, or street address.|
+|address3                |string<br/>`length<=35`    |Continuation of the clients residential, or street address.|
+|city                    |string<br/>`length<=50`    |The clients city of residence.|
+|countrySubdivisionCode  |string<br/>`length=2`      |The ISO 3166-2 code indicating the state/province/district or other value denoting the clients country subdivision \(e.g. BE=Berlin. 13=Tôkyô \[Tokyo\], AB=Alberta\)|
+|country                 |string<br/>`length=2`      |The ISO 3166-1 Alpha 2-code for the clients country of residence \(e.g. Germany = DE, JP=Japan. CA=Canada\)|
+|postCode                |string<br/>`length<=10`    |The zip code, or postal code, of the clients residence.|
+|lang                    |string<br/>`length=5`      |The preferred language of communication. See [Languages](#languages) for complete list.|
 
 ```apib
 {
@@ -1834,10 +1833,10 @@ These errors are specific to the NETELLER REST API.
 
 ## contactDetail 
 
-|Element                 |Type                       |Description                 
-|---                     |---                        |---
-|type                    |string<br/>`length<=10`    |landLine, mobile  ** The values are case sensitive.
-|value                   |string<br/>`length<=30 `   |The dialing number or recipients id.  Do not include the country code in the dialing number.
+|Element                 |Type                       |Description|
+|---                     |---                        |---|
+|type                    |string<br/>`length<=10`    |landLine, mobile  ** The values are case sensitive.|
+|value                   |string<br/>`length<=30 `   |The dialing number or recipients id.  Do not include the country code in the dialing number.|
 
 ```apib
 {
@@ -1850,12 +1849,12 @@ These errors are specific to the NETELLER REST API.
 
 ## customer
 
-|Element                 |Type                              |Description                 
-|---                     |---                               |---
-|customerId              |string<br/>`length<=100`          |Unique identifier for this customer.`ie. CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325`
-|accountProfile          |[accountProfile](#accountprofile) |The associated account profile.
-|verificationLevel       |string<br/>length=2               |**00** - Member has not been verified, no registered payment instruments<br/>**01** - Member has not been verified, has one or more registered payment instruments<br/>**10** - Member is verified, no registered payment instruments<br/>**11** - Member is verified, has one or more registered payment instruments
-|availableBalance        |[balance](#balance)               |`required scope: account_available_balance`<br/>The members currently available balance.
+|Element                 |Type                              |Description|
+|---                     |---                               |---|
+|customerId              |string<br/>`length<=100`          |Unique identifier for this customer.`ie. CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325`|
+|accountProfile          |[accountProfile](#accountprofile) |The associated account profile.|
+|verificationLevel       |string<br/>length=2               |**00** - Member has not been verified, no registered payment instruments<br/>**01** - Member has not been verified, has one or more registered payment instruments<br/>**10** - Member is verified, no registered payment instruments<br/>**11** - Member is verified, has one or more registered payment instruments|
+|availableBalance        |[balance](#balance)               |`required scope: account_available_balance`<br/>The members currently available balance.|
 
 ```apib
 {
@@ -1880,11 +1879,11 @@ These errors are specific to the NETELLER REST API.
 
 ## date
 
-|Element     |Type                       |Description                 
-|---         |---                        |---
-|year        |string<br/>`length=4`      |4 digit year, YYYY
-|month       |string<br/>`length=2`      |2 digit month, MM
-|day         |string<br/>`length=2`      |2 digit day, DD
+|Element     |Type                       |Description|
+|---         |---                        |---|
+|year        |string<br/>`length=4`      |4 digit year, YYYY|
+|month       |string<br/>`length=2`      |2 digit month, MM|
+|day         |string<br/>`length=2`      |2 digit day, DD|
 
 ```apib
 {
@@ -1898,11 +1897,11 @@ These errors are specific to the NETELLER REST API.
 
 ## error
 
-|Element                 |Type                                |Description                 
-|---                     |---                                 |---
-|code                    |string<br/>`length<=100`            |The error code reflecting the reason for the failed request.
-|message                 |string<br/>`length<=250`            |Short description of the status.
-|fieldErrors             |array of [fielderror](#fielderror)  |If applicable, details around particular fields that reported errors with the API request.
+|Element                 |Type                                |Description|
+|---                     |---                                 |---|
+|code                    |string<br/>`length<=100`            |The error code reflecting the reason for the failed request.|
+|message                 |string<br/>`length<=250`            |Short description of the status.|
+|fieldErrors             |array of [fielderror](#fielderror)  |If applicable, details around particular fields that reported errors with the API request.|
 
 ```apib
 {
@@ -1925,14 +1924,14 @@ These errors are specific to the NETELLER REST API.
 
 ## event
 
-|Element                 |Type                     |Description                 
-|---                     |---                      |---
-|mode                    |string<br/>`length<=10`  |test - denotes this is a test webhook notification that was manually triggered<br/>live - this is a live production webhook notification
-|eventDate               |string<br/>`length<=50`  |The date the event occurred. <br/>ISO 8601 format \(UTC\)<Br/>YYYY-MM-DDThh:mm:ssZ
-|eventType               |string<br/>`length<=50`  |The specific type of event that occurred.
-|attemptNumber           |string<br/>`length<=50`  |The current attemptNumber for this notification.  This will increment until we receive a HTTP 200 response on send, or until all retries have been exhausted.
-|key                     |string<br/>`length<=55`  |The optional secret key that you defined with your webhook.  This should be validated within your integration for added security.
-|links                   |array of [link](#link)   |Associated HATEOAS links for this event.  Use these links to lookup the details for this event.
+|Element                 |Type                     |Description|
+|---                     |---                      |---|
+|mode                    |string<br/>`length<=10`  |test - denotes this is a test webhook notification that was manually triggered<br/>live - this is a live production webhook notification|
+|eventDate               |string<br/>`length<=50`  |The date the event occurred. <br/>ISO 8601 format \(UTC\)<Br/>YYYY-MM-DDThh:mm:ssZ|
+|eventType               |string<br/>`length<=50`  |The specific type of event that occurred.|
+|attemptNumber           |string<br/>`length<=50`  |The current attemptNumber for this notification.  This will increment until we receive a HTTP 200 response on send, or until all retries have been exhausted.|
+|key                     |string<br/>`length<=55`  |The optional secret key that you defined with your webhook.  This should be validated within your integration for added security.|
+|links                   |array of [link](#link)   |Associated HATEOAS links for this event.  Use these links to lookup the details for this event.|
 
 ```apib
 {
@@ -1959,12 +1958,12 @@ These errors are specific to the NETELLER REST API.
 
 ## fee
 
-|Element                 |Type                       |Description                 
-|---                     |---                        |---
-|feeName                 |string<br/>`length<=50`    |The name that will display in history and invoice details for this fee item.  \(ie: Setup Fee, Shipping & Handling Fee...etc\).
-|feeType                 |string<br/>`length<=100`   |The type of fee. `ie: service_fee`
-|feeAmount               |number<br/>`length<=10`    |The fee amount that was deducted.<br/>Amount fields reflect the smallest unit of currency with no decimals. Eg. $25.00 USD should be formatted as 2500.
-|feeCurrency             |string<br/>`length<=3 `    |The currency the fee is in. See [Currencies](#currencies) for complete list.
+|Element                 |Type                       |Description|
+|---                     |---                        |---|
+|feeName                 |string<br/>`length<=50`    |The name that will display in history and invoice details for this fee item.  \(ie: Setup Fee, Shipping & Handling Fee...etc\).|
+|feeType                 |string<br/>`length<=100`   |The type of fee. `ie: service_fee`|
+|feeAmount               |number<br/>`length<=10`    |The fee amount that was deducted.<br/>Amount fields reflect the smallest unit of currency with no decimals. Eg. $25.00 USD should be formatted as 2500.|
+|feeCurrency             |string<br/>`length<=3 `    |The currency the fee is in. See [Currencies](#currencies) for complete list.|
 
 ```apib
 {
@@ -1979,10 +1978,10 @@ These errors are specific to the NETELLER REST API.
 
 ## fieldError
 
-|Element                 |Type                       |Description                 
-|---                     |---                        |---
-|field                   |string<br/>`length<=100`   |Identifies the JSON request field.
-|error                   |string<br/>`length<=250`   |The problem associated with field.
+|Element                 |Type                       |Description|
+|---                     |---                        |---|
+|field                   |string<br/>`length<=100`   |Identifies the JSON request field.|
+|error                   |string<br/>`length<=250`   |The problem associated with field.|
 
 ```apib
 {
@@ -1995,22 +1994,22 @@ These errors are specific to the NETELLER REST API.
 
 ## invoice
 
-|Element                 |Type                                         |Description                 
-|---                     |---                                          |---
-|invoiceId               |string<br/>`length<=50`                      |Unique identifier for this invoice. \(ie: INV_259e0052-a345-48e9-835c-4f6a8dcaeeb9\).
-|invoiceNumber           |string<br/>`length<=30`                      |Sequential invoice number.
-|invoiceDate             |string<br/>`length<=20`                      |Date the invoice was created \(first issued\).<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ
-|invoiceType             |string<br/>`length<=15`                      |**subscription** - invoice is auto created from subscription billing<br/>**order** - invoice is manually created through a create order api request
-|billingDetails          |array of [billingDetail](#billingdetail)`    |The associated billing details for this invoice. 
-|subscription            |[subscription](#subscription)                |The corresponding subscription resource this invoice belongs to<br/>** Only applicable for subscription invoices
-|order                   |[order](#order)                              |The corresponding order resource this invoice belongs to<br/>** Only applicable for order invoices
-|status                  |string<br/>`length<=15`                      |**payment\_due** - Indicates that a due payment has not yet been collected and will be re-tried<br/>**paid** - Indicates the payment was successful<br/>**not\_paid** - Indicates the payment was not collected and all attempts to collect payment failed
-|periodStartDate         |string<br/>`length<=20`                      |Date the period for this invoice started<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ<br/>** Only applicable for subscription invoices
-|periodEndDate           |string<br/>`length<=20`                      |Date the period for this invoice ended<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ<br/>** Only applicable for subscription invoices
-|totalAmount             |number<br/>`length<=10`                      |The total amount due reported in the smallest unit of currency \(no decimals\).
-|currency                |string<br/>`length=3`                        |The currency for the amount due.<br/>see Currencies for complete list
-|retryCount              |number                                       |The total number of additional attempts made to try to collect payment for this invoice.   If charge failed due to NSF, the system will automatically retry the transaction up to 3 times.<Br/>** Only applicable for subscription invoices
-|nextRetryDate           |string<br/>`length<=20`                      |The date the charge will be re-attempted.<Br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ<br/>** Only applicable for subscription invoices
+|Element                 |Type                                         |Description|           
+|---                     |---                                          |---|
+|invoiceId               |string<br/>`length<=50`                      |Unique identifier for this invoice. \(ie: INV_259e0052-a345-48e9-835c-4f6a8dcaeeb9\).|
+|invoiceNumber           |string<br/>`length<=30`                      |Sequential invoice number.|
+|invoiceDate             |string<br/>`length<=20`                      |Date the invoice was created \(first issued\).<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ|
+|invoiceType             |string<br/>`length<=15`                      |**subscription** - invoice is auto created from subscription billing<br/>**order** - invoice is manually created through a create order api request|
+|billingDetails          |array of [billingDetail](#billingdetail)`    |The associated billing details for this invoice.|
+|subscription            |[subscription](#subscription)                |The corresponding subscription resource this invoice belongs to<br/>** Only applicable for subscription invoices|
+|order                   |[order](#order)                              |The corresponding order resource this invoice belongs to<br/>** Only applicable for order invoices|
+|status                  |string<br/>`length<=15`                      |**payment\_due** - Indicates that a due payment has not yet been collected and will be re-tried<br/>**paid** - Indicates the payment was successful<br/>**not\_paid** - Indicates the payment was not collected and all attempts to collect payment failed|
+|periodStartDate         |string<br/>`length<=20`                      |Date the period for this invoice started<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ<br/>** Only applicable for subscription invoices|
+|periodEndDate           |string<br/>`length<=20`                      |Date the period for this invoice ended<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ<br/>** Only applicable for subscription invoices|
+|totalAmount             |number<br/>`length<=10`                      |The total amount due reported in the smallest unit of currency \(no decimals\).|
+|currency                |string<br/>`length=3`                        |The currency for the amount due.<br/>see Currencies for complete list|
+|retryCount              |number                                       |The total number of additional attempts made to try to collect payment for this invoice.   If charge failed due to NSF, the system will automatically retry the transaction up to 3 times.<Br/>** Only applicable for subscription invoices|
+|nextRetryDate           |string<br/>`length<=20`                      |The date the charge will be re-attempted.<Br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ<br/>** Only applicable for subscription invoices|
 
 Sample subscription invoice
 ```apib
@@ -3902,7 +3901,6 @@ Return a list of all subscription for the customer.
                         "status": "active",
                         "startDate": "2014-06-01T00:00:00Z",
                         "endDate": "2014-12-31T00:00:00Z",
-                        "termEndDate": "2014-12-31",
                         "currentPeriodStart": "2014-07-01T00:00:00Z",
                         "currentPeriodEnd": "2014-07-31T00:00:00Z",
                         "cancelAtPeriodEnd": false,
@@ -4343,7 +4341,6 @@ Retrieve information about a previously created subscription by passing the rele
                 "status": "active",
                 "startDate": "2014-06-01T00:00:00Z",
                 "endDate": "2014-12-31T00:00:00Z",
-                "termEndDate": "2014-12-31",
                 "currentPeriodStart": "2014-07-01T00:00:00Z",
                 "currentPeriodEnd": "2014-07-31T00:00:00Z",
                 "cancelAtPeriodEnd": false,
@@ -4396,7 +4393,6 @@ Retrieve information about a previously created subscription by passing the rele
                 "status": "active",
                 "startDate": "2014-06-01T00:00:00Z",
                 "endDate": "2014-12-31T00:00:00Z",
-                "termEndDate": "2014-12-31",
                 "currentPeriodStart": "2014-07-01T00:00:00Z",
                 "currentPeriodEnd": "2014-07-31T00:00:00Z",
                 "cancelAtPeriodEnd": false,
@@ -4455,13 +4451,14 @@ By default when you cancel a subscription, the NETELLER subscription status is u
                         "method": "GET"
                     }
                 },
-                "status": "cancelled",
+                "status": "active",
                 "startDate": "2014-06-01T00:00:00Z",
                 "endDate": "2014-12-31T00:00:00Z",
                 "currentPeriodStart": "2014-07-01T00:00:00Z",
                 "currentPeriodEnd": "2014-07-31T00:00:00Z",
-                "cancelAtPeriodEnd": false,
+                "cancelAtPeriodEnd": true,
                 "cancelDate": "2014-06-04T12:24:02Z",
+                "lastCompletedPaymentDate": "2016-01-08T00:00:03Z",
                 "links": [
                     {
                         "url": "https://api.neteller.com/v1/subscriptions/SUB_0d676b4b-0ab3-4d78-af25-e452ab431e522",
@@ -4524,7 +4521,6 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
                         "status": "active",
                         "startDate": "2014-06-01T00: 00: 00Z",
                         "endDate": "2014-12-31T00: 00: 00Z",
-                        "termEndDate": "2014-12-31",
                         "currentPeriodStart": "2014-07-01T00: 00: 00Z",
                         "currentPeriodEnd": "2014-07-31T00: 00: 00Z",
                         "cancelAtPeriodEnd": false,
