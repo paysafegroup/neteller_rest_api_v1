@@ -2367,6 +2367,7 @@ Permitted Values
 |amount                  |number                     |The amount to bill for each re-ocurrence.
 |currency                |string<br/>`length=3`      |The currency of the amount to be billed.
 |status                  |string<br/>`length<=15`    |**pending** - The subscription has been requested and is pending activation \(start date has not yet elapsed\).<br/>**active** - The subscription plan is currently active<br/>**cancelled** - The subscription plan was cancelled and can no longer be subscribed to
+|numberofSubscriptions   |number                     |The number of subscriptions that were enrolled under a plan.  This includes cancelled and ended subscriptions.
 
 
 ```apib
@@ -2378,7 +2379,8 @@ Permitted Values
     "intervalCount": 4,
     "amount": 2495,
     "currency": "EUR".
-    "status": "active"
+    "status": "active",
+    "numberOfSubscriptions": 2
 }
 ```
 
@@ -3989,6 +3991,7 @@ Creating a subscription plan allows you to define a plan for having automatic pa
                 "amount": 2995,
                 "currency": "EUR",
                 "status": "active",
+                "numberOfSubscriptions": 0,
                 "links": [
                     {
                         "url": "https://api.neteller.com/v1/plans/MONTHLYGREENPLAN",
@@ -4039,6 +4042,7 @@ Creating a subscription plan allows you to define a plan for having automatic pa
                 "amount": 2995,
                 "currency": "EUR",
                 "status": "active",
+                "numberOfSubscriptions": 2,
                 "links": [
                     {
                         "url": "https://api.neteller.com/v1/plans/MONTHLYGREENPLAN",
@@ -4083,6 +4087,7 @@ Creating a subscription plan allows you to define a plan for having automatic pa
                 "amount": 2495,
                 "currency": "EUR",
                 "status": "cancelled",
+                "numberOfSubscriptions": 2,
                 "links": [
                     {
                         "url": "https://api.neteller.com/v1/plans/SAMPLEMONTHLY",
@@ -4177,7 +4182,8 @@ Any existing subscriptions on a cancelled plan will continue to be charged until
                             "intervalCount": 4,
                             "amount": 2995,
                             "currency": "EUR",
-                            "status": "active"
+                            "status": "active",
+                            "numberOfSubscriptions": 2
                         },
                         {
                             ...
@@ -4288,7 +4294,7 @@ Retrieve information about a previously created subscription by passing the rele
 |||
 |---|---|
 |**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|account\_basic\_profile, account\_enhanced\_profile, account\_contat, account\_available\_balance|
+|**Scope(s) impacting response**|account\_basic\_profile, account\_enhanced\_profile, account\_contacts, account\_available\_balance|
 |**Expandable Resources**|plan, customer|
 |**Related Resources (if applicable)**|none|
 
@@ -4377,7 +4383,8 @@ Retrieve information about a previously created subscription by passing the rele
                     "intervalCount": 4,
                     "amount": 2495,
                     "currency": "EUR",
-                    "status": "active"
+                    "status": "active",
+                    "numberOfSubscriptions": 2
                 },
                 "customer": {
                     "link": {
