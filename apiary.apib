@@ -2390,16 +2390,11 @@ Permitted Values
 |Element                 |Type                              |Description|
 |---                     |---                               |---|
 |rel                     |string<br/>`length<=15`           |This is the redirect type, allowing different endpoints to be targeted depending on the end state of the transaction. <br/>Possible values are:<br/>**on_success**<br/>**on_pending**<br/>**on_error**<br/>**on_decline**<br/>**on_cancel**<br/>**on_timeout**|
-|returnKeys              |array of attributes               ||
 |url                     |string                            ||
-|delimiter               |string                            |This specifies the delimiter to use when parameters are sent to the redirect URI `(e.g, “;” “&” “$”)`. By default an ampersand \(&\) is used|
 
 ```apib
 {
     "rel": "on_success",
-    "returnKeys": [
-        "id"
-    ],
     "uri": "https://example.com/success.html"
 }
 ```
@@ -3311,16 +3306,10 @@ one of numerous alternative payment methods.
                     "redirects": [
                         {
                             "rel": "on_success",
-                            "returnKeys": [
-                                "id"
-                            ],
                             "uri": "https://example.com/success.html"
                         },
                         {
                             "rel": "on_cancel",
-                            "returnKeys": [
-                                "id"
-                            ],
                             "uri": "https://example.com/cancel.html"
                         }
                     ]
@@ -3474,16 +3463,10 @@ a GET request on the order id:
                 "redirects": [
                     {
                         "rel": "on_success",
-                        "returnKeys": [
-                            "id"
-                        ],
                         "uri": "https://example.com/success.html"
                     },
                     {
                         "rel": "on_cancel",
-                        "returnKeys": [
-                            "id"
-                        ],
                         "uri": "https://example.com/cancel.html"
                     }
                 ],
