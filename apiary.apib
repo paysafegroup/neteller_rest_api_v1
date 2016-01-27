@@ -2586,31 +2586,29 @@ If you are testing using cURL or a browser client, you can specify the HTTP Basi
 username and client\_secret as your password.
 
 > The client_secret for your application should not be shared with anyone or embedded in any code that you will distribute.  This exclusion also extends to an app binary that could be de-compiled.  This API call should only be made using server-side code over TLS.
- 
 
+ 
 + Parameters
 
     + grant\_type (required, string) - Type of grant \(must be client\_credentials\)
  
-
 + Request Obtain a token using your client credentials (multipart/form-data)
 
     + Headers
-    
+
             Authorization: Basic YOUR-BASE64-ENCODED-CREDENTIALS
+
 
 + Response 201 (application/json)
 
     + body
-    
 
             {
-              "accessToken": "0.AQAAAVF-mqsiAAAAAAAbd0A71bIG8IUwcgHV7mAYiG7J.EAAQsWDnpqRj7WwyFVLTsdo0yXWh9L4",
-              "tokenType": "Bearer",
-              "expiresIn": 1800
+                "accessToken": "0.AQAAAVF-mqsiAAAAAAAbd0A71bIG8IUwcgHV7mAYiG7J.EAAQsWDnpqRj7WwyFVLTsdo0yXWh9L4",
+                "tokenType": "Bearer",
+                "expiresIn": 1800            
             }    
-      
-
+            
 
 ## Obtain an access token using auth code [GET /oauth2/authorize?client_id={client_id}&redirect_uri={YOUR_REDIRECT_URL}&scope={scope}&lang={lang}]
 
@@ -2671,7 +2669,6 @@ REST API calls.  This process can be repeated until authorization is revoked by 
             + `sv_SE` - Swedish
             + `tr_TR` - Turkish
 
- 
 + Request Obtain authorization (text/html)
 
 + Response 201 (application/json)
@@ -2691,7 +2688,6 @@ Once you have received member authorization, you can exchange your authorization
 + Request Obtain authorization (application/json)
 
     + Parameters
-    
         + grant\_type: authorization_code
         + code: 0.AgAAAUnPnWEeAAAAB1jwsOAq6iK0G2op1zi_sQC3KE22.oD4wHNZjuF5tWOZh2ozEpi2E7BE
 
@@ -2720,14 +2716,12 @@ and you receive a HTTP 401 - Unauthorized error, you can utilize the refresh tok
 initial authorization response to obtain a new one.
 
 + Parameters
-
     + grant_type (required, string) - The type of grant
     + refresh_token (required,string) - The refresh token previously issued to the client
 
 + Request Obtain authorization (application/json)
 
     + Parameters
-    
         + grant\_type: refresh_token
         + refresh\_token: 0.AgAAAUnPnWEeAAAAB1jwsOAq6iK0G2op1zi_sQC3KE22.oD4wHNZjuF5tWOZh2ozEpi2E7BE
 
@@ -2773,18 +2767,17 @@ the customer to the returned uri.
 |**Expandable Resources**|customer|
 |**Related Resources (if applicable)**|none|
 
+
 + Request Send payment to email (application/json)
 
     + Attributes
-    
         + payerProfile (accountProfile, required) - The recipient of the payment. At minimum, the payee's email address or NETELLER Account ID must be supplied.
         + transaction (object, required) - Details about the payment.
         + message (string, optional) - The message what will be shown  to the member notifying them of the pending transfer.
-    
-    + Headers
-    
-                Authorization: Bearer YOUR_ACCESS_TOKEN
 
+    + Headers
+            
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
     + Body
 
@@ -2803,7 +2796,6 @@ the customer to the returned uri.
 + Response 201 (application/json)
 
     + Attributes
-    
         + customer (object, required) -The associated customer information for the payment.
         + transaction (object, required) - Details about the payment.
         + links ([string], optional) - Array of HATEOAS links (if applicable).
@@ -2846,15 +2838,13 @@ the customer to the returned uri.
 + Request Send payment to non-registered email with profile data to provide a signup link (application/json)
 
     + Attributes
-    
         + payerProfile (accountProfile, required) - The recipient of the payment. At minimum, the payee's email address or NETELLER Account ID must be supplied.
         + transaction (object, required) - Details about the payment.
         + message (string, optional) - The message what will be shown  to the member notifying them of the pending transfer.
     
     + Headers
     
-                Authorization: Bearer YOUR_ACCESS_TOKEN
-
+                Authorization: Bearer YOUR-ACCESS-TOKEN
 
     + Body
 
@@ -2901,7 +2891,6 @@ the customer to the returned uri.
 + Response 201 (application/json)
 
     + Attributes
-    
         + customer (object, required) -The associated customer information for the payment.
         + transaction (object, required) - Details about the payment.
         + links ([string], optional) - Array of HATEOAS links (if applicable).
@@ -2972,14 +2961,13 @@ NETELLER will notify the sender via email of the completed payment.
 + Request Receive payment from a NETELLER account holder (application/json)
 
     + Attributes
-    
         + paymentMethod (paymentMethod, required) - The source of funds for the transfer into the merchant account.
         + transaction (transaction, optional) - Details about the payment.
         + verificationCode (string) - The member verification code for the transaction.   This is the members 6 digit Secure Id, or Authentication Code OTP \(one time password\) if the member has two step authentication enabled.
         
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN`
+            Authorization: Bearer YOUR-ACCESS-TOKEN
     
             
     + Body            
@@ -3001,7 +2989,6 @@ NETELLER will notify the sender via email of the completed payment.
 + Response 201 (application/json)
 
     + Attributes
-    
         + customer (object, required) -The associated customer information for the payment.
         + transaction (object, required) - Details about the payment.
         + links ([string], optional) - Array of HATEOAS links (if applicable).
@@ -3069,7 +3056,6 @@ querying with your merchant reference ID and not the NETELLER Transaction ID.
         + Members
             + `merchantRefId`
 
-
     + expand (string, optional) - Name of the resource to expand inline in the response.
 
         <br/><br/>You can choose to include the expanded detail for the following resources.
@@ -3080,20 +3066,17 @@ querying with your merchant reference ID and not the NETELLER Transaction ID.
 
 + Request (application/json)
 
-    + Parameters
-    
+    + Parameter
         + id: 672391456803770
-
 
     + Headers
         
-            Authorization: Bearer YOUR\_ACCESS\_TOKEN`
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
 
 + Response 200 (application/json)
 
     + Attributes
-    
         + customer (object, required) - The associated customer information for the payment (if applicable).
         + billingDetail (object, optional) - The associated billingDetail for the transaction (if applicable). NETELLERgo! orders should always return billing details.
         + transaction (object, required) - Details about the payment.
@@ -3150,7 +3133,6 @@ This API request returns a list of [payment](#payment) objects.
 |**Related Resources (if applicable)**|customer|
 
 + Parameters
-
     + startDate (optional, string) - Start date of transaction report.  If not supplied the default is past 7 days.
     + endDate (optional, string) - End date of transaction report.  If you supply and endDate you must also supply a startDate.
     + sortOrder (string, optional) - Optional sort order.  Default is descending based on transaction date. 
@@ -3168,7 +3150,7 @@ This API request returns a list of [payment](#payment) objects.
 
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN`
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
 
 + Response 200 (application/json)
@@ -3269,7 +3251,7 @@ one of numerous alternative payment methods.
 
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN`
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
             
     + Body            
@@ -3422,9 +3404,10 @@ a GET request on the order id:
 
 + Request (application/json)
 
+
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN
+            Authorization: Bearer YOUR-ACCESS-TOKEN
             
 
 + Response 200 (application/json)
@@ -3514,13 +3497,14 @@ a GET request on the order id:
 
 + Request (application/json)
 
+
     + Parameters
     
         + orderId: ORD_7915d463-ccc8-4305-9d33-9e5c9310f12e
-        
+
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN`
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
             
 + Response 200 (application/json)
@@ -3594,14 +3578,15 @@ Sample account confirmation screen
 
 + Request (application/json)
 
+
     + Attributes
         + accountProfile (object, required) - The customer profile information to be used to pre-fill the signup pages with.
         + linkBackUrl (object, optional) - A valid http:// or https:// url that should be presented to the member upon completion of their signup/deposit that will direct them back to your site. Note: At minimum, the payee's email address or NETELLER Account ID must be supplied.At minimum, the payee's email address or NETELLER Account ID must be supplied.
         + btag: `A_234B_345C_` (string, optional) - This value should be provided if you are registered in the NETELLER affiliate program. The btag can be found as a parameter in the banner URL string. 
-    
+
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN`
+            Authorization: Bearer YOUR-ACCESS-TOKEN
             
     + Body            
 
@@ -3683,10 +3668,9 @@ Return details about a particular customer.
     + Parameters
         + customerId: CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325
 
-
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
             
 + Response 200 (application/json)
@@ -3712,12 +3696,13 @@ Return details about a particular customer.
 
 + Request (application/json)
 
+
     + Parameters
         + email: jsmith@email.com
         
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
             
 + Response 200 (application/json)
@@ -3785,7 +3770,7 @@ like to confirm and NETELLER will return a MATCH or NO_MATCH result for each.
     + dateOfBirth (optional) - The customers date of birth. Format: YYYYMMDD
     + houseNumber (optional) - The customer house or building number.
     + country (optional) - The customers ISO 3166-1 Alpha 2-code country of residence.
-    + postCode (optional) - The customers postal code or zip code.
+    + postCode (optional) - The customers postal code or zip code. (with no embedded spacing)
 
 
 + Request Account found (application/json)
@@ -3802,7 +3787,7 @@ like to confirm and NETELLER will return a MATCH or NO_MATCH result for each.
 
     + Headers
         
-            Authorization: Bearer {access_token}
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
             
 + Response 200 (application/json)
@@ -3832,6 +3817,7 @@ like to confirm and NETELLER will return a MATCH or NO_MATCH result for each.
 
             
 + Response 404 (application/json)
+
 
     + Headers
     
@@ -3945,11 +3931,11 @@ Creating a subscription plan allows you to define a plan for having automatic pa
         
 + Request (application/json)
 
+
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN
+            Authorization: Bearer YOUR-ACCESS-TOKEN
             
-    
     + Body
 
             {
@@ -3964,6 +3950,7 @@ Creating a subscription plan allows you to define a plan for having automatic pa
 
 
 + Response 201 (application/json)
+
 
     + Body
 
@@ -4000,11 +3987,13 @@ Creating a subscription plan allows you to define a plan for having automatic pa
 
     + planId: `MONTHLYGREENPLAN` (required) - The unique identifier for the subscription plan.
 
+
 + Request (application/json)
+
 
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
 
 + Response 200 (application/json)
@@ -4053,9 +4042,10 @@ Creating a subscription plan allows you to define a plan for having automatic pa
 
 + Request (application/json)
 
+
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
 
 + Response 201 (application/json)
@@ -4102,18 +4092,20 @@ Any existing subscriptions on a cancelled plan will continue to be charged until
 
 + Request Attempt to delete a non-subscribed plan (application/json)
 
+
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
 
 + Response 200 (application/json)
 
 + Request Attempt to delete a subscribed plan (application/json)
 
+
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
 
 + Response 200 (application/json)
@@ -4143,9 +4135,10 @@ Any existing subscriptions on a cancelled plan will continue to be charged until
             
 + Request (application/json)
 
+
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
 
 + Response 200 (application/json)
@@ -4220,7 +4213,7 @@ In order to create a subscription you must first obtain member authorization for
 
     + Headers
     
-            Authorization: Bearer YOUR_ACCESS_TOKEN
+            Authorization: Bearer YOUR-ACCESS-TOKEN
             
     + Body
 
@@ -4296,13 +4289,15 @@ Retrieve information about a previously created subscription by passing the rele
             
 + Request (application/json)
 
+
     + Parameters
     
         + subscriptionId: SUB_0d676b4b-0ab3-4d78-af25-e452ab431e522
         
+
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
 
 + Response 200 (application/json)
@@ -4344,13 +4339,14 @@ Retrieve information about a previously created subscription by passing the rele
 
 + Request (application/json)
 
+
     + Parameters
         + subscriptionId: SUB_0d676b4b-0ab3-4d78-af25-e452ab431e522
         + expand: plan
         
     + Headers
     
-            Authorization: Bearer YOUR_ACCESS_TOKEN
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
 
 + Response 200 (application/json)
@@ -4407,11 +4403,11 @@ By default when you cancel a subscription, the NETELLER subscription status is u
 
 + Request (application/json)
 
+
     + Attributes
         + subscriptionId: `SUB_0d676b4b-0ab3-4d78-af25-e452ab431e522` (string, required) - A system generated value that uniquely identifies this subscription.
         + cancelAtPeriodEnd: `true` (boolean, optional) - An optional parameter that you can set to true if you want to delay the cancellation of the subscription until the end of the current period.  By default, if this is not passed the subscription will be cancelled immediately. As soon as you cancel a subscription, the member will no longer be billed.
         
-    
     + Headers
 
             Authorization: Bearer YOUR_ACCESS_TOKEN
@@ -4473,9 +4469,10 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
     
 + Request (application/json)
 
+
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
 
 + Response 200 (application/json)
@@ -4552,9 +4549,10 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
     
 + Request (application/json)
 
+
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
 
 + Response 200 (application/json)
@@ -4631,9 +4629,10 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
     
 + Request (application/json)
 
+
     + Headers
         
-            Authorization: Bearer YOUR_ACCESS_TOKEN
+            Authorization: Bearer YOUR-ACCESS-TOKEN
 
 
 + Response 200 (application/json)
