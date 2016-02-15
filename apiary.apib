@@ -1853,7 +1853,7 @@ These errors are specific to the NETELLER REST API.
 |---                     |---                               |---|
 |customerId              |string<br/>`length<=100`          |Unique identifier for this customer.`ie. CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325`|
 |accountProfile          |[accountProfile](#accountprofile) |The associated account profile.|
-|verificationLevel       |string<br/>length=2               |**00** - Member has not been verified, no registered payment instruments<br/>**01** - Member has not been verified, has one or more registered payment instruments<br/>**10** - Member is verified, no registered payment instruments<br/>**11** - Member is verified, has one or more registered payment instruments|
+|verificationLevel       |string<br/>length=2               |**00** - Member has not been verified, no verified payment instruments<br/>**01** - Member has not been verified, has one or more verified payment instruments<br/>**10** - Member is verified, no verified payment instruments<br/>**11** - Member is verified, has one or more verified payment instruments|
 |availableBalance        |[balance](#balance)               |`required scope: account_available_balance`<br/>The members currently available balance.|
 
 ```apib
@@ -2771,7 +2771,7 @@ the customer to the returned uri.
 + Request Send payment to email (application/json)
 
     + Attributes
-        + payerProfile (accountProfile, required) - The recipient of the payment. At minimum, the payee's email address or NETELLER Account ID must be supplied.
+        + payeeProfile (accountProfile, required) - The recipient of the payment. At minimum, the payee's email address or NETELLER Account ID must be supplied.
         + transaction (object, required) - Details about the payment.
         + message (string, optional) - The message what will be shown  to the member notifying them of the pending transfer.
 
@@ -2838,7 +2838,7 @@ the customer to the returned uri.
 + Request Send payment to non-registered email with profile data to provide a signup link (application/json)
 
     + Attributes
-        + payerProfile (accountProfile, required) - The recipient of the payment. At minimum, the payee's email address or NETELLER Account ID must be supplied.
+        + payeeProfile (accountProfile, required) - The recipient of the payment. At minimum, the payee's email address or NETELLER Account ID must be supplied.
         + transaction (object, required) - Details about the payment.
         + message (string, optional) - The message what will be shown  to the member notifying them of the pending transfer.
     
@@ -4756,4 +4756,3 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
 - status (string) - accepted, pending, declined, cancelled, failed
 - errorCode (string) - If applicable, the corresponding code for why this transaction was not accepted.
 - errorMessage (string) - If applicable, the corresponding reason for why this transaction was not accepted.
-
