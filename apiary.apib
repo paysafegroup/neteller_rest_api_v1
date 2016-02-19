@@ -3663,7 +3663,7 @@ Return details about a particular customer.
     + email (optional) - The email of the member.
     + accountId (optional) - The 12 digit NETELLER Account Id.
 
-+ Request (application/json)
++ Request Without account\_basic\_profile authorization (application/json)
 
     + Parameters
         + customerId: CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325
@@ -3681,20 +3681,12 @@ Return details about a particular customer.
                "customerId": "CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325",
                "accountProfile": {
                     "email": "jsmith@email.com",
-                    "accountId": "451234567890",
-                    "firstName": "John",
-                    "lastName": "Smith",
-                    "country": "CA",
-                    "dateOfBirth": {
-                        "year": "1975",
-                        "month": "01",
-                        "day": "31"
-                    }
+                    "accountId": "451234567890"
                 },
                 "verificationLevel": "01"
             }
 
-+ Request (application/json)
++ Request  With account\_basic\_profile authorization (application/json)
 
 
     + Parameters
