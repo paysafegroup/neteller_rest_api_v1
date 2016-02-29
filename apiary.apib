@@ -3739,6 +3739,9 @@ like to confirm and NETELLER will return a MATCH or NO_MATCH result for each.
 |10                  |Member is verified, no registered payment instruments|
 |11                  |Member is verified, has one or more registered payment instruments \(CC, Bank Acct Verified\)|
 
+When you make your request, the input values will be normalized to remove special characters so there will be an 
+increased likelyhood of finding a match.
+
 |||
 |---|---|
 |**Scope required to initiate request**|none|
@@ -3762,7 +3765,7 @@ like to confirm and NETELLER will return a MATCH or NO_MATCH result for each.
     + dateOfBirth (optional) - The customers date of birth. Format: YYYYMMDD
     + houseNumber (optional) - The customer house or building number.
     + country (optional) - The customers ISO 3166-1 Alpha 2-code country of residence.
-    + postCode (optional) - The customers postal code or zip code. (with no embedded spacing)
+    + postCode (optional) - The customers postal code or zip code. 
 
 
 + Request Account found (application/json)
