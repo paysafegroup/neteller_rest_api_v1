@@ -3,9 +3,6 @@ HOST: https://api.neteller.com/v1
 
 # Integrating the NETELLER REST API
 
-# Technical introduction
-This section provides a technical introduction to the NETELLER REST API. 
-
 ## About the API
 The NETELLER REST API is comprehensive api that allows you to securely manage and facilitate your online payment needs.
 The _**RESTful API**_ ([REpresentational State Transfer](http://en.wikipedia.org/wiki/Representational_state_transfer)) 
@@ -34,7 +31,7 @@ response object notation.
 
 ***
 
-## Release Notes
+# Release Notes
 
 > Please see the section on Versioning to find out how to verify which Minor Version of the API you are using.  You 
 > can choose to upgrade to a newer version at anytime through API Settings of your merchant dashboard.
@@ -162,6 +159,9 @@ Upgrade Procedure
 4. Payment lookups will now only return a customer object if the payment is related to an account holder.  For NETELLERgo! checkouts that are performed by guests, a billingDetail block will be returned.
 
 ***
+
+# Technical introduction
+This section provides a technical introduction to the NETELLER REST API. 
 
 ## API Endpoints
 
@@ -2969,7 +2969,6 @@ NETELLER will notify the sender via email of the completed payment.
         
             Authorization: Bearer YOUR-ACCESS-TOKEN
     
-            
     + Body            
 
             {
@@ -3230,7 +3229,7 @@ to begin collecting payments from your customers with minimal custom development
 
 ## Create an order [POST]
 
-Create an order by passing the revelant details to the /orders endpoint, NETELLER will responsd with a link that 
+Create an order by passing the revelant details to the /orders endpoint, NETELLER will respond with a link that 
 you then re-direct your customer where they are offered the ability to pay using their NETELLER account or with 
 one of numerous alternative payment methods.
 
