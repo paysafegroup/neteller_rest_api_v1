@@ -1834,7 +1834,7 @@ These errors are specific to the NETELLER REST API.
 |Element                 |Type                       |Description|
 |---                     |---                        |---|
 |type                    |string<br/>`length<=10`    |landLine, mobile  ** The values are case sensitive.|
-|value                   |string<br/>`length<=30 `   |The dialing number or recipients id.  Do not include the country code in the dialing number.|
+|value                   |string<br/>`length<=30`   |The dialing number or recipients id.  Do not include the country code in the dialing number.|
 
 ```apib
 {
@@ -2577,7 +2577,7 @@ A device that you have successfully authenticated to your NETELLER account from.
 
 # Authorization [/oauth2]
 
-## Obtain an access token using client credentials [POST /oauth2/token?{grant_type}=client_credentials]
+## Obtain an access token using client credentials [POST /oauth2/token?grant_type=client_credentials]
 
 The Authorization header should be constructed to pass a base64 encoded version of these values (client\_id:client\_secret).  
 If you are testing using cURL or a browser client, you can specify the HTTP Basic credentials by using the client\_id as your 
@@ -2585,10 +2585,6 @@ username and client\_secret as your password.
 
 > The client_secret for your application should not be shared with anyone or embedded in any code that you will distribute.  This exclusion also extends to an app binary that could be de-compiled.  This API call should only be made using server-side code over TLS.
 
- 
-+ Parameters
-
-    + grant\_type (required, string) - Type of grant \(must be client\_credentials\)
  
 + Request Obtain a token using your client credentials (multipart/form-data)
 
