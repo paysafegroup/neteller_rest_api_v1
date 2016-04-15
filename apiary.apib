@@ -1684,6 +1684,7 @@ These errors are specific to the NETELLER REST API.
 |502         |20300  |Processor declined                 |The third party processor has declined the transaction.|
 |400         |20301  |NETELLER declined                  |NETELLER has declined to process the transaction.|
 |401         |20900  |Request not authorized             |Your request was not authorized as the API requires member authorization.  Please use the authorization_grant flow to obtain member permission for the required scope.|
+|503         |20999  |Service unavailable due to scheduled maintentance |The API is currently unavailable due to maintenance activities.|
 
 ***
 
@@ -4695,8 +4696,9 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
 # Data Structures
 
 ## accountPreferences
-- lang (string)
-- currency (string)
+- lang: `en` (string) - The preferred language of the member. See [Languages](http://paysafegroup.github.io/neteller_rest_api_v1/#/introduction/technical-introduction/languages) for complete list.
+- currency: `EUR` (string) - The preferred wallet currency of the member. See [Currencies](#currencies) for complete list.
+ a
 
 ## accountProfile
 - email (string) - The account email address.
