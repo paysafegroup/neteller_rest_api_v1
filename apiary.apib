@@ -1,7 +1,7 @@
 FORMAT: 1A
 HOST: https://api.neteller.com/v1
 
-# Integrating the NETELLER REST API
+# Integrating the NETELLER REST API v1
 
 ## About the API
 
@@ -3696,29 +3696,10 @@ Return details about a particular customer.
     + Attributes
     
         + customerId: `CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325` (string, required) - Unique identifier for this customer. ie. CUS\_0d676b4b-0eb8-4d78-af25-e41ab431e325
-        + accountProfile (object) - The member account profile.
+        + accountProfile (accountProfile) - The member account profile.
         + verificationLevel: `01` (string, required) - 00 - Member has not been verified, no registered payment instruments; 01 - Member has not been verified, has one or more registered payment instruments; 10 - Member is verified, no registered payment instruments; 11 - Member is verified, has one or more registered payment instruments
         + availableBalance (balance) - Member's currently available account balance.
         
-    + Body            
-
-            {
-               "customerId": "CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325",
-               "accountProfile": {
-                    "email": "jsmith@email.com",
-                    "accountId": "451234567890",
-                    "firstName": "John",
-                    "lastName": "Smith",
-                    "country": "CA",
-                    "dateOfBirth": {
-                        "year": "1975",
-                        "month": "01",
-                        "day": "31"
-                    }
-                },
-                "verificationLevel": "01"
-            }
-
 
 ## Verify Customer details [GET /customers/verify?email={email}&firstName={firstName}&lastName={lastName}&dateOfBirth={dateOfBirth}&houseNumber={houseNumber}&country={country}&postCode={postCode}]
 
@@ -4698,7 +4679,6 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
 ## accountPreferences
 - lang: `en` (string) - The preferred language of the member. See [Languages](http://paysafegroup.github.io/neteller_rest_api_v1/#/introduction/technical-introduction/languages) for complete list.
 - currency: `EUR` (string) - The preferred wallet currency of the member. See [Currencies](#currencies) for complete list.
- a
 
 ## accountProfile
 - email (string) - The account email address.
