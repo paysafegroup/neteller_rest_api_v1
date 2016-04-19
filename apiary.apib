@@ -1,7 +1,7 @@
 FORMAT: 1A
 HOST: https://api.neteller.com/v1
 
-# Integrating the NETELLER REST API v1
+# Integrating the NETELLER REST API
 
 ## About the API
 
@@ -2767,7 +2767,7 @@ the customer to the returned uri.
 
     + Attributes
         + payeeProfile (accountProfile, required) - The recipient of the payment. At minimum, the payee's email address or NETELLER Account ID must be supplied.
-        + transaction (object, required) - Details about the payment.
+        + transaction (transaction, required) - Details about the payment.
         + message (string, optional) - The message what will be shown  to the member notifying them of the pending transfer.
 
     + Headers
@@ -2778,7 +2778,7 @@ the customer to the returned uri.
 
             {
                 "payeeProfile": {
-                    "email": "john.doe@email.com"
+                    "email": "jsmith@email.com"
                 },
                 "transaction": {
                     "amount": 2500,
@@ -2787,13 +2787,13 @@ the customer to the returned uri.
                 },
                 "message": "sample message"
             }
-
+            
 + Response 201 (application/json)
 
     + Attributes
         + customer (object, required) -The associated customer information for the payment.
-        + transaction (object, required) - Details about the payment.
-        + links ([string], optional) - Array of HATEOAS links (if applicable).
+        + transaction (transaction, required) - Details about the payment.
+        + Include links
         
     + Body
 
@@ -4680,49 +4680,63 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
 - lang: `en` (string) - The preferred language of the member. See [Languages](http://paysafegroup.github.io/neteller_rest_api_v1/#/introduction/technical-introduction/languages) for complete list.
 - currency: `EUR` (string) - The preferred wallet currency of the member. See [Currencies](#currencies) for complete list.
 
+## accountProfileCreate
+- email: `jsmith@email.com` (string) - The account email address.
+
 ## accountProfile
-- email (string) - The account email address.
-- accountId (string) - The 12 digit NETELLER account number.
-- firstName (string) - The clients first name, or given name.
-- lastName (string) - The clients last name, or family name.
-- address1 (string) - The clients residential, or street address.
-- address2 (string) - Continuation of the clients residential, or street address.
-- address3 (string) - Continuation of the clients residential, or street address.
-- city (string) - The clients city of residence.
-- countrySubdivisionCode - The ISO 3166-2 code indicating the state/province/district or other value denoting the clients country subdivision (e.g. BE=Berlin. 13=Tôkyô [Tokyo], AB=Alberta)
-- country (string) - The ISO 3166-1 Alpha 2-code for the clients country of residence (e.g. Germany = DE, JP=Japan. CA=Canada).
-- postCode (string) - The zip code, or postal code, of the clients residence.
-- contactDetails (contactDetail) - An array of contact numbers.  Can accept up to 2 phone numbers, the first number will be considered primary. Phone numbers should contain no special characters.
-- gender (string) - m - male, f - female
+- email: `jsmith@email.com` (string) - The account email address.
+- accountId: `451000000000` (string) - The 12 digit NETELLER account number.
+- firstName: `John` (string) - The clients first name, or given name.
+- lastNam: `Smith` (string) - The clients last name, or family name.
+- address1: `address line 1` (string) - The clients residential, or street address.
+- address2: `address line 2` (string) - Continuation of the clients residential, or street address.
+- address3: `address line 3` (string) - Continuation of the clients residential, or street address.
+- city: `Smallville` (string) - The clients city of residence.
+- countrySubdivisionCode: `AB` - The ISO 3166-2 code indicating the state/province/district or other value denoting the clients country subdivision (e.g. BE=Berlin. 13=Tôkyô [Tokyo], AB=Alberta)
+- country: `CA` (string) - The ISO 3166-1 Alpha 2-code for the clients country of residence (e.g. Germany = DE, JP=Japan. CA=Canada).
+- postCode: `T3H3B2` (string) - The zip code, or postal code, of the clients residence.
+- contactDetail (array[contactDetail]) - An array of contact numbers. Can accept up to 2 phone numbers, the first number will be considered primary. Phone numbers should contain no special characters.
+- gender: `m` (string) - m \- male, f \- female
 - dateOfBirth (date) - Registered birthdate for the account holder.
 - accountPreferences (accountPreferences)
 
 ## balance
-- amount: 450 (string) - The amount in the smallest unit of currency.
-- currency: CAD (string) - The associated currency.
+- amount: `450` (number) - The amount in the smallest unit of currency.
+- currency: `CAD` (string) - The associated currency.
 
 ## contactDetail
-- type (string)
-- value (string)
++ type: `landLine` (string) - landLine, mobile
++ value: `14032339400` (string) - The full phone number including country dialing code.
 
 ## date
-- year (string
-- month (string)
-- day (string)
+- year: `1973` (string) - YYYY
+- month: `03` (string) - MM
+- day: `21` (string) - DD
+
+## fee
+- feeType: `service_fee` (string) - Description of the fee.
+- feeAmount: `71` (number) - Amount of the fee.
+- feeCurrency: `EUR` (string) - The associated currency.
+
+## links
++ links (array) - This is an array of self-referencing links. 
+   + (object) 
+        + rel: self
+        + href: ...
 
 ## paymentMethod
-- type (string) - Identifies the type of payment method.
-- value (string) - Further Identifies the payment type, and the source of funds for a payment.
+- type: `neteller` (string) - Identifies the type of payment method.
+- value: `jsmith@neteller.com` (string) - Further Identifies the payment type, and the source of funds for a payment.
 
 ## transaction
-- merchantRefId (string) - The external merchant transaction id that uniquely identifies this transaction within the merchant system.
-- amount (number) - The amount of the transaction. Amount fields reflect the smallest unit of currency with no decimals. Eg. $25.00 USD should be formatted as 2500 whereas 2500 JPY should be formatted as 2500.
-- currency (string) - The currency of the transaction.
-- id (number) - The transaction id that identifies this transaction within the NETELLER system.  The returned id is considered a transaction group id and can be used to identify both sides of a transfer.
+- merchantRefId: `23242343` (string) - The external merchant transaction id that uniquely identifies this transaction within the merchant system.
+- amount: `499` (number) - The amount of the transaction. Amount fields reflect the smallest unit of currency with no decimals. Eg. $25.00 USD should be formatted as 2500 whereas 2500 JPY should be formatted as 2500.
+- currency: `EUR` (string) - The currency of the transaction.
+- id: `34583838938370293` (number) - The transaction id that identifies this transaction within the NETELLER system.  The returned id is considered a transaction group id and can be used to identify both sides of a transfer.
 - transactionType (string) - Indicates the type of transaction or specific product for the transaction.
-- createDate (string) - ISO 8601 format (UTC). The timestamp when the transaction was requested. YYYY-MM-DDThh:mm:ssZ
-- updateDate (string) - ISO 8601 format (UTC). The timestamp when the transaction was last updated. YYYY-MM-DDThh:mm:ssZ
-- fees (string) - List of fees associated with this transaction.
+- createDate: `2014-02-03T19:12:59Z` (string) - ISO 8601 format (UTC). The timestamp when the transaction was requested. YYYY-MM-DDThh:mm:ssZ
+- updateDate: `2014-02-03T19:12:59Z` (string) - ISO 8601 format (UTC). The timestamp when the transaction was last updated. YYYY-MM-DDThh:mm:ssZ
+- fees (array [fee]) - List of fees associated with this transaction.
 - status (string) - accepted, pending, declined, cancelled, failed
 - errorCode (string) - If applicable, the corresponding code for why this transaction was not accepted.
 - errorMessage (string) - If applicable, the corresponding reason for why this transaction was not accepted.
