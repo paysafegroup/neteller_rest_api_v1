@@ -2596,13 +2596,9 @@ username and client\_secret as your password.
 
 + Response 201 (application/json)
 
-    + body
+    + Attributes
 
-            {
-                "accessToken": "0.AQAAAVF-mqsiAAAAAAAbd0A71bIG8IUwcgHV7mAYiG7J.EAAQsWDnpqRj7WwyFVLTsdo0yXWh9L4",
-                "tokenType": "Bearer",
-                "expiresIn": 1800            
-            }    
+        + Include accessToken
             
 
 ## Obtain an access token using auth code [GET /oauth2/authorize?client_id={client_id}&redirect_uri={YOUR_REDIRECT_URL}&scope={scope}&lang={lang}]
@@ -2666,7 +2662,7 @@ REST API calls.  This process can be repeated until authorization is revoked by 
 
 + Request Obtain authorization (text/html)
 
-+ Response 201 (application/json)
++ Response 200 (application/json)
 
 ### Exchange your authorization code for an access token [POST /oauth2/token?grant_type=authorization_code&code={YOUR_AUTHORIZATION_CODE}&redirect_uri={YOUR_REDIRECT_URI}]
 
@@ -2693,15 +2689,9 @@ Once you have received member authorization, you can exchange your authorization
 
 + Response 201 (application/json)
 
-    + Body
+    + Attributes
     
-            {
-                "accessToken": "0.AQAAAUgUGIk5AAAAAAAEk-CgJxQeNBiq7ES8yQaLITPU.JGrVsVsiy3ASoQsYED9VkJv25eY",
-                "tokenType": "Bearer",
-                "expiresIn": 300,
-                "refreshToken": "0.AgAAAUgUGIkyAAAAB1jwsODI5PCkVNOZul5AJ01mYtdh.ezGCYhN5YD22-BCOPX6U-muc72o",
-                "scope": "subscription_payment"
-            }
+        + Include refreshToken
 
 
 ### Exchange your refresh token for an access token [POST /oauth2/token?grant_type={grant_type}&refresh_token={refresh_token}]
@@ -2726,15 +2716,9 @@ initial authorization response to obtain a new one.
 
 + Response 201 (application/json)
 
-    + Body
-        
-            {
-               "accessToken": "0.AQAAAUfvtyJyAAAAAAA27oALPWxe111yJMNH3HEa6l_o.EddShan6OS7sQX28UhYz5cz_LHE",
-               "expiresIn": 300,
-               "tokenType": "Bearer",
-               "scope": "subscription_payment, account_available_balance"
-            }
-
+    + Attributes
+    
+        + Include refreshToken
 
 # Payments [/]
 
@@ -2766,175 +2750,58 @@ the customer to the returned uri.
 + Request Send payment to email (application/json)
 
     + Attributes
-        + payeeProfile (accountProfile, required) - The recipient of the payment. At minimum, the payee's email address or NETELLER Account ID must be supplied.
-        + transaction (transaction, required) - Details about the payment.
-        + message (string, optional) - The message what will be shown  to the member notifying them of the pending transfer.
+        + payeeProfile (accountProfileBase, required) - The recipient of the payment. At minimum, the payee's email address or NETELLER Account ID must be supplied.
+        + transaction (transactionBase, required) - Details about the payment.
+        + message: `Sample message` (string, optional) - The message what will be shown  to the member notifying them of the pending transfer.
 
     + Headers
             
             Authorization: Bearer YOUR-ACCESS-TOKEN
 
-    + Body
-
-            {
-                "payeeProfile": {
-                    "email": "jsmith@email.com"
-                },
-                "transaction": {
-                    "amount": 2500,
-                    "currency": "EUR",
-                    "merchantRefId": "20140203113703"
-                },
-                "message": "sample message"
-            }
             
 + Response 201 (application/json)
 
     + Attributes
         + customer (object, required) -The associated customer information for the payment.
+            + link
+                + url: `https://api.neteller.com/v1/customers/CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325`
+                + rel: `customer`
+                + method: `GET`
         + transaction (transaction, required) - Details about the payment.
         + Include links
         
-    + Body
-
-            {
-                "customer": {
-                    "link": {
-                        "url": "https://api.neteller.com/v1/customers/CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325",
-                        "rel": "customer",
-                        "method": "GET"
-                    }
-                },
-                "transaction": {
-                    "merchantRefId": "20140203113703",
-                    "amount": 2500,
-                    "currency": "EUR",
-                    "id": "176391453448397",
-                    "createDate": "2014-02-03T18:50:48Z",
-                    "updateDate": "2014-02-03T18:50:51Z",
-                    "status": "Accepted",
-                    "fees": [
-                        {
-                            "feeType": "Service_fee",
-                            "feeAmount": 71,
-                            "feeCurrency": "EUR"
-                        }
-                    ]
-                },
-                "links": [
-                    {
-                        "url": "https://api.neteller.com/v1/payments/176391453448397",
-                        "rel": "self",
-                        "method": "GET"
-                    }
-                ]
-            }
 
 + Request Send payment to non-registered email with profile data to provide a signup link (application/json)
 
     + Attributes
         + payeeProfile (accountProfile, required) - The recipient of the payment. At minimum, the payee's email address or NETELLER Account ID must be supplied.
-        + transaction (object, required) - Details about the payment.
-        + message (string, optional) - The message what will be shown  to the member notifying them of the pending transfer.
+        + transaction (transactionBase, required) - Details about the payment.
+        + message: `Sample message` (string, optional) - The message what will be shown  to the member notifying them of the pending transfer.
     
     + Headers
     
                 Authorization: Bearer YOUR-ACCESS-TOKEN
 
-    + Body
-
-            {
-                "payeeProfile": {
-                    "email": "jsmith@email.com",
-                    "firstName": "John",
-                    "lastName": "Smith",
-                    "address1": "address line 1",
-                    "address2": "address line 2",
-                    "address3": "address line 3",
-                    "city": "Calgary",
-                    "countrySubdivisionCode": "AB",
-                    "postCode": "T8A22J",
-                    "contactDetails": [
-                        {
-                            "type": "landLine",
-                            "value": "14032332333"
-                        },
-                        {
-                            "type": "mobile",
-                            "value": "14035552333"
-                        }
-                    ],
-                    "gender": "m",
-                    "dateOfBirth": {
-                        "year": "1975",
-                        "month": "12",
-                        "day": "10"
-                    },
-                    "accountPreferences": {
-                        "lang": "en",
-                        "currency": "EUR"
-                    }
-                },
-                "transaction": {
-                    "amount": 2500,
-                    "currency": "EUR",
-                    "merchantRefId": "20140203113703"
-                },
-                "message": "sample message"
-            }
 
 + Response 201 (application/json)
 
     + Attributes
-        + customer (object, required) -The associated customer information for the payment.
-        + transaction (object, required) - Details about the payment.
-        + links ([string], optional) - Array of HATEOAS links (if applicable).
-        
+        + customer (customer, required) -The associated customer information for the payment.
+        + transaction (transaction, required) - Details about the payment.
+        + links (array) - Array of HATEOAS links (if applicable).
+              + (object)
+                + url: `https://api.neteller.com/v1/payments/129391454779189`
+                + rel: `self`
+                + method: `GET`
+              + (object)
+                + url: `https://api.neteller.com/v1/54779189`
+                + rel: `member_signup_redirect`
+                + method: `GET`        
     + Headers
 
             Location: /v1/transferOut
             
-    
-    + Body
 
-            {
-                "customer": {
-                    "link": {
-                        "url": "https://api.neteller.com/v1/customers/CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325",
-                        "rel": "customer",
-                        "method": "GET"
-                    }
-                },
-                "transaction": {
-                    "merchantRefId": "20140203113704",
-                    "amount": 2500,
-                    "currency": "EUR",
-                    "id": "129391454779189",
-                    "createDate": "2014-02-03T19:12:59Z",
-                    "updateDate": "2014-02-03T19:12:59Z",
-                    "status": "pending",
-                    "fees": [
-                        {
-                            "feeType": "service_fee",
-                            "feeAmount": 71,
-                            "feeCurrency": "EUR"
-                        }
-                    ]
-                },
-                "links": [
-                    {
-                        "url": "https://api.neteller.com/v1/payments/129391454779189",
-                        "rel": "self",
-                        "method": "GET"
-                    },
-                    {
-                        "url": "https://member.neteller.com/member?emailAddress=jsmith@email.com&token=f45bc7114859cda1f46d8a2bbbc3449f5f42f",
-                        "rel": "member_signup_redirect",
-                        "method": "GET"
-                    }
-                ]
-            }
- 
 
 ## Request payment [POST /transferIn]
 
@@ -4680,12 +4547,10 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
 - lang: `en` (string) - The preferred language of the member. See [Languages](http://paysafegroup.github.io/neteller_rest_api_v1/#/introduction/technical-introduction/languages) for complete list.
 - currency: `EUR` (string) - The preferred wallet currency of the member. See [Currencies](#currencies) for complete list.
 
-## accountProfileCreate
+## accountProfileBase
 - email: `jsmith@email.com` (string) - The account email address.
 
-## accountProfile
-- email: `jsmith@email.com` (string) - The account email address.
-- accountId: `451000000000` (string) - The 12 digit NETELLER account number.
+## accountProfile (accountProfileBase)
 - firstName: `John` (string) - The clients first name, or given name.
 - lastNam: `Smith` (string) - The clients last name, or family name.
 - address1: `address line 1` (string) - The clients residential, or street address.
@@ -4700,23 +4565,67 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
 - dateOfBirth (date) - Registered birthdate for the account holder.
 - accountPreferences (accountPreferences)
 
+## accountProfileResponse (accountProfileBase)
+- accountId: `451000000000` (string) - The 12 digit NETELLER account number.
+Include accountProfile
+
 ## balance
 - amount: `450` (number) - The amount in the smallest unit of currency.
 - currency: `CAD` (string) - The associated currency.
 
+## billingDetail
+- email: `jsmith@email.com` (string) - The account email address.
+- firstName: `John` (string) - The clients first name, or given name.
+- lastName: `Smith`(string) - The clients last name, or family name.
+- address1: `address1` (string) - The clients residential, or street address.
+- address2: `address2` (string) - Continuation of the clients residential, or street address.
+- address3: `address3` (string) - Continuation of the clients residential, or street address.
+- city: `city` (string) - The clients city of residence.
+- countrySubdivisionCode: `AB` string -The ISO 3166-2 code indicating the state/province/district or other value denoting the clients country subdivision (e.g. BE=Berlin. 13=Tôkyô [Tokyo], AB=Alberta)
+- country: `CA` (string) - The ISO 3166-1 Alpha 2-code for the clients country of residence (e.g. Germany = DE, JP=Japan. CA=Canada)
+- postCode: `T3H3L2` (string) - The zip code, or postal code, of the clients residence.
+- lang: `EN` (string) - The preferred language of communication. See Languages for complete list.
+
 ## contactDetail
 + type: `landLine` (string) - landLine, mobile
 + value: `14032339400` (string) - The full phone number including country dialing code.
+
+## customer
++ customerId: `CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325` (string) - Unique identifier for this customer.ie. CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325
++ accountProfile (accountProfile) - The associated account profile.
++ verificationLevel: `01` (string)
+
+    00 - Member has not been verified, no verified payment instruments<br/>
+    01 - Member has not been verified, has one or more verified payment instruments<br/>
+    10 - Member is verified, no verified payment instruments<br/>
+    11 - Member is verified, has one or more verified payment instruments<br/>
+
++ availableBalance (balance) - The members currently available balance.
 
 ## date
 - year: `1973` (string) - YYYY
 - month: `03` (string) - MM
 - day: `21` (string) - DD
 
+## error
++ code (string) - The error code reflecting the reason for the failed request.
++ message (string) - Short description of the status.
++ fieldErrors ([fielderror]) - If applicable, details around particular fields that reported errors with the API request.
+
 ## fee
 - feeType: `service_fee` (string) - Description of the fee.
 - feeAmount: `71` (number) - Amount of the fee.
 - feeCurrency: `EUR` (string) - The associated currency.
+
+## fieldError
++ field (string) - Identifies the JSON request field.
++ error (string) - The problem associated with field.
+
+## invoice
+
+## item
+
+## link
 
 ## links
 + links (array) - This is an array of self-referencing links. 
@@ -4724,19 +4633,148 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
         + rel: self
         + href: ...
 
+## order
++ orderId (string) - Unique NETELLER reference for the order. ie: ORD_7915d463-ccc8-4305-9d33-9e5c9310f12e, SUB_c46645ea-b7b0-4a91-87f7-88c00ec0dea1
++ merchantRefId (string) - The associated merchant reference id from the initial request.
++ totalAmount (number) - The total amount due for this order, including all items, fees, taxes.
++ currency (string) - The currency of the total amount due.  The order must have the same currency for all items, fees and taxes. see Currencies for complete list
++ status (string) 
+
+    pending
+    cancelled
+    failed - The order was not paid.
+    paid
+    expired - The order had expired (default: 15 mins)
+
++ lang (string) - The language that the Quick Checkout pages should be displayed in. see Languages for complete list
++ items ([item]) - Specific line items (products/fees or services) that you are requesting payment for.
++ fees ([fee]) - Specific fees (setup/shipping&handling, etc.) that are to be included in the payment.
++ taxes ([tax]) - Specific taxes(VAT, GST, PST, etc...) that are to be included in the payment.
++ customerIp (string) - The value should be the incoming IP address of your customer, which will restrict the payment page to being viewable only from this IP address.
++ paymentMethods ([paymentMethod]) - This allows you to define which payment options you would like to use
++ redirects ([redirect]) - This allows you to add redirects to the order. Redirects cause a connection back to your merchant system via the customer's browser.
++ links ([link]) - Array of HATEOAS links (if applicable)
+    + hosted_payment – URI for the payment page. Customers should be redirected to this URI to see their invoice and complete payment; or this should be used as the form action on the merchant payment page if using a silent post.
+    + self – This URI can be called to return a JSON object about the current status of the order, e.g., to see if the payment has been settled.
+
+## payment
++ customer (customer) - NETELLER member account details for this transaction (if applicable).
++ billingDetail (billingDetail) - Billing details for this transaction, if paid as a guest and is not associated with a NETELLER account.
++ transaction (transaction) - Associated transaction details.
+
+## plan
++ planId (string) - A unique identifier for the plan that you will use to identify which plan you want to enroll your customer in.
++ planName (string) - The display name for the plan.
++ interval (number) - The number of intervals between each billing attempt. (ie: to bill every 15 days, you would select an interval of 15 and a type of daily).
++ intervalType (string) - The type of interval you wish want to define. 
+
+    daily
+    weekly
+    monthly
+    yearly
+
++ intervalCount (number) - The length of the contract in intervals, or how many recurring billings will be attempted. intervalCount * interval = Total Subscription Term (duration) (ie: For a yearly subscription billing every 3 months, this would be 4)
++ amount (number) - The amount to bill for each re-ocurrence.
++ currency (string) - The currency of the amount to be billed.
++ status (string) 
+
+    pending - The subscription has been requested and is pending activation (start date has not yet elapsed).
+    active - The subscription plan is currently active
+    cancelled - The subscription plan was cancelled and can no longer be subscribed to
+
++ numberofSubscriptions (number) - The number of subscriptions that were enrolled under a plan. This includes cancelled and ended subscriptions.
+
+## redirect
++ rel (string) - This is the redirect type, allowing different endpoints to be targeted depending on the end state of the transaction. 
+
+    Possible values are:
+    on_success
+    on_pending
+    on_error
+    on_decline
+    on_cancel
+    on_timeout
+
++ url (string)
+
+## subscription
++ subscriptionId (string) - A system generated value that uniquely identifies this subscription.
++ plan (plan) - The associated subscription plan that the subscription is for.
++ customer (customer) - The associated customer for this subscription.
++ status (string) 
+
+    pending - A subscription has been requested and is pending activation upon the requested start date
+    active - The subscription is currently active
+    cancelled - The subscription was cancelled by the subscriber or by the merchant application
+    ended - The subscription has lapsed
+    failed - The subscription request failed.  This status will only be set if the subscription was created with no startDate supplied and the immediate billing failed.
+
++ startDate (string) - > current date Date the subscription should start.  If startDate is not supplied, the customer will be billed immediately.  If supplying a subscription startDate, the date must be greater then the current date.
+
+    ISO 8601 format (UTC)
+    YYYY-MM-DDThh:mm:ssZ
+
++ endDate (string) - If the subscription has ended (either because it was canceled or because the customer was switched to a subscription to a new plan), the date the subscription ended
+
+    ISO 8601 format (UTC)
+    YYYY-MM-DDThh:mm:ssZ
+    
++ currentPeriodStart (string) - Start of the current period that the subscription has been invoiced for.
+
+    ISO 8601 format (UTC)
+    YYYY-MM-DDThh:mm:ssZ
+
++ currentPeriodEnd (string) - End of the current period that the subscription has been invoiced for. At the end of this period, a new invoice will be created
+
+    ISO 8601 format (UTC)
+    YYYY-MM-DDThh:mm:ssZ
+
++ cancelAtPeriodEnd (boolean) - If the subscription has been canceled with the atPeriodEnd flag set to true, then this value on the subscription will be true. You can use this attribute to determine whether a subscription that has a status of active is scheduled to be canceled at the end of the current period.
++ canceledDate (string) - If the subscription has been canceled, the date of that cancellation. If the subscription was canceled with cancelAtPeriodEnd, canceledDate will still reflect the date of the initial cancellation request, not the end of the subscription period when the subscription is automatically moved to a canceled state.
+
+    ISO 8601 format (UTC)
+    YYYY-MM-DDThh:mm:ssZ
+
++ lastCompletedPaymentDate (string) - The date the last successful payment was processed for this subscription
+
+    ISO 8601 format (UTC)
+    YYYY-MM-DDThh:mm:ssZ
+
+## tax
++ taxName (string) - The name that will display in history and invoice details for this tax item.  (ie: VAT, GST, PST...etc)
++ taxAmount (number) - The amount of the tax. Amount fields reflect the smallest unit of currency with no decimals. Eg. $25.00 USD should be formatted as 2500.
++ taxCurrency (string) - The currency the tax is in. See Currencies for complete list.
+
+## accessToken
++ tokenType: `Bearer` (string) - The type of access token that was issued.  Currently only 'Bearer' tokens are supported.
++ expiresIn: `1000` (number) - How much time in seconds until the token expires.
++ accessToken: `0.AQAAAVF-mqsiAAAAAAAbd0A71bIG8IUwcgHV7mAYiG7J.EAAQsWDnpqRj7WwyFVLTsdo0yXWh9L4` (string) - The access token to pass in the API call to access the protected resource.
+
+## refreshToken
++ tokenType: `Bearer` (string) - The type of access token that was issued.  Currently only 'Bearer' tokens are supported.
++ expiresIn: `1000` (number) - How much time in seconds until the token expires.
++ accessToken: `0.AQAAAVF-mqsiAAAAAAAbd0A71bIG8IUwcgHV7mAYiG7J.EAAQsWDnpqRj7WwyFVLTsdo0yXWh9L4` (string) - The access token to pass in the API call to access the protected resource.
++ refreshToken: `0.AgAAAUgUGIkyAAAAB1jwsODI5PCkVNOZul5AJ01mYtdh.ezGCYhN5YD22-BCOPX6U-muc72o` (string) - The token to use to obtain a new access token with the same permissions (scope) previously authorized.
++ scope: `subscription_payment` (string)
+
 ## paymentMethod
 - type: `neteller` (string) - Identifies the type of payment method.
 - value: `jsmith@neteller.com` (string) - Further Identifies the payment type, and the source of funds for a payment.
 
-## transaction
+## transactionBase
 - merchantRefId: `23242343` (string) - The external merchant transaction id that uniquely identifies this transaction within the merchant system.
 - amount: `499` (number) - The amount of the transaction. Amount fields reflect the smallest unit of currency with no decimals. Eg. $25.00 USD should be formatted as 2500 whereas 2500 JPY should be formatted as 2500.
 - currency: `EUR` (string) - The currency of the transaction.
+
+## transaction (transactionBase)
 - id: `34583838938370293` (number) - The transaction id that identifies this transaction within the NETELLER system.  The returned id is considered a transaction group id and can be used to identify both sides of a transfer.
 - transactionType (string) - Indicates the type of transaction or specific product for the transaction.
 - createDate: `2014-02-03T19:12:59Z` (string) - ISO 8601 format (UTC). The timestamp when the transaction was requested. YYYY-MM-DDThh:mm:ssZ
 - updateDate: `2014-02-03T19:12:59Z` (string) - ISO 8601 format (UTC). The timestamp when the transaction was last updated. YYYY-MM-DDThh:mm:ssZ
 - fees (array [fee]) - List of fees associated with this transaction.
-- status (string) - accepted, pending, declined, cancelled, failed
-- errorCode (string) - If applicable, the corresponding code for why this transaction was not accepted.
-- errorMessage (string) - If applicable, the corresponding reason for why this transaction was not accepted.
+- status: `accepted` (string) - accepted, pending, declined, cancelled, failed
+
+## transactionError (transaction)
+- status: `declined` (string) - accepted, pending, declined, cancelled, failed
+- errorCode: `5269` (string) - If applicable, the corresponding code for why this transaction was not accepted.
+- errorMessage: `errormessage` (string) - If applicable, the corresponding reason for why this transaction was not accepted
