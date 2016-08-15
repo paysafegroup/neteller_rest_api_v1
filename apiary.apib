@@ -3072,7 +3072,7 @@ querying with your merchant reference ID and not the NETELLER Transaction ID.
 
     + Attributes
         + customer (object, required) - The associated customer information for the payment (if applicable).
-        + billingDetail (object, optional) - The associated billingDetail for the transaction (if applicable). NETELLERgo! orders should always return billing details.
+        + billingDetail (object, optional) - The associated billing details for the transaction (if applicable). NETELLERgo! orders should always return billing details.
         + transaction (object, required) - Details about the payment.
         + links ([string], optional) - Array of HATEOAS links (if applicable).
 
@@ -3151,10 +3151,10 @@ This API request returns a list of [payment](#payment) objects.
 
     + Attributes
     
-        + list (array) - A collection of associated payment objects.
-            + customer (object, required) - The associated customer information for the payment (if applicable).
-            + billingDetail (object, optional) - The associated billingDetail for the transaction (if applicable).
-            + transaction (object, required) - Details about the payment.
+        + list ([array]) - A collection of associated payment objects.
+            - Include customer
+            - Include billingDetail
+            - transaction (transaction)
         + links ([string], optional) - Array of HATEOAS links (if applicable).
 
 
@@ -4703,6 +4703,31 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
 ## balance
 - amount: `450` (number) - The amount in the smallest unit of currency.
 - currency: `CAD` (string) - The associated currency.
+
+## billingDetail
+- billingDetail (object, required) - The associated billing details for the payment (if applicable).
+
+    - Properties
+        - email: `jondoe@email.com` (string) - The account email address.
+        - firstName: `Jon` (string) - The clients first name, or given name.
+        - lastName: `Doe` (string) - The clients last name, or family name.
+        - address1: `Address Line 1` (string) - The clients residential or street address.
+        - address2: `Address Line 2` (string) - Continuation of the clients residential or street address.
+        - address3: `Address Line 3` (string) - Continuation of the clients residential or street address.
+        - city: `Calgary` (string) - The clients city of residence.
+        - countrySubdivisionCode: `AB` (string)
+        - country: `CA` (string)
+        - postCode: `T3H3L3` (string)
+        - lang: `EN` (string)
+
+## customer
+- customer (object, required) - The associated customer information for the payment (if applicable).
+
+    - Properties
+        - customerId: `CUS_0d6766b4b-0eb8-4d78-af25-e41ab431e325` (string)
+        - accountProfile
+        - verificationLevel 
+        - availableBalance
 
 ## contactDetail
 + type: `landLine` (string) - landLine, mobile
