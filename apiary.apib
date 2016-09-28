@@ -37,95 +37,95 @@ response object notation.
 > Please see the section on Versioning to find out how to verify which Minor Version of the API you are using.  You 
 > can choose to upgrade to a newer version at anytime through API Settings of your merchant dashboard.
 
-|API Version|Minor Version    |Patch / Description|
-|---        |---              |---|
-|**v1**     |**2015-04-28**   |**_2016-01-24_**|
-|           |                 |- Added new scope for account\_basic\_profile and updated the accountProfile object to restrict values returned|
-|           |                 |- Added new customer verify endpoint|
-|           |                 |- Added new payment list endpoint|
-|           |                 |- Updated paymentMethod to make NETELLER optional|
-|           |                 |**_2015-11-24_**|
-|           |                 |- Added transactionType to the the transaction object|
-|           |                 |**_2015-10-20_**|
-|           |                 |- Added payment method for NETELLERgo! \(paysafecard\)|
-|           |                 |- Removed deprecated payment method for NETELLERgo! \(ukash\)|
-|           |                 |- Added new currency: Emirati Dirham \(AED\)|
-|           |                 |**_2015-09-15_**|
-|           |                 |- Added payment methods for NETELLERgo! \(qiwi, yandex, webmoney\)|
-|           |                 |- Added F/X support for orders presented in different currencies|
-|           |                 |- Added support for one-step payments in NETELLERgo!|
-|           |                 |**_2015-08-11_**|             
-|           |                 |- Added payment method for NETELLERgo! \(boku\)|
-|           |                 |**_2015-07-07_**|                  
-|           |                 |- Added ability to lookup all subscriptions for a customer|
-|           |                 |- Added new currencies: South African Rand \(ZAR\), Brazilian Real \(BRL\)|
-|           |                 |**_2015-06-02_**|                                                  
-|           |                 |- Added payment method for NETELLERgo! \(bitcoin\)|
-|           |                 |- Added pending status to NETELLERgo! and support for on_pending redirect|
-|           |                 |**_2015-04-28_**|                                                  
-|           |                 |- Added status to order resource|
-|           |                 |- Added billingDetail resource|
-|           |                 |- Updated create order to take an optional array of billingDetail instead of payerProfile|
-|           |                 |- Updated lookup payment to return optional billingDetail if payment is made as a guest and not a NETELLER member|
-|           |                 |- Added invoiceId to invoice resource|
-|           |                 |- Replace customer reference in subscription/order invoice lookup with billingDetail|
-|           |                 |- Add HATEOAS link for corresponding customer detail for invoice lookup if they authenticated to NETELLER to pay|
-|           |                 |- Create subscription requires a customer id now instead of profile \(The customer id is obtained using the authorization flow\)|
-|           |                 |- Added error codes: 20009, 20301|
-|**v1**     |**2015-11-04**   |- **_2015-03-24_**|
-|           |                 |- Added additional webhooks for orders, payments|
-|           |                 |- Added payment methods for NETELLERgo! \(bradesco, bancodobrasil, itau, webpay\)|
-|           |                 |- Enhanced OAUTH authorization flow to return customer id for an authorization|
-|           |                 |- Added new currencies: Nigerian Naira \(NGN\), Taiwan New Dollar \(TWD\)|
-|           |                 |- **_2015-02-10_**|
-|           |                 |- Added payment methods for NETELLERgo! \(ideal\)|
-|           |                 |- Added multifactor authentication support to OAUTH / NETELLERgo! flows|
-|           |                 |- Added payment HATEOAS link to invoice resources|
-|           |                 |- Set subscription start times to 00:00:00 and end times to 23:59:59|
-|           |                 |- Ensure URLs returned from sandbox properly refer to sandbox host server|
-|           |                 |- Removed support for deprecated currencies: Latvian Lats \(LVL\), Lithuanian Litus \(LTL\)|
-|           |                 |- **_2014-12-09_**|
-|           |                 |- Added support for NETELLERgo!|
-|           |                 |- Added payment methods for NETELLERgo! \(sofort, poli, giropay, ukash\)|
-|           |                 |- Added order, paymentMethod, redirect resources|
-|           |                 |- Modified invoice resource to support order invoices|
-|           |                 |- Added order lookup|
-|           |                 |- Added lookup invoice for an order|
-|           |                 |- Added error codes: 20016|
-|           |                 |- **_2014-11-04_**|
-|           |                 |- Renamed account resource to customer|
-|           |                 |- Updated customer lookup to new resource uris \(/v1/account -> /v1/customer\)|
-|           |                 |- Removed linkbackurl from accountProfile resource and moved to root of create customer request|
-|           |                 |- Return customer resource instead of accountProfile on payment, subscriptions, invoices resources|
-|           |                 |- Renamed subscriptionPlan resource to plan|
-|           |                 |- Renamed invoice amountDue to totalAmount|
-|           |                 |- Lists no longer contain un-neccesary object wrapper, rather returns a list of the appropriate object.|
-|**v1**     |**2014-04-15**   |- **_2014-09-30_**|
-|           |                 |- Added API minor version support|
-|           |                 |- **_2014-09-03_**|
-|           |                 |- Added OAUTH2 authorization grant|
-|           |                 |- Added account, balance resources|
-|           |                 |- Added account lookup functionality|
-|           |                 |- Added new scopes: subscription\_payment, account\_enhanced\_profile, account\_contacts, account\_balance|
-|           |                 |- Modified create subscription to require scope: subscription_payment|
-|           |                 |- **_2014-07-22_**|
-|           |                 |- Added Quick Signup functionality|
-|           |                 |- **_2014-06-17_**|
-|           |                 |- Added ability to list subscription invoices and subscription plans|
-|           |                 |- Added subscription invoice lookup|
-|           |                 |- Added subscription webhooks|
-|           |                 |- Added error codes: 20050|
-|           |                 |- Added new languages Greek \(el\_GR\), Korean \(ko\_KR\)|
-|           |                 |- Added new subscription status: pending|
-|           |                 |- **_2014-05-21_**|
-|           |                 |- Added ability to list invoices for a subscription|
-|           |                 |- Added support for resource expansion|
-|           |                 |- Added new currencies: Malaysian Riggit \(MYR\), Moroccan Dirham \(MAD\), Tunisia Dinar \(TND\) and Swiss Franc \(CHF\)|
-|           |                 |- Added error codes: 20102<|
-|           |                 |- **_2014-04-15_**|
-|           |                 |- Modified authentication to OAUTH2 authentication using client_credentials|
-|           |                 |- Added subscription billing support|
-|           |                 |- Added error codes: 20100, 20101|
+API Version|Minor Version    |Patch / Description
+---        |---              |---
+**v1**     |**2015-04-28**   |**_2016-01-24_**
+           |                 |- Added new scope for account\_basic\_profile and updated the accountProfile object to restrict values returned
+           |                 |- Added new customer verify endpoint
+           |                 |- Added new payment list endpoint
+           |                 |- Updated paymentMethod to make NETELLER optional
+           |                 |**_2015-11-24_**
+           |                 |- Added transactionType to the the transaction object
+           |                 |**_2015-10-20_**
+           |                 |- Added payment method for NETELLERgo! \(paysafecard\)
+           |                 |- Removed deprecated payment method for NETELLERgo! \(ukash\)
+           |                 |- Added new currency: Emirati Dirham \(AED\)
+           |                 |**_2015-09-15_**
+           |                 |- Added payment methods for NETELLERgo! \(qiwi, yandex, webmoney\)
+           |                 |- Added F/X support for orders presented in different currencies
+           |                 |- Added support for one-step payments in NETELLERgo!
+           |                 |**_2015-08-11_**
+           |                 |- Added payment method for NETELLERgo! \(boku\)
+           |                 |**_2015-07-07_**                  
+           |                 |- Added ability to lookup all subscriptions for a customer
+           |                 |- Added new currencies: South African Rand \(ZAR\), Brazilian Real \(BRL\)
+           |                 |**_2015-06-02_**                 
+           |                 |- Added payment method for NETELLERgo! \(bitcoin\)
+           |                 |- Added pending status to NETELLERgo! and support for on_pending redirect
+           |                 |**_2015-04-28_**                                   
+           |                 |- Added status to order resource
+           |                 |- Added billingDetail resource
+           |                 |- Updated create order to take an optional array of billingDetail instead of payerProfile
+           |                 |- Updated lookup payment to return optional billingDetail if payment is made as a guest and not a NETELLER member
+           |                 |- Added invoiceId to invoice resource
+           |                 |- Replace customer reference in subscription/order invoice lookup with billingDetail
+           |                 |- Add HATEOAS link for corresponding customer detail for invoice lookup if they authenticated to NETELLER to pay
+           |                 |- Create subscription requires a customer id now instead of profile \(The customer id is obtained using the authorization flow\)
+           |                 |- Added error codes: 20009, 20301
+**v1**     |**2015-11-04**   |- **_2015-03-24_**
+           |                 |- Added additional webhooks for orders, payments
+           |                 |- Added payment methods for NETELLERgo! \(bradesco, bancodobrasil, itau, webpay\)
+           |                 |- Enhanced OAUTH authorization flow to return customer id for an authorization
+           |                 |- Added new currencies: Nigerian Naira \(NGN\), Taiwan New Dollar \(TWD\)
+           |                 |- **_2015-02-10_**
+           |                 |- Added payment methods for NETELLERgo! \(ideal\)
+           |                 |- Added multifactor authentication support to OAUTH / NETELLERgo! flows
+           |                 |- Added payment HATEOAS link to invoice resources
+           |                 |- Set subscription start times to 00:00:00 and end times to 23:59:59
+           |                 |- Ensure URLs returned from sandbox properly refer to sandbox host server
+           |                 |- Removed support for deprecated currencies: Latvian Lats \(LVL\), Lithuanian Litus \(LTL\)
+           |                 |- **_2014-12-09_**
+           |                 |- Added support for NETELLERgo!
+           |                 |- Added payment methods for NETELLERgo! \(sofort, poli, giropay, ukash\)
+           |                 |- Added order, paymentMethod, redirect resources
+           |                 |- Modified invoice resource to support order invoices
+           |                 |- Added order lookup
+           |                 |- Added lookup invoice for an order
+           |                 |- Added error codes: 20016
+           |                 |- **_2014-11-04_**
+           |                 |- Renamed account resource to customer
+           |                 |- Updated customer lookup to new resource uris \(/v1/account -> /v1/customer\)
+           |                 |- Removed linkbackurl from accountProfile resource and moved to root of create customer request
+           |                 |- Return customer resource instead of accountProfile on payment, subscriptions, invoices resources
+           |                 |- Renamed subscriptionPlan resource to plan
+           |                 |- Renamed invoice amountDue to totalAmount
+           |                 |- Lists no longer contain un-neccesary object wrapper, rather returns a list of the appropriate object.
+**v1**     |**2014-04-15**   |- **_2014-09-30_**
+           |                 |- Added API minor version support
+           |                 |- **_2014-09-03_**
+           |                 |- Added OAUTH2 authorization grant
+           |                 |- Added account, balance resources
+           |                 |- Added account lookup functionality
+           |                 |- Added new scopes: subscription\_payment, account\_enhanced\_profile, account\_contacts, account\_balance
+           |                 |- Modified create subscription to require scope: subscription_payment
+           |                 |- **_2014-07-22_**
+           |                 |- Added Quick Signup functionality
+           |                 |- **_2014-06-17_**
+           |                 |- Added ability to list subscription invoices and subscription plans
+           |                 |- Added subscription invoice lookup
+           |                 |- Added subscription webhooks
+           |                 |- Added error codes: 20050
+           |                 |- Added new languages Greek \(el\_GR\), Korean \(ko\_KR\)
+           |                 |- Added new subscription status: pending
+           |                 |- **_2014-05-21_**
+           |                 |- Added ability to list invoices for a subscription
+           |                 |- Added support for resource expansion
+           |                 |- Added new currencies: Malaysian Riggit \(MYR\), Moroccan Dirham \(MAD\), Tunisia Dinar \(TND\) and Swiss Franc \(CHF\)
+           |                 |- Added error codes: 20102<
+           |                 |- **_2014-04-15_**
+           |                 |- Modified authentication to OAUTH2 authentication using client_credentials
+           |                 |- Added subscription billing support
+           |                 |- Added error codes: 20100, 20101
 
 
 ***
@@ -228,10 +228,10 @@ For example, if a request to look up subscriptions identifies that there are 134
 
 > _You can change the default list page size by defining a **limit** parameter value._
 
-|Parameter Name |Description|
-|---            |---|
-|limit          |The number of records to be returned per page. Default = 10, Max = 100|
-|offset         |Identifies your location within the list and allows you to fetch the next set of resources|
+Parameter Name |Description
+---            |---
+limit          |The number of records to be returned per page. Default = 10, Max = 100
+offset         |Identifies your location within the list and allows you to fetch the next set of resources
 
 Sample Response with List Data
 
@@ -430,9 +430,9 @@ You can request an access token using only your client credentials \(client\_id:
 
 **Request Parameters**
 
-|Parameter Name     |Required?     |Description|
-|---                |---           |---|
-|grant\_type        |required      |set to `client_credentials`|
+Parameter Name     |Required?     |Description
+---                |---           |---
+grant\_type        |required      |set to `client_credentials`
 
 
 
@@ -460,11 +460,11 @@ https://api.neteller.com/v1/oauth2/token?grant_type=client_credentials
 
 **Response Structure**
 
-|Field Name     |Field Type     |Constraints    |Description|
-|---            |---            |---            |---|
-|accessToken    |string         |length <= 200  |The access token to be used in calls to the protect NETELLER REST APIs.|
-|tokenType      |string         |length <= 50   |Identifies the type of token to the client.  Possible values: `Bearer`|
-|expiresIn      |number         |               |The lifetime in seconds of the access token.|
+Field Name     |Field Type     |Constraints    |Description
+---            |---            |---            |---
+accessToken    |string         |length <= 200  |The access token to be used in calls to the protect NETELLER REST APIs.
+tokenType      |string         |length <= 50   |Identifies the type of token to the client.  Possible values: `Bearer`
+expiresIn      |number         |               |The lifetime in seconds of the access token.
 
 > A refresh token WILL NOT be included for this grant type.  It is only applicable for type: authorization_grant
 
@@ -528,14 +528,14 @@ GET https://api.neteller.com/v1/oauth2/authorize?client_id=YOUR_APPLICATION_ID&r
 
 **Authorization Request Parameters**
 
-|Parameter Name  |Required? |Description|
-|---             |---       |---|
-|client_id       |required  |Unique identifier generated when you registered your application.|
-|redirect\_uri   |optional  |The uri that the user's browser will be redirected back to once app authorization is completed. If supplied during this authorization request, the same uri must be supplied in the call to the token endpoint. When not supplied, the default registered redirect uri will be used. The redirect_uri must secured over TLS \(https://\)|
-|scope           |required  |The supplied scope parameter will indicate the level of access you require for your app. The scope parameter MUST be supplied. If your application requires multiple scopes then you should supply a comma separated list. Eg. scope=perm1,perm2|
-|state           |optional  ||
-|response_type   |          |Identifies the type of response for this request. Valid values: code - for server side flows **Only code is permitted at this time |
-|lang            |          |OPTIONAL: preferred language to render the authorization flow in. see [Languages](#Languages) for complete list|
+Parameter Name  |Required? |Description
+---             |---       |---
+client_id       |required  |Unique identifier generated when you registered your application.
+redirect\_uri   |optional  |The uri that the user's browser will be redirected back to once app authorization is completed. If supplied during this authorization request, the same uri must be supplied in the call to the token endpoint. When not supplied, the default registered redirect uri will be used. The redirect_uri must secured over TLS \(https://\)
+scope           |required  |The supplied scope parameter will indicate the level of access you require for your app. The scope parameter MUST be supplied. If your application requires multiple scopes then you should supply a comma separated list. Eg. scope=perm1,perm2
+state           |optional  |
+response_type   |          |Identifies the type of response for this request. Valid values: code - for server side flows **Only code is permitted at this time 
+lang            |          |OPTIONAL: preferred language to render the authorization flow in. see [Languages](#Languages) for complete list
 
 
 The following request sample shows how to ask for authorization to obtain a members balance to show on your cashier page.
@@ -561,11 +561,11 @@ Member will be prompted to authorize the requested permissions.
 If the member authorizes your request NETELLER will redirect \(via HTTP 302\) the user's browser by adding the following parameters to the query component of the redirection URI using the 
 "application/x-www-form-urlencoded" format.
 
-|Parameter Name    |Description|
-|---               |---|
-|code              |A short lived authorization code that can be exchanged for an access token. This value is short lived \(10 minutes\) and must be exchanged for a valid access token before it expires.|
-|state             |Will be provided if the state parameter was present in the authorization request.|
-|customer_id       |The associated unique identifier for this NETELLER account holder. This identifier can be used to lookup additional information about the customer.|
+Parameter Name    |Description
+---               |---
+code              |A short lived authorization code that can be exchanged for an access token. This value is short lived \(10 minutes\) and must be exchanged for a valid access token before it expires.
+state             |Will be provided if the state parameter was present in the authorization request.
+customer_id       |The associated unique identifier for this NETELLER account holder. This identifier can be used to lookup additional information about the customer.
 
 *Sample Response*
 
@@ -583,11 +583,11 @@ POST https://api.neteller.com/v1/oauth2/token?grant_type=authorization_code&code
  
 *Token Request Parameters*
 
-|Field Name    |Field Type    |Field Size    |Required?    |Description|
-|---           |---           |---           |---          |---|
-|grant\_type   |string        |100           |required     |set to 'authorization_code'|
-|code          |string        |20            |required     |set to the auth_code previously received from the authorization server.|
-|redirect\_uri |string        |500           |optional     |The TLS enabled redirection uri that will be returned to. This value must match the uri used to obtain authorization, If not supplied during the authorization flow then the redirect_uri will be the registered redirect uri for your application \(as set in the merchant.com portal under the APPS section\) and should not be passed.|
+Field Name    |Field Type    |Field Size    |Required?    |Description
+---           |---           |---           |---          |---
+grant\_type   |string        |100           |required     |set to 'authorization_code'
+code          |string        |20            |required     |set to the auth_code previously received from the authorization server.
+redirect\_uri |string        |500           |optional     |The TLS enabled redirection uri that will be returned to. This value must match the uri used to obtain authorization, If not supplied during the authorization flow then the redirect_uri will be the registered redirect uri for your application \(as set in the merchant.com portal under the APPS section\) and should not be passed.
 
 *Sample Request #1 \(using client_id and client_secret as username/password\)*
 
@@ -619,13 +619,13 @@ If your app is successfully authenticated, and the authorization code is valid, 
 
 A [token](# Complex JSON Objects) object will be returned.
 
-|Field Name     |Field Type    |Field Size    |Description|
-|---            |---           |---           |---|
-|accessToken    |string        |100           |The access token to be used in calls to the protect NETELLER REST APIs.|
-|tokenType      |string        |20            |Identifies the type of token to the client. For now only 'Bearer' is supported.|
-|expiresIn      |number        |6             |The lifetime in seconds of the access token. Default is 300 seconds \(5 minutes\).|
-|refreshToken   |string        |100           |The refresh token which can be used to obtain new access tokens using the same authorization grant that was previously   associated to it. This value is a secret. You should treat it like the user's password and take appropriate measures to protect it.|
-|scope          |string        |250           |The scope associated with the access token.|
+Field Name     |Field Type    |Field Size    |Description
+---            |---           |---           |---
+accessToken    |string        |100           |The access token to be used in calls to the protect NETELLER REST APIs.
+tokenType      |string        |20            |Identifies the type of token to the client. For now only 'Bearer' is supported.
+expiresIn      |number        |6             |The lifetime in seconds of the access token. Default is 300 seconds \(5 minutes\).
+refreshToken   |string        |100           |The refresh token which can be used to obtain new access tokens using the same authorization grant that was previously   associated to it. This value is a secret. You should treat it like the user's password and take appropriate measures to protect it.
+scope          |string        |250           |The scope associated with the access token.
 
 *Sample Response*
 
@@ -652,10 +652,10 @@ the initial authorization response to obtain a new one.
 
 *Request Parameter*
 
-|Parameter Name     |Required?    |Description|
-|---                |---          |---|
-|grant\_type        |required     |set to 'refresh_token'|
-|refresh\_token     |required     |The refresh token previously issued to the client|
+Parameter Name     |Required?    |Description
+---                |---          |---
+grant\_type        |required     |set to 'refresh_token'
+refresh\_token     |required     |The refresh token previously issued to the client
 
 *Sample Request*
 
@@ -669,12 +669,12 @@ curl -X POST \
 
 *Response Structure*
 
-|Field Name    |Field Type  |Field Size     |Description|
-|---           |---         |---            |---|
-|accessToken   |string      |length <= 200  |The access token to be used in calls to the NETELLER REST APIs.|
-|expiresIn     |number      |               |The lifetime in seconds of the access token.|
-|tokenType     |string      |20             |Identifies the type of token to the client. "Bearer"|
-|scope         |string      |               |The comma delimited list of scopes that have been authorized for this token.|
+Field Name    |Field Type  |Field Size     |Description
+---           |---         |---            |---
+accessToken   |string      |length <= 200  |The access token to be used in calls to the NETELLER REST APIs.
+expiresIn     |number      |               |The lifetime in seconds of the access token.
+tokenType     |string      |20             |Identifies the type of token to the client. "Bearer"
+scope         |string      |               |The comma delimited list of scopes that have been authorized for this token.
 
 *Sample Response*
 
@@ -701,24 +701,24 @@ If the member does not authorize your request, or the request fails for reasons 
 
 > There are some error situations in which you will not receive the error back on your redirect_uri.   For example, if you attempt to supply an insecure http:// redirect.  In this case the customer would see an invalid request error.  For this reason it is important to validate your integration!
 
-|Parameter Name                 |Description|
-|---                            |---|
-|error                          |The error that occurred|
-|error_description              |Reason for the error.|
-|state                          |Will be provided if the **state** parameter was present in the authorization request|
+Parameter Name                 |Description
+---                            |---
+error                          |The error that occurred
+error_description              |Reason for the error.
+state                          |Will be provided if the **state** parameter was present in the authorization request
 
 
 Possible Errors:
 
-|Error                           |Error Reason|
-|---                             |---|
-|**invalid_request**             |The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed.|
-|**unauthorized_client**         |The client is not authorized to request an authorization code using this method.|
-|**access_denied**               |The resource owner or authorization server denied your request.|
-|**unsupported_response_type**   |The authorization server does not support obtaining an authorization code using this method.|
-|**invalid_scope**               |The requested scope is invalid, unknown, or malformed.|
-|**server_error**                |The authorization server encountered an unexpected condition that prevented it from fulfilling the request.\(This error code is needed because a 500 Internal Server Error HTTP status code cannot be returned to the client via an HTTP redirect.\)|
-|**temporarily_unavailable**     |The authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server.  \(This error code is needed because a 503.  Service Unavailable HTTP status code cannot be returned to the client via an HTTP redirect.\)|
+Error                           |Error Reason
+---                             |---
+**invalid_request**             |The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed.
+**unauthorized_client**         |The client is not authorized to request an authorization code using this method.
+**access_denied**               |The resource owner or authorization server denied your request.
+**unsupported_response_type**   |The authorization server does not support obtaining an authorization code using this method.
+**invalid_scope**               |The requested scope is invalid, unknown, or malformed.
+**server_error**                |The authorization server encountered an unexpected condition that prevented it from fulfilling the request.\(This error code is needed because a 500 Internal Server Error HTTP status code cannot be returned to the client via an HTTP redirect.\)
+**temporarily_unavailable**     |The authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server.  \(This error code is needed because a 503.  Service Unavailable HTTP status code cannot be returned to the client via an HTTP redirect.\)
 
 Sample Response
 
@@ -728,24 +728,24 @@ https://YOUR_URL/?error=access_denied&error_description=The+resource+owner+or+au
 
 The authorization server responds with an HTTP 400 \(Bad Request\) status code \(unless specified otherwise\) and includes the following parameters with a JSON response:
 
-|Parameter Name                 |Description|
-|---                            |---|
-|error                          |The error that occurred|
-|error_description              |Reason for the error.|
-|state                          |Will be provided if the **state** parameter was present in the authorization request|
+Parameter Name                 |Description
+---                            |---
+error                          |The error that occurred
+error_description              |Reason for the error.
+state                          |Will be provided if the **state** parameter was present in the authorization request
 
 
 Possible Errors:
 
-|Error                           |Error Reason|
-|---                             |---|
-|**invalid_request**             |The request is missing a required parameter, includes an unsupported parameter value \(other than grant type\), repeats a parameter, includes multiple credentials, utilizes more than one mechanism for authenticating the client, or is otherwise malformed.|
-|**invalid_client**              |Client authentication failed \(e.g., unknown client, no client authentication included, or unsupported authentication method\). The authorization server MAY return an HTTP 401 (Unauthorized) status code to indicate which HTTP authentication schemes are supported. If the client attempted to authenticate via the "Authorization" request header field, the authorization server MUST respond with an HTTP 401 (Unauthorized) status code and include the "WWW-Authenticate" response header field matching the authentication scheme used by the client. **This error might also indicate that you are attempting access from an unauthorized IP address.|
-|**invalid_grant**               |The provided authorization grant \(e.g., authorization code, resource owner credentials\) or refresh token is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.|
-|**unauthorized_client**         |The authenticated client is not authorized to use this authorization grant type.|
-|**server_error**                |The authorization server encountered an unexpected condition that prevented it from fulfilling the request.\(This error code is needed because a 500 Internal Server Error HTTP status code cannot be returned to the client via an HTTP redirect.\)|
-|**unsupported_grant_type**      |The authorization grant type is not supported by the authorization server.|
-|**invalid_scope**               |The requested scope is invalid, unknown, malformed, or exceeds the scope granted by the resource owner.|
+Error                           |Error Reason
+---                             |---
+**invalid_request**             |The request is missing a required parameter, includes an unsupported parameter value \(other than grant type\), repeats a parameter, includes multiple credentials, utilizes more than one mechanism for authenticating the client, or is otherwise malformed.
+**invalid_client**              |Client authentication failed \(e.g., unknown client, no client authentication included, or unsupported authentication method\). The authorization server MAY return an HTTP 401 (Unauthorized) status code to indicate which HTTP authentication schemes are supported. If the client attempted to authenticate via the "Authorization" request header field, the authorization server MUST respond with an HTTP 401 (Unauthorized) status code and include the "WWW-Authenticate" response header field matching the authentication scheme used by the client. **This error might also indicate that you are attempting access from an unauthorized IP address.
+**invalid_grant**               |The provided authorization grant \(e.g., authorization code, resource owner credentials\) or refresh token is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.
+**unauthorized_client**         |The authenticated client is not authorized to use this authorization grant type.
+**server_error**                |The authorization server encountered an unexpected condition that prevented it from fulfilling the request.\(This error code is needed because a 500 Internal Server Error HTTP status code cannot be returned to the client via an HTTP redirect.\)
+**unsupported_grant_type**      |The authorization grant type is not supported by the authorization server.
+**invalid_scope**               |The requested scope is invalid, unknown, malformed, or exceeds the scope granted by the resource owner.
 
 ***
 
@@ -759,13 +759,13 @@ For API requests that permit default scope, you may not require member authoriza
 > The permissions associated with an access token are set in the /v1/oauth2/authorize call.   
 Some API methods will limit their response data dependent upon which authorized scopes have been granted.  See the JSON Objects reference for details around which fields are returned by default and which ones require member authorization. 
 
-|Permission              |Authorized Scope             |Description|
-|---                     |---                          |---|
-|Subscription Payment    |subscription_payment         |Permits access to setup a subscription and automatically receive recurring payments from a NETELLER account holder<br/>**Member Prompt: Allow access to setup a subscription and receive recurring payments from your NETELLER account.**|
-|Basic Profile           |account\_basic\_profile      |Permits access to your name, date of birth, country<br/>**Member Prompt: Allow access to view your name, date of birth and country.**|
-|Enhanced Profile        |account\_enhanced\_profile   |Permits access to account address, city, post code, subdivision, account preferences and gender<br/>**Member Prompt: Allow access to view your address, account preferences and gender.**|
-|Available Balance       |account\_available\_balance  |Permits access to view the members currently available balance<br/>**Member Prompt: Allow access to view your currently available balance.**|
-|Contact Information     |account\_contacts            |Permits access to the member contact phone numbers.<br/>**Member Prompt: Allow access to view your contact phone numbers.**|
+Permission              |Authorized Scope             |Description
+---                     |---                          |---
+Subscription Payment    |subscription_payment         |Permits access to setup a subscription and automatically receive recurring payments from a NETELLER account holder<br/>**Member Prompt: Allow access to setup a subscription and receive recurring payments from your NETELLER account.**
+Basic Profile           |account\_basic\_profile      |Permits access to your name, date of birth, country<br/>**Member Prompt: Allow access to view your name, date of birth and country.**
+Enhanced Profile        |account\_enhanced\_profile   |Permits access to account address, city, post code, subdivision, account preferences and gender<br/>**Member Prompt: Allow access to view your address, account preferences and gender.**
+Available Balance       |account\_available\_balance  |Permits access to view the members currently available balance<br/>**Member Prompt: Allow access to view your currently available balance.**
+Contact Information     |account\_contacts            |Permits access to the member contact phone numbers.<br/>**Member Prompt: Allow access to view your contact phone numbers.**
 
 ***
 
@@ -824,40 +824,40 @@ Example : https://example.com/netellerwebhook
 
 **Subscription resource event**
 
-|Event Types                            |Event that triggers the webhook|
-|---                                    |---|
-|subscription\_activated                |Subscription was activated. Also triggered when a subscription has moved from a 'pending' to 'active' state.|
-|subscription\_cancelled                |Subscription was cancelled.|
-|subscription\_cancelled\_at\_period\_end   |Subscription is set to be cancelled at the end of the current billing period.|
-|subscription\_created                  |Subscription was successfully created.|
-|subscription\_ended                    |Subscription has lapsed and is now ended.|
-|subscription\_failed                   |Subscription failed to be created. Most likely the account had insufficient funds for initial payment.|
-|subscription\_pending                  |Subscription is created but pending a future activation.|
+Event Types                            |Event that triggers the webhook
+---                                    |---
+subscription\_activated                |Subscription was activated. Also triggered when a subscription has moved from a 'pending' to 'active' state.
+subscription\_cancelled                |Subscription was cancelled.
+subscription\_cancelled\_at\_period\_end   |Subscription is set to be cancelled at the end of the current billing period.
+subscription\_created                  |Subscription was successfully created.
+subscription\_ended                    |Subscription has lapsed and is now ended.
+subscription\_failed                   |Subscription failed to be created. Most likely the account had insufficient funds for initial payment.
+subscription\_pending                  |Subscription is created but pending a future activation.
 
 **Order resource events**
 
-|Event Types                             |Event that triggers the webhook|
-|---                                     |---|
-|order\_cancelled\_or\_expired           |Order payment failed, the member did not complete their order in time.|
+Event Types                             |Event that triggers the webhook
+---                                     |---
+order\_cancelled\_or\_expired           |Order payment failed, the member did not complete their order in time.
 
 **Invoice resource events**
 
-|Event Types                             |Event that triggers the webhook|
-|---                                     |---|
-|order\_payment\_declined                |Order payment was declined.|
-|order\_payment\_succeeded               |Order payment was successful.|
-|subscription\_payment\_declined         |Subscription payment for period was not successful.<bt/>Attempts to collect payment for the subscription for the billing period have failed and no more retries will be attempted.|
-|subscription\_payment\_pending\_retry   |Subscription payment was not collected as the member has insufficient funds available, <Br/>NETELLER will continue to try to collect payment for this period.|
-|subscription\_payment\_succeeded        |Subscription payment for period was successful.|
+Event Types                             |Event that triggers the webhook
+---                                     |---
+order\_payment\_declined                |Order payment was declined.
+order\_payment\_succeeded               |Order payment was successful.
+subscription\_payment\_declined         |Subscription payment for period was not successful.<bt/>Attempts to collect payment for the subscription for the billing period have failed and no more retries will be attempted.
+subscription\_payment\_pending\_retry   |Subscription payment was not collected as the member has insufficient funds available, <Br/>NETELLER will continue to try to collect payment for this period.
+subscription\_payment\_succeeded        |Subscription payment for period was successful.
 
 **Payment resource events**
 
-|Event Types           |Event that triggers the webhook|
-|---                   |---|
-|payment\_cancelled    |Payment was cancelled.|
-|payment\_declined     |Payment was declined.|
-|payment\_pending      |Payment is pending.|
-|payment\_succeeded    |Payment is successful.|
+Event Types           |Event that triggers the webhook
+---                   |---
+payment\_cancelled    |Payment was cancelled.
+payment\_declined     |Payment was declined.
+payment\_pending      |Payment is pending.
+payment\_succeeded    |Payment is successful.
 
 ***
 
@@ -865,34 +865,34 @@ Example : https://example.com/netellerwebhook
 
 <a name="currencies"></a>
 
-|Currency Code|Description|
-|---          |---|
-|AED          |Emirati Dirham|
-|AUD          |Australian Dollar|
-|BRL          |Brazilian Real|
-|GBP          |British Pound|
-|BGN          |Bulgarian Lev|
-|CAD          |Canadian Dollar|
-|DKK          |Danish Krone|
-|EUR          |Euro|
-|HUF          |Hungarian Forint|
-|INR          |Indian Rupee|
-|JPY          |Japanese Yen|
-|MYR          |Malaysian Ringgit|
-|MAD          |Moroccan Dirham|
-|MXN          |Mexican Peso|
-|NGN          |Nigerian Naira|
-|NOK          |Norwegian Kroner|
-|PLN          |Polish Zloty|
-|RON          |Romanian New Leu|
-|RUB          |Russian Ruble|
-|SGD          |Singapore Dollar|
-|SEK          |Swedish Krona|
-|CHF          |Swiss Franc|
-|TWD          |Taiwan New Dollar|
-|TND          |Tunisia Dinar|
-|USD          |United States Dollar|
-|ZAR          |South African Rand|
+Currency Code|Description
+---          |---
+AED          |Emirati Dirham
+AUD          |Australian Dollar
+BRL          |Brazilian Real
+GBP          |British Pound
+BGN          |Bulgarian Lev
+CAD          |Canadian Dollar
+DKK          |Danish Krone
+EUR          |Euro
+HUF          |Hungarian Forint
+INR          |Indian Rupee
+JPY          |Japanese Yen
+MYR          |Malaysian Ringgit
+MAD          |Moroccan Dirham
+MXN          |Mexican Peso
+NGN          |Nigerian Naira
+NOK          |Norwegian Kroner
+PLN          |Polish Zloty
+RON          |Romanian New Leu
+RUB          |Russian Ruble
+SGD          |Singapore Dollar
+SEK          |Swedish Krona
+CHF          |Swiss Franc
+TWD          |Taiwan New Dollar
+TND          |Tunisia Dinar
+USD          |United States Dollar
+ZAR          |South African Rand
 
 ***
 
@@ -900,23 +900,23 @@ Example : https://example.com/netellerwebhook
 
 <a name="languages"></a>
 
-|Language Code|Description|
-|---          |---|
-|da_DK        |Danish|
-|de_DE        |German|
-|el_GR        |Greek|
-|en_US        |English|
-|es_ES        |Spanish|
-|fr_FR        |French|
-|it_IT        |Italian|
-|ja_JP        |Japanese|
-|ko_KR        |Korean|
-|no_NO        |Norwegian|
-|pl_PL        |Polish|
-|pt_PT        |Portuguese|
-|ru_RU        |Russian|
-|sv_SE        |Swedish|
-|tr_TR        |Turkish|
+Language Code|Description
+---          |---
+da_DK        |Danish
+de_DE        |German
+el_GR        |Greek
+en_US        |English
+es_ES        |Spanish
+fr_FR        |French
+it_IT        |Italian
+ja_JP        |Japanese
+ko_KR        |Korean
+no_NO        |Norwegian
+pl_PL        |Polish
+pt_PT        |Portuguese
+ru_RU        |Russian
+sv_SE        |Swedish
+tr_TR        |Turkish
 
 ***
 
@@ -1537,42 +1537,42 @@ error code will be returned in the header so it can be easily used by an applica
 
 **HTTP Status Code Summary**
 
-|HTTP Response Code Category|Description|
-|---|---|
-|1xx: Informational|Communicates transfer protocol–level information|
-|2xx: Success|Indicates that the client’s request was accepted|
-|3xx: Redirection|Indicates that the client must take some additional action in order to complete the request|
-|4xx: Client Error|Indicates that the client has made an error with the request|
-|5xx: Server Error|Indicates that an error occurred on the server side|
+HTTP Response Code Category|Description
+---|---
+1xx: Informational|Communicates transfer protocol–level information
+2xx: Success|Indicates that the client’s request was accepted
+3xx: Redirection|Indicates that the client must take some additional action in order to complete the request
+4xx: Client Error|Indicates that the client has made an error with the request
+5xx: Server Error|Indicates that an error occurred on the server side
 
 **Common HTTP Response Status Codes**
 
-|HTTP Status Code|Description|
-|---|---|
-|200 OK|Everything worked as expected|
-|201 CREATED|The request was successful. NETBANX created a new resource and the response body contains the representation|
-|202 ACCEPTED|This indicates that the client’s request will be handled asynchronously. It tells the client that the request appears valid, but it still may have problems once it is processed|
-|204 NO CONTENT|This is usually returned in response to a PUT, POST, or DELETE request, when the REST API declines to send back any status message or representation in the body of the response message|
-|304 NOT MODIFIED|The client's cached version of the representation is still up to date|
-|400 BAD REQUEST|This often indicates that a required parameter is missing or that a parameter is invalid. This is a generic client-side error status, used when no other 4xx error code is appropriate|
-|401 UNAUTHORIZED|This indicates that the client tried to operate on a protected resource without providing the proper authorization. They may have provided the wrong credentials or none at all|
-|402 PAYMENT REQUIRED|The parameters were valid but the request failed|
-|404 NOT FOUND|The requested resource does not exist|
-|405 METHOD NOT ALLOWED|The client tried to POST or PUT to a resource that would not accept it|
-|415 UNSUPPORTED MEDIA TYPE|The request is in a format not supported by the requested resource for the requested method|
-|429 TOO MANY REQUESTS|The application is sending too many simultaneous requests|
-|500 INTERNAL SERVER ERROR|An error occurred with an internal server|
-|502 EXTERNAL SERVER ERROR|We received an invalid response from the upstream gateway in attempting to fulfill the request|
+HTTP Status Code|Description
+---|---
+200 OK|Everything worked as expected
+201 CREATED|The request was successful. NETBANX created a new resource and the response body contains the representation
+202 ACCEPTED|This indicates that the client’s request will be handled asynchronously. It tells the client that the request appears valid, but it still may have problems once it is processed
+204 NO CONTENT|This is usually returned in response to a PUT, POST, or DELETE request, when the REST API declines to send back any status message or representation in the body of the response message
+304 NOT MODIFIED|The client's cached version of the representation is still up to date
+400 BAD REQUEST|This often indicates that a required parameter is missing or that a parameter is invalid. This is a generic client-side error status, used when no other 4xx error code is appropriate
+401 UNAUTHORIZED|This indicates that the client tried to operate on a protected resource without providing the proper authorization. They may have provided the wrong credentials or none at all
+402 PAYMENT REQUIRED|The parameters were valid but the request failed
+404 NOT FOUND|The requested resource does not exist
+405 METHOD NOT ALLOWED|The client tried to POST or PUT to a resource that would not accept it
+415 UNSUPPORTED MEDIA TYPE|The request is in a format not supported by the requested resource for the requested method
+429 TOO MANY REQUESTS|The application is sending too many simultaneous requests
+500 INTERNAL SERVER ERROR|An error occurred with an internal server
+502 EXTERNAL SERVER ERROR|We received an invalid response from the upstream gateway in attempting to fulfill the request
 
 **Error Attributes**
 
-|Element|Type|Description|
-|---|---|---|
-|Element|Type|Description|
-|code|String|This is the error code|
-|message|String|This is a description of the error|
-|details|Array|This is a detailed description|
-|fieldErrors|Array|This is a list of fields that have problems|
+Element|Type|Description
+---|---|---
+Element|Type|Description
+code|String|This is the error code
+message|String|This is a description of the error
+details|Array|This is a detailed description
+fieldErrors|Array|This is a list of fields that have problems
 
 **Error message example with details**
 
@@ -1621,70 +1621,70 @@ error code will be returned in the header so it can be easily used by an applica
 
 These are the error codes common to all subsystems
 
-|HTTP Status   |Code     |Message                                 |Description|
-|---           |---      |---                                     |---|
-|400           |5001     |Invalid currency                        |The submitted currency code is invalid or your account does not support this currency.|
-|              |5010     |Invalid country                         |The submitted country code is invalid.|
-|              |5016     |Account not found                       |The account you provided cannot be found.|
-|              |5017     |Account disabled                        |The account you provided is disabled.|
-|              |5023     |Bad request                             |The request is not parseable.|
-|              |5042     |Invalid merchant reference              |This error usually indicates that a transaction was attempted with the merchant reference field missing. This value is mandatory and must be included with your request.|
-|              |5068     |Invalid field                           |Either you submitted a request that is missing a mandatory  field or the value of a field does not match the format expected.|
-|401           |5275     |Authentication credentials expired      |The authentication credentials provided with the request have expired.|
-|              |5276     |Authentication credentials disabled     |The authentication credentials provided with the request provided have been disabled.|
-|              |5277     |Authentication credentials locked       |The authentication credentials provided with the request have been locked due to multiple authentication failures.|
-|              |5278     |Cannot authenticate                     |The authentication credentials provided with the request were not accepted for an unknown reason.| 
-|              |5279     |Authentication credentials are invalid  |The authentication credentials are invalid.|
-|              |5280     |Authentication credentials not provided |The required authentication credentials were not provided.|
-|403           |5270     |Unauthorized access                     |The credentials provided with the request do not have permission to access the requested data.|
-|404           |5269     |Entity not found                        |The ID\(s\) specified in the URL do not correspond to the values in the system.|
-|              |5273     |URI not found                           |Your client reached our application but we were unable to service your request due to an invalid URL.|
-|405           |5281     |Method not supported                    |The request uses an action (e.g., GET, POST, or PUT) that is not supported by the resource.|
-|406           |5271     |Unsupported 'Accept' header             |You requested a response in the 'Accept' header that is in an unsupported format.|
-|415           |5272     |Unsupported 'Content-Type'              |The 'Content-Type' you specified in request header was submitted in an unsupported format.|
-|429           |1200     |API call rate exceeded                  |The API call has been denied as it has exceeded the permissible call rate limit.|
-|500           |1000     |Internal error                          |An internal error occurred.|
-|              |1001     |Activity Timed Out                      |Your request timed out before it could be completed.  If you receive this error, it is still possible that your request will be successfully processed and you should use the API to verify the status of your request.|
-|              |1002     |Database Error                          |An internal error occurred.|
-|              |1003     |Decryption Error                        |An internal error occurred.|
-|              |1007     |Gateway Error                           |An internal error occurred.|
+HTTP Status   |Code     |Message                                 |Description
+---           |---      |---                                     |---
+400           |5001     |Invalid currency                        |The submitted currency code is invalid or your account does not support this currency.
+              |5010     |Invalid country                         |The submitted country code is invalid.
+              |5016     |Account not found                       |The account you provided cannot be found.
+              |5017     |Account disabled                        |The account you provided is disabled.
+              |5023     |Bad request                             |The request is not parseable.
+              |5042     |Invalid merchant reference              |This error usually indicates that a transaction was attempted with the merchant reference field missing. This value is mandatory and must be included with your request.
+              |5068     |Invalid field                           |Either you submitted a request that is missing a mandatory  field or the value of a field does not match the format expected.
+401           |5275     |Authentication credentials expired      |The authentication credentials provided with the request have expired.
+              |5276     |Authentication credentials disabled     |The authentication credentials provided with the request provided have been disabled.
+              |5277     |Authentication credentials locked       |The authentication credentials provided with the request have been locked due to multiple authentication failures.
+              |5278     |Cannot authenticate                     |The authentication credentials provided with the request were not accepted for an unknown reason.
+              |5279     |Authentication credentials are invalid  |The authentication credentials are invalid.
+              |5280     |Authentication credentials not provided |The required authentication credentials were not provided.
+403           |5270     |Unauthorized access                     |The credentials provided with the request do not have permission to access the requested data.
+404           |5269     |Entity not found                        |The ID\(s\) specified in the URL do not correspond to the values in the system.
+              |5273     |URI not found                           |Your client reached our application but we were unable to service your request due to an invalid URL.
+405           |5281     |Method not supported                    |The request uses an action (e.g., GET, POST, or PUT) that is not supported by the resource.
+406           |5271     |Unsupported 'Accept' header             |You requested a response in the 'Accept' header that is in an unsupported format.
+415           |5272     |Unsupported 'Content-Type'              |The 'Content-Type' you specified in request header was submitted in an unsupported format.
+429           |1200     |API call rate exceeded                  |The API call has been denied as it has exceeded the permissible call rate limit.
+500           |1000     |Internal error                          |An internal error occurred.
+              |1001     |Activity Timed Out                      |Your request timed out before it could be completed.  If you receive this error, it is still possible that your request will be successfully processed and you should use the API to verify the status of your request.
+              |1002     |Database Error                          |An internal error occurred.
+              |1003     |Decryption Error                        |An internal error occurred.
+              |1007     |Gateway Error                           |An internal error occurred.
 
 These errors are specific to the NETELLER REST API.
 
-|HTTP Status |Code   |Message                            |Description|
-|---         |---    |---                                |---|
-|401         |20000  |Unsupported API request            |You are not registered to use this API|
-|401         |20001  |Account closed                     |The account is closed|
-|400         |20002  |Merchant account inactive          |Your merchant account is currently inactive. |
-|400         |20003  |Invalid merchant account currency  |Your NETELLER Merchant Account does not support this currency.|
-|400         |20005  |Duplicate transaction reference    |The provided transaction reference has already been used for another transaction.  You must provide a unique value for each request.|
-|400         |20006  |Invalid amount format              |Amount must be numeric and cannot contain decimals or any alpha characters.|
-|400         |20007  |Invalid accountId or email         |The specified accountId or email is invalid.|
-|400         |20008  |Invalid verification code          |The supplied verification code was not valid for this request.|
-|400         |20009  |Invalid customer                   |The supplied customerId is invalid.|
-|400         |20010  |Merchant blocked geolocation       |Member is residing in a blocked country/state/region \(merchant has chosen to block members from transacting in that location\)|
-|400         |20011  |NETELLER blocked geolocation       |Member is residing in a NETELLER blocked country/state/region.|
-|400         |20015  |Member is not entitled             |Member is not entitled to receive this type of transaction.  |
-|400         |20016  |Merchant is not entitled           |Merchant is not entitled to initiate this type of transaction.|
-|402         |20020  |Insufficient balance               |Insufficient balance to complete the transaction.|
-|400         |20021  |Below member min transfer amount   |The specified amount is below defined minimum transfer limits.|
-|400         |20022  |Above max transfer out amount      |The specified amount is above defined maximum transfer out limits.|
-|400         |20025  |Below merchant min transfer amount |The specified amount is below your defined minimum transfer limits.|
-|400         |20026  |Above max transfer in amount       |The specified amount is above defined maximum transfer in limits.|
-|400         |20030  |Below min transaction limit        |The specified amount is too low. You must specify an amount greater than or equal to 1 unit of currency.|
-|400         |20031  |Above max transaction limit        |The specified amount is too high. You must specify an amount within your transactional limit.|
-|400         |20035  |Above max account limit            |The transaction exceeds allowed account limits.|
-|400         |20040  |Expired                            |The transaction was not completed in the permitted time and has expired.|
-|400         |20045  |Merchant declined                  |Transaction was manually cancelled or declined by the merchant.|
-|400         |20050  |Legacy transaction details not available from this API, use NetCheck |The transaction you are trying to retrieve was submitted using the legacy NetDirect or Instant Payout API.  Please use NetCheck to retrieve the associated error detail for the transaction.|
-|400         |20100  |Plan already exists                |The requested planId has already been used.  Please specify a unique planId with your request.|
-|400         |20101  |Cannot delete a subscribed to plan |You cannot delete a subscription plan that has already been subscribed to.   If you wish to prevent further enrollment in this plan then you must cancel the plan.|
-|400         |20102  |Invalid term length                |The term length for this subscription plan is invalid.  Please ensure the interval, interval type and interval count combination is less than 5 years.|
-|400         |20200  |Existing member email              |The supplied email is already registered with NETELLER.| 
-|502         |20300  |Processor declined                 |The third party processor has declined the transaction.|
-|400         |20301  |NETELLER declined                  |NETELLER has declined to process the transaction.|
-|401         |20900  |Request not authorized             |Your request was not authorized as the API requires member authorization.  Please use the authorization_grant flow to obtain member permission for the required scope.|
-|503         |20999  |Service unavailable due to scheduled maintentance |The API is currently unavailable due to maintenance activities.|
+HTTP Status |Code   |Message                            |Description
+---         |---    |---                                |---
+401         |20000  |Unsupported API request            |You are not registered to use this API
+401         |20001  |Account closed                     |The account is closed
+400         |20002  |Merchant account inactive          |Your merchant account is currently inactive.
+400         |20003  |Invalid merchant account currency  |Your NETELLER Merchant Account does not support this currency.
+400         |20005  |Duplicate transaction reference    |The provided transaction reference has already been used for another transaction.  You must provide a unique value for each request.
+400         |20006  |Invalid amount format              |Amount must be numeric and cannot contain decimals or any alpha characters.
+400         |20007  |Invalid accountId or email         |The specified accountId or email is invalid.
+400         |20008  |Invalid verification code          |The supplied verification code was not valid for this request.
+400         |20009  |Invalid customer                   |The supplied customerId is invalid.
+400         |20010  |Merchant blocked geolocation       |Member is residing in a blocked country/state/region \(merchant has chosen to block members from transacting in that location\)
+400         |20011  |NETELLER blocked geolocation       |Member is residing in a NETELLER blocked country/state/region.
+400         |20015  |Member is not entitled             |Member is not entitled to receive this type of transaction.
+400         |20016  |Merchant is not entitled           |Merchant is not entitled to initiate this type of transaction.
+402         |20020  |Insufficient balance               |Insufficient balance to complete the transaction.
+400         |20021  |Below member min transfer amount   |The specified amount is below defined minimum transfer limits.
+400         |20022  |Above max transfer out amount      |The specified amount is above defined maximum transfer out limits.
+400         |20025  |Below merchant min transfer amount |The specified amount is below your defined minimum transfer limits.
+400         |20026  |Above max transfer in amount       |The specified amount is above defined maximum transfer in limits.
+400         |20030  |Below min transaction limit        |The specified amount is too low. You must specify an amount greater than or equal to 1 unit of currency.
+400         |20031  |Above max transaction limit        |The specified amount is too high. You must specify an amount within your transactional limit.
+400         |20035  |Above max account limit            |The transaction exceeds allowed account limits.
+400         |20040  |Expired                            |The transaction was not completed in the permitted time and has expired.
+400         |20045  |Merchant declined                  |Transaction was manually cancelled or declined by the merchant.
+400         |20050  |Legacy transaction details not available from this API, use NetCheck |The transaction you are trying to retrieve was submitted using the legacy NetDirect or Instant Payout API.  Please use NetCheck to retrieve the associated error detail for the transaction.
+400         |20100  |Plan already exists                |The requested planId has already been used.  Please specify a unique planId with your request.
+400         |20101  |Cannot delete a subscribed to plan |You cannot delete a subscription plan that has already been subscribed to.   If you wish to prevent further enrollment in this plan then you must cancel the plan.
+400         |20102  |Invalid term length                |The term length for this subscription plan is invalid.  Please ensure the interval, interval type and interval count combination is less than 5 years.
+400         |20200  |Existing member email              |The supplied email is already registered with NETELLER. 
+502         |20300  |Processor declined                 |The third party processor has declined the transaction.
+400         |20301  |NETELLER declined                  |NETELLER has declined to process the transaction.
+401         |20900  |Request not authorized             |Your request was not authorized as the API requires member authorization.  Please use the authorization_grant flow to obtain member permission for the required scope.
+503         |20999  |Service unavailable due to scheduled maintentance |The API is currently unavailable due to maintenance activities.
 
 ***
 
@@ -1694,10 +1694,10 @@ These errors are specific to the NETELLER REST API.
 
 ## accountPreferences
 
-|Element                 |Type                   |Description|
-|---                     |---                    |---|
-|lang                    |string<br/>`length=5`  |The preferred language of the member. See [Languages](http://paysafegroup.github.io/neteller_rest_api_v1/#/introduction/technical-introduction/languages) for complete list.|
-|currency                |string<br/>`length=3`  |The preferred wallet currency of the member. See [Currencies](#currencies) for complete list.|
+Element                 |Type                   |Description
+---                     |---                    |---
+lang                    |string<br/>`length=5`  |The preferred language of the member. See [Languages](http://paysafegroup.github.io/neteller_rest_api_v1/#/introduction/technical-introduction/languages) for complete list.
+currency                |string<br/>`length=3`  |The preferred wallet currency of the member. See [Currencies](#currencies) for complete list.
 
 ```apib
 {
@@ -1710,23 +1710,23 @@ These errors are specific to the NETELLER REST API.
 
 ## accountProfile
 
-|Element                 |Type                                           |Description|
-|---                     |---                                            |---|                  
-|email                   |string<br/>`length<=100`                       |The account email address.|
-|accountId               |string<br/>`length=15`                         |The 12 digit NETELLER account number.|
-|firstName               |string<br/>`length<=25`                        |`required scope: account_basic_profile`<br/>The clients first name, or given name.|
-|lastName                |string<br/>`length<=25`                        |`required scope: account_basic_profile`<br/>The clients last name, or family name.|
-|address1                |string<br/>`length<=35`                        |`required scope: account_enhanced_profile`<br/>|The clients residential, or street address.|
-|address2                |string<br/>`length<=35`                        |`required scope: account_enhanced_profile`<br/>|Continuation of the clients residential, or street address.|
-|address3                |string<br/>`length<=35`                        |`required scope: account_enhanced_profile`<br/>|Continuation of the clients residential, or street address.|
-|city                    |string<br/>`length<=50`                        |`required scope: account_enhanced_profile`<br/>|The clients city of residence.|
-|countrySubdivisionCode  |string<br/>`length=2`                          |`required scope: account_enhanced_profile`<br/>|The ISO 3166-2 code indicating the state/province/district or other value denoting the clients country subdivision \(e.g. BE=Berlin. 13=Tôkyô \[Tokyo\], AB=Alberta\)|
-|country                 |string<br/>`length=2`                          |`required scope: account_basic_profile`<br/>|The ISO 3166-1 Alpha 2-code for the clients country of residence \(e.g. Germany = DE, JP=Japan. CA=Canada\).|
-|postCode                |string<br/>`length<=10`                        |`required scope: account_enhanced_profile`<br/>|The zip code, or postal code, of the clients residence.|
-|contactDetails          |array of [contactDetail](#contactDetail)       |`required scope: account_contacts`<br/>An array of contact numbers.  Can accept up to 2 phone numbers, the first number will be considered primary. Phone numbers should contain no special characters.|
-|gender                  |string<br/>`length=1`                          |`required scope: account_enhanced_profile`<br/>m - male, f - female|
-|dateOfBirth             |[date](#date)                                  |`required scope: account_basic_profile`<br/>The clients date of birth.|
-|accountPreferences      |[accountPreferences](#accountPreferences)      |`required scope: account_enhanced_profile`<br/>The clients preferred language, currency.|
+Element                 |Type                                           |Description
+---                     |---                                            |---                  
+email                   |string<br/>`length<=100`                       |The account email address.
+accountId               |string<br/>`length=15`                         |The 12 digit NETELLER account number.
+firstName               |string<br/>`length<=25`                        |`required scope: account_basic_profile`<br/>The clients first name, or given name.
+lastName                |string<br/>`length<=25`                        |`required scope: account_basic_profile`<br/>The clients last name, or family name.
+address1                |string<br/>`length<=35`                        |`required scope: account_enhanced_profile`<br/>|The clients residential, or street address.
+address2                |string<br/>`length<=35`                        |`required scope: account_enhanced_profile`<br/>|Continuation of the clients residential, or street address.
+address3                |string<br/>`length<=35`                        |`required scope: account_enhanced_profile`<br/>|Continuation of the clients residential, or street address.
+city                    |string<br/>`length<=50`                        |`required scope: account_enhanced_profile`<br/>|The clients city of residence.
+countrySubdivisionCode  |string<br/>`length=2`                          |`required scope: account_enhanced_profile`<br/>|The ISO 3166-2 code indicating the state/province/district or other value denoting the clients country subdivision \(e.g. BE=Berlin. 13=Tôkyô \[Tokyo\], AB=Alberta\)
+country                 |string<br/>`length=2`                          |`required scope: account_basic_profile`<br/>|The ISO 3166-1 Alpha 2-code for the clients country of residence \(e.g. Germany = DE, JP=Japan. CA=Canada\).
+postCode                |string<br/>`length<=10`                        |`required scope: account_enhanced_profile`<br/>|The zip code, or postal code, of the clients residence.
+contactDetails          |array of [contactDetail](#contactDetail)       |`required scope: account_contacts`<br/>An array of contact numbers.  Can accept up to 2 phone numbers, the first number will be considered primary. Phone numbers should contain no special characters.
+gender                  |string<br/>`length=1`                          |`required scope: account_enhanced_profile`<br/>m - male, f - female
+dateOfBirth             |[date](#date)                                  |`required scope: account_basic_profile`<br/>The clients date of birth.
+accountPreferences      |[accountPreferences](#accountPreferences)      |`required scope: account_enhanced_profile`<br/>The clients preferred language, currency.
 
 ```apib
 {
@@ -1767,10 +1767,10 @@ These errors are specific to the NETELLER REST API.
 
 ## attribute
 
-|Element                 |Type                       |Description|
-|---                     |---                        |---|
-|key                     |string<br/>`length<=50`    |This is a unique identifier for an attribute.|
-|value                   |string<br/>`length<=100`   |The value for this attribute.|
+Element                 |Type                       |Description
+---                     |---                        |---
+key                     |string<br/>`length<=50`    |This is a unique identifier for an attribute.
+value                   |string<br/>`length<=100`   |The value for this attribute.
 
 ```apib
 {
@@ -1783,10 +1783,10 @@ These errors are specific to the NETELLER REST API.
 
 ## balance
 
-|Element                 |Type                       |Description|
-|---                     |---                        |---|
-|amount                  |string<br/>`length<=100`   |The amount in the smallest unit of currency.|
-|currency                |string<br/>`length<=15`    |The associated currency.|
+Element                 |Type                       |Description
+---                     |---                        |---
+amount                  |string<br/>`length<=100`   |The amount in the smallest unit of currency.
+currency                |string<br/>`length<=15`    |The associated currency.
 
 ```apib
 {
@@ -1799,19 +1799,19 @@ These errors are specific to the NETELLER REST API.
 
 ## billingDetail
 
-|Element                 |Type                       |Description|
-|---                     |---                        |---|                
-|email                   |string<br/>`length<=100`   |The account email address.|
-|firstName               |string<br/>`length<=25`    |The clients first name, or given name.|
-|lastName                |string<br/>`length<=25`    |The clients last name, or family name.|
-|address1                |string<br/>`length<=35`    |The clients residential, or street address.|
-|address2                |string<br/>`length<=35`    |Continuation of the clients residential, or street address.|
-|address3                |string<br/>`length<=35`    |Continuation of the clients residential, or street address.|
-|city                    |string<br/>`length<=50`    |The clients city of residence.|
-|countrySubdivisionCode  |string<br/>`length=2`      |The ISO 3166-2 code indicating the state/province/district or other value denoting the clients country subdivision \(e.g. BE=Berlin. 13=Tôkyô \[Tokyo\], AB=Alberta\)|
-|country                 |string<br/>`length=2`      |The ISO 3166-1 Alpha 2-code for the clients country of residence \(e.g. Germany = DE, JP=Japan. CA=Canada\)|
-|postCode                |string<br/>`length<=10`    |The zip code, or postal code, of the clients residence.|
-|lang                    |string<br/>`length=5`      |The preferred language of communication. See [Languages](#languages) for complete list.|
+Element                 |Type                       |Description
+---                     |---                        |---                
+email                   |string<br/>`length<=100`   |The account email address.
+firstName               |string<br/>`length<=25`    |The clients first name, or given name.
+lastName                |string<br/>`length<=25`    |The clients last name, or family name.
+address1                |string<br/>`length<=35`    |The clients residential, or street address.
+address2                |string<br/>`length<=35`    |Continuation of the clients residential, or street address.
+address3                |string<br/>`length<=35`    |Continuation of the clients residential, or street address.
+city                    |string<br/>`length<=50`    |The clients city of residence.
+countrySubdivisionCode  |string<br/>`length=2`      |The ISO 3166-2 code indicating the state/province/district or other value denoting the clients country subdivision \(e.g. BE=Berlin. 13=Tôkyô \[Tokyo\], AB=Alberta\)
+country                 |string<br/>`length=2`      |The ISO 3166-1 Alpha 2-code for the clients country of residence \(e.g. Germany = DE, JP=Japan. CA=Canada\)
+postCode                |string<br/>`length<=10`    |The zip code, or postal code, of the clients residence.
+lang                    |string<br/>`length=5`      |The preferred language of communication. See [Languages](#languages) for complete list.
 
 ```apib
 {
@@ -1832,10 +1832,10 @@ These errors are specific to the NETELLER REST API.
 
 ## contactDetail 
 
-|Element                 |Type                       |Description|
-|---                     |---                        |---|
-|type                    |string<br/>`length<=10`    |landLine, mobile  ** The values are case sensitive.|
-|value                   |string<br/>`length<=30`   |The dialing number or recipients id.  Do not include the country code in the dialing number.|
+Element                 |Type                       |Description
+---                     |---                        |---
+type                    |string<br/>`length<=10`    |landLine, mobile  ** The values are case sensitive.
+value                   |string<br/>`length<=30`   |The dialing number or recipients id.  Do not include the country code in the dialing number.
 
 ```apib
 {
@@ -1848,12 +1848,12 @@ These errors are specific to the NETELLER REST API.
 
 ## customer
 
-|Element                 |Type                              |Description|
-|---                     |---                               |---|
-|customerId              |string<br/>`length<=100`          |Unique identifier for this customer.`ie. CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325`|
-|accountProfile          |[accountProfile](#accountprofile) |The associated account profile.|
-|verificationLevel       |string<br/>length=2               |**00** - Member has not been verified, no verified payment instruments<br/>**01** - Member has not been verified, has one or more verified payment instruments<br/>**10** - Member is verified, no verified payment instruments<br/>**11** - Member is verified, has one or more verified payment instruments|
-|availableBalance        |[balance](#balance)               |`required scope: account_available_balance`<br/>The members currently available balance.|
+Element                 |Type                              |Description
+---                     |---                               |---
+customerId              |string<br/>`length<=100`          |Unique identifier for this customer.`ie. CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325`
+accountProfile          |[accountProfile](#accountprofile) |The associated account profile.
+verificationLevel       |string<br/>length=2               |**00** - Member has not been verified, no verified payment instruments<br/>**01** - Member has not been verified, has one or more verified payment instruments<br/>**10** - Member is verified, no verified payment instruments<br/>**11** - Member is verified, has one or more verified payment instruments
+availableBalance        |[balance](#balance)               |`required scope: account_available_balance`<br/>The members currently available balance.
 
 ```apib
 {
@@ -1878,11 +1878,11 @@ These errors are specific to the NETELLER REST API.
 
 ## date
 
-|Element     |Type                       |Description|
-|---         |---                        |---|
-|year        |string<br/>`length=4`      |4 digit year, YYYY|
-|month       |string<br/>`length=2`      |2 digit month, MM|
-|day         |string<br/>`length=2`      |2 digit day, DD|
+Element     |Type                       |Description
+---         |---                        |---
+year        |string<br/>`length=4`      |4 digit year, YYYY
+month       |string<br/>`length=2`      |2 digit month, MM
+day         |string<br/>`length=2`      |2 digit day, DD
 
 ```apib
 {
@@ -1896,11 +1896,11 @@ These errors are specific to the NETELLER REST API.
 
 ## error
 
-|Element                 |Type                                |Description|
-|---                     |---                                 |---|
-|code                    |string<br/>`length<=100`            |The error code reflecting the reason for the failed request.|
-|message                 |string<br/>`length<=250`            |Short description of the status.|
-|fieldErrors             |array of [fielderror](#fielderror)  |If applicable, details around particular fields that reported errors with the API request.|
+Element                 |Type                                |Description
+---                     |---                                 |---
+code                    |string<br/>`length<=100`            |The error code reflecting the reason for the failed request.
+message                 |string<br/>`length<=250`            |Short description of the status.
+fieldErrors             |array of [fielderror](#fielderror)  |If applicable, details around particular fields that reported errors with the API request.
 
 ```apib
 {
@@ -1923,14 +1923,14 @@ These errors are specific to the NETELLER REST API.
 
 ## event
 
-|Element                 |Type                     |Description|
-|---                     |---                      |---|
-|mode                    |string<br/>`length<=10`  |test - denotes this is a test webhook notification that was manually triggered<br/>live - this is a live production webhook notification|
-|eventDate               |string<br/>`length<=50`  |The date the event occurred. <br/>ISO 8601 format \(UTC\)<Br/>YYYY-MM-DDThh:mm:ssZ|
-|eventType               |string<br/>`length<=50`  |The specific type of event that occurred.|
-|attemptNumber           |string<br/>`length<=50`  |The current attemptNumber for this notification.  This will increment until we receive a HTTP 200 response on send, or until all retries have been exhausted.|
-|key                     |string<br/>`length<=55`  |The optional secret key that you defined with your webhook.  This should be validated within your integration for added security.|
-|links                   |array of [link](#link)   |Associated HATEOAS links for this event.  Use these links to lookup the details for this event.|
+Element                 |Type                     |Description
+---                     |---                      |---
+mode                    |string<br/>`length<=10`  |test - denotes this is a test webhook notification that was manually triggered<br/>live - this is a live production webhook notification
+eventDate               |string<br/>`length<=50`  |The date the event occurred. <br/>ISO 8601 format \(UTC\)<Br/>YYYY-MM-DDThh:mm:ssZ
+eventType               |string<br/>`length<=50`  |The specific type of event that occurred.
+attemptNumber           |string<br/>`length<=50`  |The current attemptNumber for this notification.  This will increment until we receive a HTTP 200 response on send, or until all retries have been exhausted.
+key                     |string<br/>`length<=55`  |The optional secret key that you defined with your webhook.  This should be validated within your integration for added security.
+links                   |array of [link](#link)   |Associated HATEOAS links for this event.  Use these links to lookup the details for this event.
 
 ```apib
 {
@@ -1957,12 +1957,12 @@ These errors are specific to the NETELLER REST API.
 
 ## fee
 
-|Element                 |Type                       |Description|
-|---                     |---                        |---|
-|feeName                 |string<br/>`length<=50`    |The name that will display in history and invoice details for this fee item.  \(ie: Setup Fee, Shipping & Handling Fee...etc\).|
-|feeType                 |string<br/>`length<=100`   |The type of fee. `ie: service_fee`|
-|feeAmount               |number<br/>`length<=10`    |The fee amount that was deducted.<br/>Amount fields reflect the smallest unit of currency with no decimals. Eg. $25.00 USD should be formatted as 2500.|
-|feeCurrency             |string<br/>`length<=3 `    |The currency the fee is in. See [Currencies](#currencies) for complete list.|
+Element                 |Type                       |Description
+---                     |---                        |---
+feeName                 |string<br/>`length<=50`    |The name that will display in history and invoice details for this fee item.  \(ie: Setup Fee, Shipping & Handling Fee...etc\).
+feeType                 |string<br/>`length<=100`   |The type of fee. `ie: service_fee`
+feeAmount               |number<br/>`length<=10`    |The fee amount that was deducted.<br/>Amount fields reflect the smallest unit of currency with no decimals. Eg. $25.00 USD should be formatted as 2500.
+feeCurrency             |string<br/>`length<=3 `    |The currency the fee is in. See [Currencies](#currencies) for complete list.
 
 ```apib
 {
@@ -1977,10 +1977,10 @@ These errors are specific to the NETELLER REST API.
 
 ## fieldError
 
-|Element                 |Type                       |Description|
-|---                     |---                        |---|
-|field                   |string<br/>`length<=100`   |Identifies the JSON request field.|
-|error                   |string<br/>`length<=250`   |The problem associated with field.|
+Element                 |Type                       |Description
+---                     |---                        |---
+field                   |string<br/>`length<=100`   |Identifies the JSON request field.
+error                   |string<br/>`length<=250`   |The problem associated with field.
 
 ```apib
 {
@@ -1993,22 +1993,22 @@ These errors are specific to the NETELLER REST API.
 
 ## invoice
 
-|Element                 |Type                                         |Description|           
-|---                     |---                                          |---|
-|invoiceId               |string<br/>`length<=50`                      |Unique identifier for this invoice. \(ie: INV_259e0052-a345-48e9-835c-4f6a8dcaeeb9\).|
-|invoiceNumber           |string<br/>`length<=30`                      |Sequential invoice number.|
-|invoiceDate             |string<br/>`length<=20`                      |Date the invoice was created \(first issued\).<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ|
-|invoiceType             |string<br/>`length<=15`                      |**subscription** - invoice is auto created from subscription billing<br/>**order** - invoice is manually created through a create order api request|
-|billingDetails          |array of [billingDetail](#billingdetail)     |The associated billing details for this invoice.|
-|subscription            |[subscription](#subscription)                |The corresponding subscription resource this invoice belongs to<br/>** Only applicable for subscription invoices|
-|order                   |[order](#order)                              |The corresponding order resource this invoice belongs to<br/>** Only applicable for order invoices|
-|status                  |string<br/>`length<=15`                      |**payment\_due** - Indicates that a due payment has not yet been collected and will be re-tried<br/>**paid** - Indicates the payment was successful<br/>**not\_paid** - Indicates the payment was not collected and all attempts to collect payment failed|
-|periodStartDate         |string<br/>`length<=20`                      |Date the period for this invoice started<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ<br/>** Only applicable for subscription invoices|
-|periodEndDate           |string<br/>`length<=20`                      |Date the period for this invoice ended<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ<br/>** Only applicable for subscription invoices|
-|totalAmount             |number<br/>`length<=10`                      |The total amount due reported in the smallest unit of currency \(no decimals\).|
-|currency                |string<br/>`length=3`                        |The currency for the amount due.<br/>see Currencies for complete list|
-|retryCount              |number                                       |The total number of additional attempts made to try to collect payment for this invoice.   If charge failed due to NSF, the system will automatically retry the transaction up to 3 times.<Br/>** Only applicable for subscription invoices|
-|nextRetryDate           |string<br/>`length<=20`                      |The date the charge will be re-attempted.<Br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ<br/>** Only applicable for subscription invoices|
+Element                 |Type                                         |Description
+---                     |---                                          |---
+invoiceId               |string<br/>`length<=50`                      |Unique identifier for this invoice. \(ie: INV_259e0052-a345-48e9-835c-4f6a8dcaeeb9\).
+invoiceNumber           |string<br/>`length<=30`                      |Sequential invoice number.
+invoiceDate             |string<br/>`length<=20`                      |Date the invoice was created \(first issued\).<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ
+invoiceType             |string<br/>`length<=15`                      |**subscription** - invoice is auto created from subscription billing<br/>**order** - invoice is manually created through a create order api request
+billingDetails          |array of [billingDetail](#billingdetail)     |The associated billing details for this invoice.
+subscription            |[subscription](#subscription)                |The corresponding subscription resource this invoice belongs to<br/>** Only applicable for subscription invoices
+order                   |[order](#order)                              |The corresponding order resource this invoice belongs to<br/>** Only applicable for order invoices
+status                  |string<br/>`length<=15`                      |**payment\_due** - Indicates that a due payment has not yet been collected and will be re-tried<br/>**paid** - Indicates the payment was successful<br/>**not\_paid** - Indicates the payment was not collected and all attempts to collect payment failed
+periodStartDate         |string<br/>`length<=20`                      |Date the period for this invoice started<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ<br/>** Only applicable for subscription invoices
+periodEndDate           |string<br/>`length<=20`                      |Date the period for this invoice ended<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ<br/>** Only applicable for subscription invoices
+totalAmount             |number<br/>`length<=10`                      |The total amount due reported in the smallest unit of currency \(no decimals\).
+currency                |string<br/>`length=3`                        |The currency for the amount due.<br/>see Currencies for complete list
+retryCount              |number                                       |The total number of additional attempts made to try to collect payment for this invoice.   If charge failed due to NSF, the system will automatically retry the transaction up to 3 times.<Br/>** Only applicable for subscription invoices
+nextRetryDate           |string<br/>`length<=20`                      |The date the charge will be re-attempted.<Br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ<br/>** Only applicable for subscription invoices
 
 Sample subscription invoice
 ```apib
@@ -2109,13 +2109,13 @@ Sample order invoice:
 
 ## item
 
-|Element             |Type                        |Description|
-|---                 |---                         |---|
-|amount              |string<br/>`length<=15`     |Amount for a single item.|
-|quantity            |number<br/>`length=3`       |Number of items requested.|
-|sku                 |string<br/>`length<=50`     |Optional reference for the order item.|
-|name                |string<br/>`length<=15`     |Short name for the item.|
-|description         |string<br/>`length<=150`    |Description of the item.|
+Element             |Type                        |Description
+---                 |---                         |---
+amount              |string<br/>`length<=15`     |Amount for a single item.
+quantity            |number<br/>`length=3`       |Number of items requested.
+sku                 |string<br/>`length<=50`     |Optional reference for the order item.
+name                |string<br/>`length<=15`     |Short name for the item.
+description         |string<br/>`length<=150`    |Description of the item.
 
 ```apib
 {
@@ -2131,11 +2131,11 @@ Sample order invoice:
 
 ## link
 
-|Element                 |Type                       |Description|
-|---                     |---                        |---|
-|url                     |string<br/>`length<=500`   |This is the URL to which to send the link. If this is an HTTPS address, please ensure that your certificate is valid – otherwise, the link will cause the browser to display a certificate warning.|
-|rel                     |string<br/>`length<=100`   |This is the link type, allowing different endpoints to be targeted depending on the end state of the transaction.  The link relation describes how this link relates to the previous call.- self will get details of the current call|
-|method                  |string<br/>`length<=6`     |The HTTP method required for the related call.|
+Element                 |Type                       |Description
+---                     |---                        |---
+url                     |string<br/>`length<=500`   |This is the URL to which to send the link. If this is an HTTPS address, please ensure that your certificate is valid – otherwise, the link will cause the browser to display a certificate warning.
+rel                     |string<br/>`length<=100`   |This is the link type, allowing different endpoints to be targeted depending on the end state of the transaction.  The link relation describes how this link relates to the previous call.- self will get details of the current call
+method                  |string<br/>`length<=6`     |The HTTP method required for the related call.
 
 ```apib
 {
@@ -2149,21 +2149,21 @@ Sample order invoice:
 
 ## order
 
-|Element                 |Type                                       |Description|
-|---                     |---                                        |---|
-|orderId                 |string<br/>`length<=100`                   |Unique NETELLER reference for the order. `ie: ORD_7915d463-ccc8-4305-9d33-9e5c9310f12e, SUB_c46645ea-b7b0-4a91-87f7-88c00ec0dea1`|
-|merchantRefId           |string<br/>`length<=50`                    |The associated merchant reference id from the initial request.|
-|totalAmount             |number                                     |The total amount due for this order, including all items, fees, taxes.|
-|currency                |string<br/>`length<=3`                     |The currency of the total amount due.  The order must have the same currency for all items, fees and taxes. <br/>see [Currencies](#currencies) for complete list|
-|status                  |string<br/>`length<=20`                    |**pending**<br/>**cancelled**<br/>**failed** - The order was not paid.<br/>**paid**<br/>**expired** - The order had expired \(default: 15 mins\)|
-|lang                    |string<br/>`length<=5`                     |The language that the Quick Checkout pages should be displayed in.<br/>see Languages for complete list|
-|items                   |Array of [item](#item)                     |Specific line items \(products/fees or services\) that you are requesting payment for.|
-|fees                    |Array of [fee](#fee)                       |Specific fees \(setup/shipping&handling, etc.\) that are to be included in the payment.|
-|taxes                   |Array of [tax](#tax)                       |Specific taxes\(VAT, GST, PST, etc...\) that are to be included in the payment.|
-|customerIp              |string<br/>`length<=20`                    |The value should be the incoming IP address of your customer, which will restrict the payment page to being viewable only from this IP address.|
-|paymentMethods          |Array of [paymentMethod](#paymentMethod)   |This allows you to define which payment options you would like to use|
-|redirects               |Array of [redirect](#redirect)             |This allows you to add redirects to the order. Redirects cause a connection back to your merchant system via the customer's browser.|
-|links                   |Array of [link](#link)                     |Array of HATEOAS links \(if applicable\)<br/>**hosted_payment** – URI for the payment page. Customers should be redirected to this URI to see their invoice and complete payment; or this should be used as the form action on the merchant payment page if using a silent post.<br/>**self** – This URI can be called to return a JSON object about the current status of the order, e.g., to see if the payment has been settled.|
+Element                 |Type                                       |Description
+---                     |---                                        |---
+orderId                 |string<br/>`length<=100`                   |Unique NETELLER reference for the order. `ie: ORD_7915d463-ccc8-4305-9d33-9e5c9310f12e, SUB_c46645ea-b7b0-4a91-87f7-88c00ec0dea1`
+merchantRefId           |string<br/>`length<=50`                    |The associated merchant reference id from the initial request.
+totalAmount             |number                                     |The total amount due for this order, including all items, fees, taxes.
+currency                |string<br/>`length<=3`                     |The currency of the total amount due.  The order must have the same currency for all items, fees and taxes. <br/>see [Currencies](#currencies) for complete list
+status                  |string<br/>`length<=20`                    |**pending**<br/>**cancelled**<br/>**failed** - The order was not paid.<br/>**paid**<br/>**expired** - The order had expired \(default: 15 mins\)
+lang                    |string<br/>`length<=5`                     |The language that the Quick Checkout pages should be displayed in.<br/>see Languages for complete list
+items                   |Array of [item](#item)                     |Specific line items \(products/fees or services\) that you are requesting payment for.
+fees                    |Array of [fee](#fee)                       |Specific fees \(setup/shipping&handling, etc.\) that are to be included in the payment.
+taxes                   |Array of [tax](#tax)                       |Specific taxes\(VAT, GST, PST, etc...\) that are to be included in the payment.
+customerIp              |string<br/>`length<=20`                    |The value should be the incoming IP address of your customer, which will restrict the payment page to being viewable only from this IP address.
+paymentMethods          |Array of [paymentMethod](#paymentMethod)   |This allows you to define which payment options you would like to use
+redirects               |Array of [redirect](#redirect)             |This allows you to add redirects to the order. Redirects cause a connection back to your merchant system via the customer's browser.
+links                   |Array of [link](#link)                     |Array of HATEOAS links \(if applicable\)<br/>**hosted_payment** – URI for the payment page. Customers should be redirected to this URI to see their invoice and complete payment; or this should be used as the form action on the merchant payment page if using a silent post.<br/>**self** – This URI can be called to return a JSON object about the current status of the order, e.g., to see if the payment has been settled.
 
 ```apib
 {
@@ -2240,11 +2240,11 @@ Sample order invoice:
 
 ## payment
 
-|Element                 |Type                                   |Description|
-|---                     |---                                    |---|
-|customer                |[customer](#customer)                  |NETELLER member account details for this transaction \(if applicable\).|
-|billingDetail<br/>      |[billingDetail](#billingDetail)        |Billing details for this transaction, if paid as a guest and is not associated with a NETELLER account.|
-|transaction<br/>        |[transaction](#transaction)            |Associated transaction details.|
+Element                 |Type                                   |Description
+---                     |---                                    |---
+customer                |[customer](#customer)                  |NETELLER member account details for this transaction \(if applicable\).
+billingDetail<br/>      |[billingDetail](#billingDetail)        |Billing details for this transaction, if paid as a guest and is not associated with a NETELLER account.
+transaction<br/>        |[transaction](#transaction)            |Associated transaction details.
 
 Sample payment from NETELLER account holder
 ```apib
@@ -2314,10 +2314,10 @@ Sample payment from guest
 
 ## paymentMethod
 
-|Element  |Type                       |Description|
-|---      |---                        |---|     
-|type     |string<br/>`length<=15`    |Identifies the type of payment method.|
-|value    |string<br/>`length<=100`   |Further Identifies the payment type, and the source of funds for a payment.|
+Element  |Type                       |Description
+---      |---                        |---
+type     |string<br/>`length<=15`    |Identifies the type of payment method.
+value    |string<br/>`length<=100`   |Further Identifies the payment type, and the source of funds for a payment.
 
 
 > For outgoing transfers you can only use NETELLER Account ID to identify the recipient whey they already have a registered NETELLER account, for non-account holders you must specify the recipients email address.
@@ -2329,23 +2329,23 @@ Sample payment from guest
 
 Permitted Values
 
-|Type               |Value                                                       |Logo           |Supported Processing Currencies|
-|---                |---                                                         |---            |---|
-|neteller           |The NETELLER account holders email address \(preferred\)<br/>**OR**<br/>The account holders 12 digit NETELLER account ID| ![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/neteller.png)  |See Currencies|
-|voucher            |paysafecard                                                 |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/paysafecard.png)               |EUR, GBP, CHF, BGN, CZK, DKK, HRK, HUF, NOK, PLN, RON, SEK|
-|onlinebanking      |sofortbanking                                               |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/sofort.png)                    |EUR|
-|onlinebanking      |poli                                                        |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/poli.png)                      |AUD|
-|onlinebanking      |giropay                                                     |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/giropay.png)                   |EUR|
-|onlinebanking      |ideal                                                       |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/ideal.png)                     |EUR|
-|onlinebanking      |bradesco                                                    |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/bradesco.png)                  |USD<br/>Max $500 transaction, $3000 month per customer|
-|onlinebanking      |itau                                                        |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/itau.png)                      |USD|
-|onlinebanking      |bancodobrasil                                               |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/banco-do-brasil.png)           |USD<br/>Max $500 transaction, $3000 month per customer|
-|onlinebanking      |webpay                                                      |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/webpay.png)                    |USD|
-|onlinebanking      |qiwi                                                        |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/qiwi.png)                      |RUB|
-|onlinebanking      |webmoney                                                    |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/webmoney.png)                  |RUB|
-|onlinebanking      |yandex                                                      |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/yandex_en.png)                 |RUB|
-|digitalcurrency    |bitcoin                                                     |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/bitcoin.png)                   |GBP, USD, EUR|
-|carrierbilling     |boku                                                        |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/boku.png)                      |DKK, SEK, CHF, GBP|
+Type               |Value                                                       |Logo           |Supported Processing Currencies
+---                |---                                                         |---            |---
+neteller           |The NETELLER account holders email address \(preferred\)<br/>**OR**<br/>The account holders 12 digit NETELLER account ID| ![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/neteller.png)  |See Currencies
+voucher            |paysafecard                                                 |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/paysafecard.png)               |EUR, GBP, CHF, BGN, CZK, DKK, HRK, HUF, NOK, PLN, RON, SEK
+onlinebanking      |sofortbanking                                               |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/sofort.png)                    |EUR
+onlinebanking      |poli                                                        |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/poli.png)                      |AUD
+onlinebanking      |giropay                                                     |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/giropay.png)                   |EUR
+onlinebanking      |ideal                                                       |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/ideal.png)                     |EUR
+onlinebanking      |bradesco                                                    |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/bradesco.png)                  |USD<br/>Max $500 transaction, $3000 month per customer
+onlinebanking      |itau                                                        |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/itau.png)                      |USD
+onlinebanking      |bancodobrasil                                               |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/banco-do-brasil.png)           |USD<br/>Max $500 transaction, $3000 month per customer
+onlinebanking      |webpay                                                      |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/webpay.png)                    |USD
+onlinebanking      |qiwi                                                        |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/qiwi.png)                      |RUB
+onlinebanking      |webmoney                                                    |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/webmoney.png)                  |RUB
+onlinebanking      |yandex                                                      |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/yandex_en.png)                 |RUB
+digitalcurrency    |bitcoin                                                     |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/bitcoin.png)                   |GBP, USD, EUR
+carrierbilling     |boku                                                        |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/boku.png)                      |DKK, SEK, CHF, GBP
 
 
 ```apib
@@ -2359,17 +2359,17 @@ Permitted Values
 
 ## plan
 
-|Element                 |Type                       |Description|
-|---                     |---                        |---|
-|planId                  |string<br/>`length<=50`    |A unique identifier for the plan that you will use to identify which plan you want to enroll your customer in.|
-|planName                |string<br/>`length<=200`   |The display name for the plan.|
-|interval                |number<br/>`length<=3`     |The number of intervals between each billing attempt.<br/>\(ie: to bill every 15 days, you would select an interval of 15 and a type of daily\).|
-|intervalType            |string<br/>`length<=10`    |The type of interval you wish want to define. <br/>**daily**<br/>**weekly**<br/>**monthly**<br/>**yearly**|
-|intervalCount           |number<br/>`length<=3`     |The length of the contract in intervals, or how many recurring billings will be attempted.<br/>intervalCount * interval = Total Subscription Term \(duration)<br/>(ie: For a yearly subscription billing every 3 months, this would be 4\)|
-|amount                  |number                     |The amount to bill for each re-ocurrence.|
-|currency                |string<br/>`length=3`      |The currency of the amount to be billed.|
-|status                  |string<br/>`length<=15`    |**pending** - The subscription has been requested and is pending activation \(start date has not yet elapsed\).<br/>**active** - The subscription plan is currently active<br/>**cancelled** - The subscription plan was cancelled and can no longer be subscribed to|
-|numberofSubscriptions   |number                     |The number of subscriptions that were enrolled under a plan.  This includes cancelled and ended subscriptions.|
+Element                 |Type                       |Description
+---                     |---                        |---
+planId                  |string<br/>`length<=50`    |A unique identifier for the plan that you will use to identify which plan you want to enroll your customer in.
+planName                |string<br/>`length<=200`   |The display name for the plan.
+interval                |number<br/>`length<=3`     |The number of intervals between each billing attempt.<br/>\(ie: to bill every 15 days, you would select an interval of 15 and a type of daily\).
+intervalType            |string<br/>`length<=10`    |The type of interval you wish want to define. <br/>**daily**<br/>**weekly**<br/>**monthly**<br/>**yearly**
+intervalCount           |number<br/>`length<=3`     |The length of the contract in intervals, or how many recurring billings will be attempted.<br/>intervalCount * interval = Total Subscription Term \(duration)<br/>(ie: For a yearly subscription billing every 3 months, this would be 4\)
+amount                  |number                     |The amount to bill for each re-ocurrence.
+currency                |string<br/>`length=3`      |The currency of the amount to be billed.
+status                  |string<br/>`length<=15`    |**pending** - The subscription has been requested and is pending activation \(start date has not yet elapsed\).<br/>**active** - The subscription plan is currently active<br/>**cancelled** - The subscription plan was cancelled and can no longer be subscribed to
+numberofSubscriptions   |number                     |The number of subscriptions that were enrolled under a plan.  This includes cancelled and ended subscriptions.
 
 
 ```apib
@@ -2390,10 +2390,10 @@ Permitted Values
 
 ## redirect
 
-|Element                 |Type                              |Description|
-|---                     |---                               |---|
-|rel                     |string<br/>`length<=15`           |This is the redirect type, allowing different endpoints to be targeted depending on the end state of the transaction. <br/>Possible values are:<br/>**on_success**<br/>**on_pending**<br/>**on_error**<br/>**on_decline**<br/>**on_cancel**<br/>**on_timeout**|
-|url                     |string                            ||
+Element                 |Type                              |Description
+---                     |---                               |---
+rel                     |string<br/>`length<=15`           |This is the redirect type, allowing different endpoints to be targeted depending on the end state of the transaction. <br/>Possible values are:<br/>**on_success**<br/>**on_pending**<br/>**on_error**<br/>**on_decline**<br/>**on_cancel**<br/>**on_timeout**
+url                     |string                            |
 
 ```apib
 {
@@ -2406,19 +2406,19 @@ Permitted Values
 
 ## subscription
 
-|Element                       |Type                       |Description|
-|---                           |---                        |---|
-|subscriptionId                |string<br/>`length<=50`    |A system generated value that uniquely identifies this subscription.|
-|plan                          |[plan](#plan)              |The associated subscription plan that the subscription is for.|
-|customer                      |[customer](#customer)      |The associated customer for this subscription.|
-|status                        |string<br/>`length<=15`    |**pending** - A subscription has been requested and is pending activation upon the requested start date<br/>**active** - The subscription is currently active<br/>**cancelled** - The subscription was cancelled by the subscriber or by the merchant application<br/>**ended** - The subscription has lapsed<br/>**failed** - The subscription request failed.  This status will only be set if the subscription was created with no startDate supplied and the immediate billing failed.|
-|startDate                     |string<br/>`length=20`<br/>> current date |Date the subscription should start.  If startDate is not supplied, the customer will be billed immediately.  If supplying a subscription startDate, the date must be greater then the current date.<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ|
-|endDate                       |string<br/>`length=20`     |If the subscription has ended (either because it was canceled or because the customer was switched to a subscription to a new plan), the date the subscription ended<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ|
-|currentPeriodStart            |string<br/>`length=20`     |Start of the current period that the subscription has been invoiced for.<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ|
-|currentPeriodEnd              |string<br/>`length=20`     |End of the current period that the subscription has been invoiced for. At the end of this period, a new invoice will be created<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ|
-|cancelAtPeriodEnd             |boolean                    |If the subscription has been canceled with the atPeriodEnd flag set to true, then this value on the subscription will be true. You can use this attribute to determine whether a subscription that has a status of active is scheduled to be canceled at the end of the current period.|
-|canceledDate                  |string<br/>`length=20`     |If the subscription has been canceled, the date of that cancellation. If the subscription was canceled with cancelAtPeriodEnd, canceledDate will still reflect the date of the initial cancellation request, not the end of the subscription period when the subscription is automatically moved to a canceled state.<br/>ISO 8601 format (UTC)<br/>YYYY-MM-DDThh:mm:ssZ|
-|lastCompletedPaymentDate      |string<br/>`length=20`     |The date the last successful payment was processed for this subscription<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ|
+Element                       |Type                       |Description
+---                           |---                        |---
+subscriptionId                |string<br/>`length<=50`    |A system generated value that uniquely identifies this subscription.
+plan                          |[plan](#plan)              |The associated subscription plan that the subscription is for.
+customer                      |[customer](#customer)      |The associated customer for this subscription.
+status                        |string<br/>`length<=15`    |**pending** - A subscription has been requested and is pending activation upon the requested start date<br/>**active** - The subscription is currently active<br/>**cancelled** - The subscription was cancelled by the subscriber or by the merchant application<br/>**ended** - The subscription has lapsed<br/>**failed** - The subscription request failed.  This status will only be set if the subscription was created with no startDate supplied and the immediate billing failed.
+startDate                     |string<br/>`length=20`<br/>> current date |Date the subscription should start.  If startDate is not supplied, the customer will be billed immediately.  If supplying a subscription startDate, the date must be greater then the current date.<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ
+endDate                       |string<br/>`length=20`     |If the subscription has ended (either because it was canceled or because the customer was switched to a subscription to a new plan), the date the subscription ended<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ
+currentPeriodStart            |string<br/>`length=20`     |Start of the current period that the subscription has been invoiced for.<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ
+currentPeriodEnd              |string<br/>`length=20`     |End of the current period that the subscription has been invoiced for. At the end of this period, a new invoice will be created<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ
+cancelAtPeriodEnd             |boolean                    |If the subscription has been canceled with the atPeriodEnd flag set to true, then this value on the subscription will be true. You can use this attribute to determine whether a subscription that has a status of active is scheduled to be canceled at the end of the current period.
+canceledDate                  |string<br/>`length=20`     |If the subscription has been canceled, the date of that cancellation. If the subscription was canceled with cancelAtPeriodEnd, canceledDate will still reflect the date of the initial cancellation request, not the end of the subscription period when the subscription is automatically moved to a canceled state.<br/>ISO 8601 format (UTC)<br/>YYYY-MM-DDThh:mm:ssZ
+lastCompletedPaymentDate      |string<br/>`length=20`     |The date the last successful payment was processed for this subscription<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ
 
 ```apib
 { 
@@ -2452,11 +2452,11 @@ Permitted Values
 
 ## tax
 
-|Element                 |Type                       |Description|
-|---                     |---                        |---|
-|taxName                 |string<br/>`length<=50`    |The name that will display in history and invoice details for this tax item.  \(ie: VAT, GST, PST...etc\)|
-|taxAmount               |number<br/>`length<=10`    |The amount of the tax.<br/>Amount fields reflect the smallest unit of currency with no decimals. Eg. $25.00 USD should be formatted as 2500.|
-|taxCurrency             |string<br/>`length<=3`     |The currency the tax is in.<br/>See [Currencies](#currencies) for complete list.|
+Element                 |Type                       |Description
+---                     |---                        |---
+taxName                 |string<br/>`length<=50`    |The name that will display in history and invoice details for this tax item.  \(ie: VAT, GST, PST...etc\)
+taxAmount               |number<br/>`length<=10`    |The amount of the tax.<br/>Amount fields reflect the smallest unit of currency with no decimals. Eg. $25.00 USD should be formatted as 2500.
+taxCurrency             |string<br/>`length<=3`     |The currency the tax is in.<br/>See [Currencies](#currencies) for complete list.
 
 ```apib
 {
@@ -2470,12 +2470,12 @@ Permitted Values
 
 ## token
 
-|Element                  |Type                       |Description|
-|---                      |---                        |---|
-|tokenType                |string<br/>`length<=50`    |The type of access token that was issued.  Currently only 'Bearer' tokens are supported.|
-|expiresIn                |number                     |How much time in seconds until the token expires.|
-|accessToken              |string<br/>`length<=200`   |The access token to pass in the API call to access the protected resource.|
-|refreshToken             |string<br/>`length<=200`   |The token to use to obtain a new access token with the same permissions \(scope\) previously authorized.|
+Element                  |Type                       |Description
+---                      |---                        |---
+tokenType                |string<br/>`length<=50`    |The type of access token that was issued.  Currently only 'Bearer' tokens are supported.
+expiresIn                |number                     |How much time in seconds until the token expires.
+accessToken              |string<br/>`length<=200`   |The access token to pass in the API call to access the protected resource.
+refreshToken             |string<br/>`length<=200`   |The token to use to obtain a new access token with the same permissions \(scope\) previously authorized.
 
 ```apib
 {
@@ -2490,19 +2490,19 @@ Permitted Values
 
 ## transaction
 
-|Element                 |Type                       |Description|
-|---                     |---                        |---|
-|amount                  |number<br/>`length<=15`    |The amount of the transaction.<br/>Amount fields reflect the smallest unit of currency with no decimals. Eg. $25.00 USD should be formatted as 2500 whereas 2500 JPY should be formatted as 2500.|
-|createDate              |string<br/>`length<=20`    |ISO 8601 format \(UTC\)<br/>The timestamp when the transaction was requested.<br/>YYYY-MM-DDThh:mm:ssZ|
-|currency                |string<br/>`length<=3`     |The currency of the transaction.|
-|errorCode               |string<br/>`length<=100`   |If applicable, the corresponding code for why this transaction was not accepted.<br/>see REST API Errors|
-|errorMessage            |string<br/>`length<=250`   |If applicable, the corresponding reason for why this transaction was not accepted.<br/>see REST API Errors |
-|fees                    |array of [fee](#fee)       |List of fees associated with this transaction.|
-|id                      |number                     |The transaction id that identifies this transaction within the NETELLER system.  The returned id is considered a transaction group id and can be used to identify both sides of a transfer.|
-|merchantRefId           |string<br/>`length<=50`    |The external merchant transaction id that uniquely identifies this transaction within the merchant system.|
-|status                  |string<br/>`length<=20`    |**accepted**<br/>**pending**<br/>**declined**<br/>**cancelled**<br/>**failed**|
-|transactionType         |string<br/>`length<=50`    |Indicates the type of transaction or specific product for the transaction.|
-|updateDate              |string<br/>`length<=20`    |ISO 8601 format \(UTC\)<br/>The timestamp when the transaction was last updated.<br/>YYYY-MM-DDThh:mm:ssZ|
+Element                 |Type                       |Description|
+---                     |---                        |---|
+amount                  |number<br/>`length<=15`    |The amount of the transaction.<br/>Amount fields reflect the smallest unit of currency with no decimals. Eg. $25.00 USD should be formatted as 2500 whereas 2500 JPY should be formatted as 2500.
+createDate              |string<br/>`length<=20`    |ISO 8601 format \(UTC\)<br/>The timestamp when the transaction was requested.<br/>YYYY-MM-DDThh:mm:ssZ
+currency                |string<br/>`length<=3`     |The currency of the transaction.
+errorCode               |string<br/>`length<=100`   |If applicable, the corresponding code for why this transaction was not accepted.<br/>see REST API Errors
+errorMessage            |string<br/>`length<=250`   |If applicable, the corresponding reason for why this transaction was not accepted.<br/>see REST API Errors
+fees                    |array of [fee](#fee)       |List of fees associated with this transaction.
+id                      |number                     |The transaction id that identifies this transaction within the NETELLER system.  The returned id is considered a transaction group id and can be used to identify both sides of a transfer.
+merchantRefId           |string<br/>`length<=50`    |The external merchant transaction id that uniquely identifies this transaction within the merchant system.
+status                  |string<br/>`length<=20`    |**accepted**<br/>**pending**<br/>**declined**<br/>**cancelled**<br/>**failed**
+transactionType         |string<br/>`length<=50`    |Indicates the type of transaction or specific product for the transaction.
+updateDate              |string<br/>`length<=20`    |ISO 8601 format \(UTC\)<br/>The timestamp when the transaction was last updated.<br/>YYYY-MM-DDThh:mm:ssZ
 
 ```apib
 {
@@ -2533,34 +2533,34 @@ Permitted Values
 > the test.api.neteller.com endpoint.  The password supplied here can be used for testing the 
 > Authorization flows for a particular account.
 
-|Currency|Account ID|Email Address|Secure ID|Password|
-|---|---|---|---|---|
-|AED|451323763077|netellertest_AED@neteller.com|315508|NTt3st1!|
-|AUD|451823760529|netellertest_AUD@neteller.com|521652|NTt3st1!|
-|BGN|450424149137|netellertest_BGN@neteller.com|354380|NTt3st1!|
-|BRL|452124231445|netellertest_BRL@neteller.com|907916|NTt3st1!|
-|CAD|455781454840|netellertest_CAD@neteller.com|755608|NTt3st1!|
-|CHF|452324249609|netellertest_CHF@neteller.com|372993|NTt3st1!|
-|DKK|459734233011|netellertest_DKK@neteller.com|856751|NTt3st1!|
-|EUR|453501020503|netellertest_EUR@neteller.com|908379|NTt3st1!|
-|GBP|458591047553|netellertest_GBP@neteller.com|411392|NTt3st1!|
-|HUF|450824149649|netellertest_HUF@neteller.com|363552|NTt3st1!|
-|INR|450824016049|netellertest_INR@neteller.com|332880|NTt3st1!|
-|JPY|452604251512|netellertest_JPY@neteller.com|490055|NTt3st1!|
-|MAD|453123727913|netellertest_MAD@neteller.com|796289|NTt3st1!|
-|MXN|456444237546|netellertest_MXN@neteller.com|878408|NTt3st1!|
-|MYR|452724116521|netellertest_MYR@neteller.com|108145|NTt3st1!|
-|NGN|450924006321|netellertest_NGN@neteller.com|205750|NTt3st1!|
-|NOK|455394172769|netellertest_NOK@neteller.com|418852|NTt3st1!|
-|PLN|451823629489|netellertest_PLN@neteller.com|654091|NTt3st1!|
-|RON|450424018097|netellertest_RON@neteller.com|860647|NTt3st1!|
-|RUB|455121038904|netellertest_RUB@neteller.com|888470|NTt3st1!|
-|SEK|453313818311|netellertest_SEK@neteller.com|173419|NTt3st1!|
-|SGD|451523741861|netellertest_SGD@neteller.com|316938|NTt3st1!|
-|TND|453523858985|netellertest_TND@neteller.com|588931|NTt3st1!|
-|TWD|451723748785|netellertest_TWD@neteller.com|711009|NTt3st1!|
-|USD|454651018446|netellertest_USD@neteller.com|270955|NTt3st1!|
-|ZAR|453523842837|netellertest_ZAR@neteller.com|708904|NTt3st1!|
+Currency|Account ID|Email Address|Secure ID|Password
+---|---|---|---|---
+AED|451323763077|netellertest_AED@neteller.com|315508|NTt3st1!
+AUD|451823760529|netellertest_AUD@neteller.com|521652|NTt3st1!
+BGN|450424149137|netellertest_BGN@neteller.com|354380|NTt3st1!
+BRL|452124231445|netellertest_BRL@neteller.com|907916|NTt3st1!
+CAD|455781454840|netellertest_CAD@neteller.com|755608|NTt3st1!
+CHF|452324249609|netellertest_CHF@neteller.com|372993|NTt3st1!
+DKK|459734233011|netellertest_DKK@neteller.com|856751|NTt3st1!
+EUR|453501020503|netellertest_EUR@neteller.com|908379|NTt3st1!
+GBP|458591047553|netellertest_GBP@neteller.com|411392|NTt3st1!
+HUF|450824149649|netellertest_HUF@neteller.com|363552|NTt3st1!
+INR|450824016049|netellertest_INR@neteller.com|332880|NTt3st1!
+JPY|452604251512|netellertest_JPY@neteller.com|490055|NTt3st1!
+MAD|453123727913|netellertest_MAD@neteller.com|796289|NTt3st1!
+MXN|456444237546|netellertest_MXN@neteller.com|878408|NTt3st1!
+MYR|452724116521|netellertest_MYR@neteller.com|108145|NTt3st1!
+NGN|450924006321|netellertest_NGN@neteller.com|205750|NTt3st1!
+NOK|455394172769|netellertest_NOK@neteller.com|418852|NTt3st1!
+PLN|451823629489|netellertest_PLN@neteller.com|654091|NTt3st1!
+RON|450424018097|netellertest_RON@neteller.com|860647|NTt3st1!
+RUB|455121038904|netellertest_RUB@neteller.com|888470|NTt3st1!
+SEK|453313818311|netellertest_SEK@neteller.com|173419|NTt3st1!
+SGD|451523741861|netellertest_SGD@neteller.com|316938|NTt3st1!
+TND|453523858985|netellertest_TND@neteller.com|588931|NTt3st1!
+TWD|451723748785|netellertest_TWD@neteller.com|711009|NTt3st1!
+USD|454651018446|netellertest_USD@neteller.com|270955|NTt3st1!
+ZAR|453523842837|netellertest_ZAR@neteller.com|708904|NTt3st1!
 
 ***
 
@@ -2739,12 +2739,12 @@ and the recipient is not an account holder, the profile information will be used
 the customer to the returned uri.
 
 
-|||
-|---|---|
-|**Scope required to initiate request**|none \(default\)|
-|**Scope(s) impacting response**|account\_enhanced\_profile, account\_contact|
-|**Expandable Resources**|customer|
-|**Related Resources (if applicable)**|none|
+|
+---|---
+**Scope required to initiate request**|none \(default\)
+**Scope(s) impacting response**|account\_enhanced\_profile, account\_contact
+**Expandable Resources**|customer
+**Related Resources (if applicable)**|none
 
 
 + Request Send payment to email (application/json)
@@ -2802,7 +2802,6 @@ the customer to the returned uri.
             Location: /v1/transferOut
             
 
-
 ## Request payment [POST /transferIn]
 
 This is an inbound payment request and will faciliate collecting payment from a NETELLER member to your merchant account.
@@ -2813,12 +2812,12 @@ If approved, funds will immediately be pulled from the member account and deposi
 
 NETELLER will notify the sender via email of the completed payment.
 
-|||
-|---|---|
-|**Scope required to initiate request**|none (default)|
-|**Scope(s) impacting response**|account\_enhanced\_profile, account\_contact|
-|**Expandable Resources**|customer|
-|**Related Resources (if applicable)**|none|
+|
+---|---
+**Scope required to initiate request**|none (default)
+**Scope(s) impacting response**|account\_enhanced\_profile, account\_contact
+**Expandable Resources**|customer
+**Related Resources (if applicable)**|none
 
 + Request Receive payment from a NETELLER account holder (application/json)
 
@@ -2900,12 +2899,12 @@ When performing a look up using your merchant reference id, you must
 also pass the parameter of **?refType=merchantRefId** to denote that your are 
 querying with your merchant reference ID and not the NETELLER Transaction ID.
 
-|||
-|---|---|
-|**Scope required to initiate request**|none (default)|
-|**Scope(s) impacting response**|account\_enhanced\_profile, account\_contact|
-|**Expandable Resources**|customer|
-|**Related Resources (if applicable)**|none|
+|
+---|---
+**Scope required to initiate request**|none (default)
+**Scope(s) impacting response**|account\_enhanced\_profile, account\_contact
+**Expandable Resources**|customer
+**Related Resources (if applicable)**|none
 
 + Parameters
 
@@ -2986,12 +2985,12 @@ The payments lookup function can be used to retrieve a listing of transactions a
 
 This API request returns a list of [payment](#payment) objects.
 
-|||
-|---|---|
-|**Scope required to initiate request**|none (default)|
-|**Scope(s) impacting response**|none|
-|**Expandable Resources**|none|
-|**Related Resources (if applicable)**|customer|
+|
+---|---
+**Scope required to initiate request**|none (default)
+**Scope(s) impacting response**|none
+**Expandable Resources**|none
+**Related Resources (if applicable)**|customer
 
 + Parameters
     + startDate (optional, string) - Start date of transaction report.  If not supplied the default is past 7 days.
@@ -3019,9 +3018,9 @@ This API request returns a list of [payment](#payment) objects.
     + Attributes
     
         + list (array) - A collection of associated payment objects.
-            + customer (object, required) - The associated customer information for the payment (if applicable).
-            + billingDetail (object, optional) - The associated billingDetail for the transaction (if applicable).
-            + transaction (object, required) - Details about the payment.
+            + customer (required) - The associated customer information for the payment (if applicable).
+            + billingDetail (optional) - The associated billingDetail for the transaction (if applicable).
+            + transaction (required) - Details about the payment.
         + links ([string], optional) - Array of HATEOAS links (if applicable).
 
 
@@ -3095,12 +3094,12 @@ Create an order by passing the revelant details to the /orders endpoint, NETELLE
 you then re-direct your customer where they are offered the ability to pay using their NETELLER account or with 
 one of numerous alternative payment methods.
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|none|
-|**Expandable Resources**|none|
-|**Related Resources (if applicable)**|hosted_payment|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|none
+**Expandable Resources**|none
+**Related Resources (if applicable)**|hosted_payment
 
 + Request (application/json)
 
@@ -3252,12 +3251,12 @@ The details of an order can be queried from the API at any time. A self link is 
 which can be used to look up the status of the order. Alternatively, the order endpoint can be called directly as 
 a GET request on the order id: 
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|none|
-|**Expandable Resources**|none|
-|**Related Resources (if applicable)**|hosted_payment, invoice, payment|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|none
+**Expandable Resources**|none
+**Related Resources (if applicable)**|hosted_payment, invoice, payment
 
 + Parameters
 
@@ -3344,12 +3343,12 @@ a GET request on the order id:
             
 ## Lookup invoice for an order [GET /orders/{orderId}/invoice]
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|none|
-|**Expandable Resources**|order|
-|**Related Resources (if applicable)**|customer|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|none
+**Expandable Resources**|order
+**Related Resources (if applicable)**|customer
 
 
 + Parameters
@@ -3429,12 +3428,12 @@ If you supplied a valid linkBackUrl, the member will have the option of returnin
 Sample account confirmation screen
 ![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/Create-a-customer-linkBack.png)
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|none|
-|**Expandable Resources**|none|
-|**Related Resources (if applicable)**|member\_signup\_redirect|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|none
+**Expandable Resources**|none
+**Related Resources (if applicable)**|member\_signup\_redirect
 
 
 + Request (application/json)
@@ -3511,12 +3510,12 @@ Return details about a particular customer.
 
 > Note: A customer object will only be returned if the customer has completed their account setup.  The level of detail returned is dependant upon what scope authorization you have received from the member, see the authorization grant flow for more information.
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|account\_basic\_profile, account\_enhanced\_profile, account\_contacts, account\_available\_balance|
-|**Expandable Resources**|none|
-|**Related Resources (if applicable)**|none|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|account\_basic\_profile, account\_enhanced\_profile, account\_contacts, account\_available\_balance
+**Expandable Resources**|none
+**Related Resources (if applicable)**|none
 
 + Parameters
 
@@ -3574,22 +3573,22 @@ The verify endpoint can be used to verify that member account details in the NET
 the member in your system. Call this endpoint with the specific account identifier and one or more of the values you would
 like to confirm and NETELLER will return a MATCH or NO_MATCH result for each. 
 
-|VerificationLevel   |Description|
-|---                 |---|
-|00                  |Member has not been verified, no registered payment instruments|
-|01                  |Member has not been verified, has one or more registered payment instruments  \(CC or Bank Acct Verified\)|
-|10                  |Member is verified, no registered payment instruments|
-|11                  |Member is verified, has one or more registered payment instruments \(CC, Bank Acct Verified\)|
+VerificationLevel   |Description
+---                 |---
+00                  |Member has not been verified, no registered payment instruments
+01                  |Member has not been verified, has one or more registered payment instruments  \(CC or Bank Acct Verified\)
+10                  |Member is verified, no registered payment instruments
+11                  |Member is verified, has one or more registered payment instruments \(CC, Bank Acct Verified\)
 
 When you make your request, the input values will be normalized to remove special characters so there will be an 
 increased likelyhood of finding a match.
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|none|
-|**Expandable Resources**|none|
-|**Related Resources (if applicable)**|none|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|none
+**Expandable Resources**|none
+**Related Resources (if applicable)**|none
 
 + Parameters
 
@@ -3673,12 +3672,12 @@ increased likelyhood of finding a match.
 
 Return a list of all subscription for the customer.
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|none|
-|**Expandable Resources**|none|
-|**Related Resources (if applicable)**|none|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|none
+**Expandable Resources**|none
+**Related Resources (if applicable)**|none
 
 + Parameters
 
@@ -3750,12 +3749,12 @@ You can then enroll your customers by creating a new 'Subscription' request and 
 
 Creating a subscription plan allows you to define a plan for having automatic payments transferred to your merchant account on a fixed schedule.
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|none|
-|**Expandable Resources**|none|
-|**Related Resources (if applicable)**|none|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|none
+**Expandable Resources**|none
+**Related Resources (if applicable)**|none
 
 + Attributes
 
@@ -3813,12 +3812,12 @@ Creating a subscription plan allows you to define a plan for having automatic pa
 
 ## Lookup a plan [GET /plans/{planId}]
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|none|
-|**Expandable Resources**|none|
-|**Related Resources (if applicable)**|none|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|none
+**Expandable Resources**|none
+**Related Resources (if applicable)**|none
 
 + Parameters
 
@@ -3865,12 +3864,12 @@ Creating a subscription plan allows you to define a plan for having automatic pa
 
 ## Cancel a plan [POST /plans/{planId}/cancel]
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|none|
-|**Expandable Resources**|none|
-|**Related Resources (if applicable)**|none|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|none
+**Expandable Resources**|none
+**Related Resources (if applicable)**|none
 
 + Attributes
 
@@ -3915,12 +3914,12 @@ Creating a subscription plan allows you to define a plan for having automatic pa
 You can only delete a subscription plan that has not been offered to any members.  Once you have enrolled members in a subscription plan, you may choose to cancel the plan to prevent any further subscriptions from being created.  
 Any existing subscriptions on a cancelled plan will continue to be charged until the end of their term
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|none|
-|**Expandable Resources**|none|
-|**Related Resources (if applicable)**|none|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|none
+**Expandable Resources**|none
+**Related Resources (if applicable)**|none
 
 + Attributes
 
@@ -3958,12 +3957,12 @@ Any existing subscriptions on a cancelled plan will continue to be charged until
 
 ## List all your plans [GET /plans?limit={limit}&offset={offset}]
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|none|
-|**Expandable Resources**|none|
-|**Related Resources (if applicable)**|none|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|none
+**Expandable Resources**|none
+**Related Resources (if applicable)**|none
 
 + Parameters
 
@@ -4032,12 +4031,12 @@ Creating a subscription is the act of enrolling an existing NETELLER account hol
 
 In order to create a subscription you must first obtain member authorization for the required 'subscription_payment' scope. See Obtain an access token using the auth_code grant type.  Once authorized, you can then exchange the authorization code for an access token that will allow you to access this API. 
 
-|||
-|---|---|
-|**Scope required to initiate request**|subscription_payment|
-|**Scope(s) impacting response**|account\_basic\_profile, account\_enhanced\_profile, account\_contacts, account\_available\_balance|
-|**Expandable Resources**|plan, customer|
-|**Related Resources (if applicable)**|payment|
+|
+---|---
+**Scope required to initiate request**|subscription_payment
+**Scope(s) impacting response**|account\_basic\_profile, account\_enhanced\_profile, account\_contacts, account\_available\_balance
+**Expandable Resources**|plan, customer
+**Related Resources (if applicable)**|payment
 
 
 + Request (application/json)
@@ -4106,12 +4105,12 @@ In order to create a subscription you must first obtain member authorization for
 
 Retrieve information about a previously created subscription by passing the relevant subscription identifier.
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|account\_basic\_profile, account\_enhanced\_profile, account\_contacts, account\_available\_balance|
-|**Expandable Resources**|plan, customer|
-|**Related Resources (if applicable)**|none|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|account\_basic\_profile, account\_enhanced\_profile, account\_contacts, account\_available\_balance
+**Expandable Resources**|plan, customer
+**Related Resources (if applicable)**|none
 
 + Parameters
 
@@ -4231,12 +4230,12 @@ Retrieve information about a previously created subscription by passing the rele
 
 By default when you cancel a subscription, the NETELLER subscription status is updated immediately to reflect a cancelled state.  If you wish to delay cancellation until the end of the current period, pass in the optional cancelAtPeriod end flag and the subscription will be cancelled just before the start of the next billing cycle.
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|none|
-|**Expandable Resources**|plan,customer|
-|**Related Resources (if applicable)**|none|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|none
+**Expandable Resources**|plan,customer
+**Related Resources (if applicable)**|none
 
 + Request (application/json)
 
@@ -4292,12 +4291,12 @@ By default when you cancel a subscription, the NETELLER subscription status is u
 
 You can obtain a list of all your active subscriptions.  Newest subscriptions will be returned at the top of the list (sorted newest -> oldest).
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|none|
-|**Expandable Resources**|none|
-|**Related Resources (if applicable)**|none|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|none
+**Expandable Resources**|none
+**Related Resources (if applicable)**|none
 
 + Parameters
 
@@ -4372,12 +4371,12 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
 
 ## Lookup invoice for a subscription [GET /subscriptions/{subscriptionId}/invoices/{invoiceNumber}]
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|none|
-|**Expandable Resources**|subscription|
-|**Related Resources (if applicable)**|none|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|none
+**Expandable Resources**|subscription
+**Related Resources (if applicable)**|none
 
 + Parameters
 
@@ -4451,12 +4450,12 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
 
 ## List all invoices for a subscription [GET /subscriptions/{subscriptionId}/invoices?limit={limit}&offset={offset}]
 
-|||
-|---|---|
-|**Scope required to initiate request**|none|
-|**Scope(s) impacting response**|none|
-|**Expandable Resources**|none|
-|**Related Resources (if applicable)**|none|
+|
+---|---
+**Scope required to initiate request**|none
+**Scope(s) impacting response**|none
+**Expandable Resources**|none
+**Related Resources (if applicable)**|none
 
 + Parameters
 
