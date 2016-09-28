@@ -3,8 +3,6 @@ HOST: https://api.neteller.com/v1
 
 # Integrating the NETELLER REST API
 
-## About the API
-
 The NETELLER REST API is comprehensive api that allows you to securely manage and facilitate your online payment needs.
 The _**RESTful API**_ ([REpresentational State Transfer](http://en.wikipedia.org/wiki/Representational_state_transfer)) 
 provides predictable, resource based URI's that removes the complexity that often comes with implementing
@@ -99,7 +97,7 @@ API Version|Minor Version    |Patch / Description
            |                 |- Return customer resource instead of accountProfile on payment, subscriptions, invoices resources
            |                 |- Renamed subscriptionPlan resource to plan
            |                 |- Renamed invoice amountDue to totalAmount
-           |                 |- Lists no longer contain un-neccesary object wrapper, rather returns a list of the appropriate object.
+           |                 |- Lists no longer contain un-necessary object wrapper, rather returns a list of the appropriate object.
 **v1**     |**2014-04-15**   |- **_2014-09-30_**
            |                 |- Added API minor version support
            |                 |- **_2014-09-03_**
@@ -4573,17 +4571,7 @@ Include accountProfile
 - currency: `CAD` (string) - The associated currency.
 
 ## billingDetail
-- email: `jsmith@email.com` (string) - The account email address.
-- firstName: `John` (string) - The clients first name, or given name.
-- lastName: `Smith`(string) - The clients last name, or family name.
-- address1: `address1` (string) - The clients residential, or street address.
-- address2: `address2` (string) - Continuation of the clients residential, or street address.
-- address3: `address3` (string) - Continuation of the clients residential, or street address.
-- city: `city` (string) - The clients city of residence.
-- countrySubdivisionCode: `AB` string -The ISO 3166-2 code indicating the state/province/district or other value denoting the clients country subdivision (e.g. BE=Berlin. 13=Tôkyô [Tokyo], AB=Alberta)
-- country: `CA` (string) - The ISO 3166-1 Alpha 2-code for the clients country of residence (e.g. Germany = DE, JP=Japan. CA=Canada)
-- postCode: `T3H3L2` (string) - The zip code, or postal code, of the clients residence.
-- lang: `EN` (string) - The preferred language of communication. See Languages for complete list.
+- billingDetail (object, required) - The associated billing details for the payment (if applicable).
 
 ## contactDetail
 + type: `landLine` (string) - landLine, mobile
