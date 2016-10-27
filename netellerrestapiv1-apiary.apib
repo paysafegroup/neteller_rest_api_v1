@@ -1168,68 +1168,51 @@ Authorization: Bearer 0.AQAAAUpkOdfxAAAAAAA27oCvz0-Y9rEevMOnlll8yDtB.3ukRggt_VV1
 Content-Type: application/json
 Cache-Control: no-cache
  
-{
-  "orderId": "ORD_4fdbec07-0cc2-496f-90d2-74491b4eb917",
-  "merchantRefId": "20141231120800",
-  "totalAmount": 3599,
-  "currency": "EUR",
-  "customerIp": "192.168.0.1",
-  "lang": "en_US",
-  "items":
-  [
-    {
-      "amount": 2500,
-      "quantity": 1,
-      "sku": "XYZPART1",
-      "name": "Item A",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget venenatis diam. Integer euismod magna dui, a accumsan elit interdum."
-    },
-    {
-      "amount": 200,
-      "quantity": 2,
-      "sku": "",
-      "name": "Item B",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet congue orci, ac euismod."
-    }
-  ],
-  "fees":
-  [
-    {
-      "feeAmount": 500,
-      "feeName": "Setup Fee"
-    }
-  ],
-  "taxes":
-  [
-    {
-      "taxAmount": 199,
-      "taxName": "VAT"
-    }
-  ],
-  "redirects":
-  [
-    {
-      "rel": "on_success",
-      "uri": "http://requestb.in/16bf0vr1?result=success"
-    },
-    {
-      "rel": "on_cancel",
-      "uri": "http://requestb.in/16bf0vr1?result=cancel"
-    }
-  ],
-  "links":
-  [
-    {
-      "url": "https://api.neteller.com/v1/checkout/ORD_4fdbec07-0cc2-496f-90d2-74491b4eb917",
-      "rel": "hosted_payment",
-      "method": "GET"
-    },
-    {
-      "url": "https://api.neteller.com/v1/orders/ORD_4fdbec07-0cc2-496f-90d2-74491b4eb917",
-      "rel": "self",
-      "method": "GET"
-    }
-  ]
+{  
+   "order":{  
+      "merchantRefId":"20141231120800",
+      "totalAmount":3599,
+      "currency":"EUR",
+      "lang":"en_US",
+      "items":[  
+         {  
+            "amount":2500,
+            "quantity":1,
+            "sku":"XYZPART1",
+            "name":"Item A",
+            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget venenatis diam. Integer euismod magna dui, a accumsan elit interdum."
+         },
+         {  
+            "amount":200,
+            "quantity":2,
+            "sku":"",
+            "name":"Item B",
+            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet congue orci, ac euismod."
+         }
+      ],
+      "fees":[  
+         {  
+            "feeAmount":500,
+            "feeName":"Setup Fee"
+         }
+      ],
+      "taxes":[  
+         {  
+            "taxAmount":199,
+            "taxName":"VAT"
+         }
+      ],
+      "redirects":[  
+         {  
+            "rel":"on_success",
+            "uri":"http://requestb.in/16bf0vr1?result=success"
+         },
+         {  
+            "rel":"on_cancel",
+            "uri":"http://requestb.in/16bf0vr1?result=cancel"
+         }
+      ]
+   }
 }
 ```
 
@@ -1241,7 +1224,6 @@ Cache-Control: no-cache
   "merchantRefId": "20141219132605",
   "totalAmount": 3599,
   "currency": "EUR",
-  "customerIp": "192.168.0.1",
   "lang": "en_US",
   "items":
   [
