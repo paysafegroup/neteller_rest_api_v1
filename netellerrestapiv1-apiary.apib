@@ -863,34 +863,39 @@ payment\_succeeded    |Payment is successful.
 
 <a name="currencies"></a>
 
-Currency Code|Description
----          |---
-AED          |Emirati Dirham
-AUD          |Australian Dollar
-BRL          |Brazilian Real
-GBP          |British Pound
-BGN          |Bulgarian Lev
-CAD          |Canadian Dollar
-DKK          |Danish Krone
-EUR          |Euro
-HUF          |Hungarian Forint
-INR          |Indian Rupee
-JPY          |Japanese Yen
-MYR          |Malaysian Ringgit
-MAD          |Moroccan Dirham
-MXN          |Mexican Peso
-NGN          |Nigerian Naira
-NOK          |Norwegian Kroner
-PLN          |Polish Zloty
-RON          |Romanian New Leu
-RUB          |Russian Ruble
-SGD          |Singapore Dollar
-SEK          |Swedish Krona
-CHF          |Swiss Franc
-TWD          |Taiwan New Dollar
-TND          |Tunisia Dinar
-USD          |United States Dollar
-ZAR          |South African Rand
+Currency Code|Description            |Decimal Places
+---          |---                    |---
+AED          |Emirati Dirham         |2
+AUD          |Australian Dollar      |2
+BRL          |Brazilian Real         |2
+GBP          |British Pound          |2
+BGN          |Bulgarian Lev          |2
+CAD          |Canadian Dollar        |2
+DKK          |Danish Krone           |2
+EUR          |Euro                   |2
+HUF          |Hungarian Forint       |0
+INR          |Indian Rupee           |2
+JPY          |Japanese Yen           |0
+MYR          |Malaysian Ringgit      |2
+MAD          |Moroccan Dirham        |2
+MXN          |Mexican Peso           |2
+NGN          |Nigerian Naira         |2
+NOK          |Norwegian Kroner       |2
+PLN          |Polish Zloty           |2
+RON          |Romanian New Leu       |2
+RUB          |Russian Ruble          |2
+SGD          |Singapore Dollar       |2
+SEK          |Swedish Krona          |2
+CHF          |Swiss Franc            |2
+TWD          |Taiwan New Dollar      |2
+TND          |Tunisia Dinar          |3
+USD          |United States Dollar   |2
+ZAR          |South African Rand     |2
+
+Note: When specifying amounts in your API calls be aware of the number of decimal places (minor units) that 
+each currency supports.  You must change the formatting of the amount based on the minor units for the 
+specific currency.  For example, Japanese Yen does not have minor units so the amount should be specified as 
+such.  ie: 50 JPY would pass 50 in the amount, 50.00 USD would be an amount of 5000, and 50.000 TND would be 50000.
 
 ***
 
@@ -2581,7 +2586,7 @@ username and client\_secret as your password.
         + Include accessToken
             
 
-## Obtain an access token using auth code [GET /oauth2/authorize?client_id={client_id}&redirect_uri={YOUR_REDIRECT_URL}&scope={scope}&lang={lang}]
+## Obtain an access token using auth code [GET /oauth2/authorize?client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}&lang={lang}]
 
 The authorization grant flow has two parts and utilizes two authorization server endpoints.  
 
@@ -2644,13 +2649,13 @@ REST API calls.  This process can be repeated until authorization is revoked by 
 
 + Response 200 (application/json)
 
-### Exchange your authorization code for an access token [POST /oauth2/token?grant_type=authorization_code&code={YOUR_AUTHORIZATION_CODE}&redirect_uri={YOUR_REDIRECT_URI}]
+### Exchange your authorization code for an access token [POST /oauth2/token?grant_type={grant_type}&code={code}&redirect_uri={redirect_uri}]
 
 Once you have received member authorization, you can exchange your authorization_code for an access token.  
 
 + Parameters
-
-    + grant\_type (required, string) - The type of grant
+d 
+    + grant_type (required, string) - The type of grant
     + code (required,string) - Set to the auth_code previously received from the authorization server.
     + redirect\_uri (optional, string) - The TLS enabled redirection uri that will be returned to. 
     
@@ -2681,6 +2686,7 @@ and you receive a HTTP 401 - Unauthorized error, you can utilize the refresh tok
 initial authorization response to obtain a new one.
 
 + Parameters
+
     + grant_type (required, string) - The type of grant
     + refresh_token (required,string) - The refresh token previously issued to the client
 
