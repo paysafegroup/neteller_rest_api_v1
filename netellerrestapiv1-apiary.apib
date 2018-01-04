@@ -35,96 +35,97 @@ response object notation.
 > Please see the section on Versioning to find out how to verify which Minor Version of the API you are using.  You 
 > can choose to upgrade to a newer version at anytime through API Settings of your merchant dashboard.
 
-API Version|Minor Version    |Patch / Description
----        |---              |---
-**v1**     |**2015-04-28**   |**_2016-01-24_**
-           |                 |- Added new scope for account\_basic\_profile and updated the accountProfile object to restrict values returned
-           |                 |- Added new customer verify endpoint
-           |                 |- Added new payment list endpoint
-           |                 |- Updated paymentMethod to make NETELLER optional
-           |                 |**_2015-11-24_**
-           |                 |- Added transactionType to the the transaction object
-           |                 |**_2015-10-20_**
-           |                 |- Added payment method for NETELLERgo! \(paysafecard\)
-           |                 |- Removed deprecated payment method for NETELLERgo! \(ukash\)
-           |                 |- Added new currency: Emirati Dirham \(AED\)
-           |                 |**_2015-09-15_**
-           |                 |- Added payment methods for NETELLERgo! \(qiwi, yandex, webmoney\)
-           |                 |- Added F/X support for orders presented in different currencies
-           |                 |- Added support for one-step payments in NETELLERgo!
-           |                 |**_2015-08-11_**
-           |                 |- Added payment method for NETELLERgo! \(boku\)
-           |                 |**_2015-07-07_**                  
-           |                 |- Added ability to lookup all subscriptions for a customer
-           |                 |- Added new currencies: South African Rand \(ZAR\), Brazilian Real \(BRL\)
-           |                 |**_2015-06-02_**                 
-           |                 |- Added payment method for NETELLERgo! \(bitcoin\)
-           |                 |- Added pending status to NETELLERgo! and support for on_pending redirect
-           |                 |**_2015-04-28_**                                   
-           |                 |- Added status to order resource
-           |                 |- Added billingDetail resource
-           |                 |- Updated create order to take an optional array of billingDetail instead of payerProfile
-           |                 |- Updated lookup payment to return optional billingDetail if payment is made as a guest and not a NETELLER member
-           |                 |- Added invoiceId to invoice resource
-           |                 |- Replace customer reference in subscription/order invoice lookup with billingDetail
-           |                 |- Add HATEOAS link for corresponding customer detail for invoice lookup if they authenticated to NETELLER to pay
-           |                 |- Create subscription requires a customer id now instead of profile \(The customer id is obtained using the authorization flow\)
-           |                 |- Added error codes: 20009, 20301
-**v1**     |**2015-11-04**   |- **_2015-03-24_**
-           |                 |- Added additional webhooks for orders, payments
-           |                 |- Added payment methods for NETELLERgo! \(bradesco, bancodobrasil, itau, webpay\)
-           |                 |- Enhanced OAUTH authorization flow to return customer id for an authorization
-           |                 |- Added new currencies: Nigerian Naira \(NGN\), Taiwan New Dollar \(TWD\)
-           |                 |- **_2015-02-10_**
-           |                 |- Added payment methods for NETELLERgo! \(ideal\)
-           |                 |- Added multifactor authentication support to OAUTH / NETELLERgo! flows
-           |                 |- Added payment HATEOAS link to invoice resources
-           |                 |- Set subscription start times to 00:00:00 and end times to 23:59:59
-           |                 |- Ensure URLs returned from sandbox properly refer to sandbox host server
-           |                 |- Removed support for deprecated currencies: Latvian Lats \(LVL\), Lithuanian Litus \(LTL\)
-           |                 |- **_2014-12-09_**
-           |                 |- Added support for NETELLERgo!
-           |                 |- Added payment methods for NETELLERgo! \(sofort, poli, giropay, ukash\)
-           |                 |- Added order, paymentMethod, redirect resources
-           |                 |- Modified invoice resource to support order invoices
-           |                 |- Added order lookup
-           |                 |- Added lookup invoice for an order
-           |                 |- Added error codes: 20016
-           |                 |- **_2014-11-04_**
-           |                 |- Renamed account resource to customer
-           |                 |- Updated customer lookup to new resource uris \(/v1/account -> /v1/customer\)
-           |                 |- Removed linkbackurl from accountProfile resource and moved to root of create customer request
-           |                 |- Return customer resource instead of accountProfile on payment, subscriptions, invoices resources
-           |                 |- Renamed subscriptionPlan resource to plan
-           |                 |- Renamed invoice amountDue to totalAmount
-           |                 |- Lists no longer contain un-necessary object wrapper, rather returns a list of the appropriate object.
-**v1**     |**2014-04-15**   |- **_2014-09-30_**
-           |                 |- Added API minor version support
-           |                 |- **_2014-09-03_**
-           |                 |- Added OAUTH2 authorization grant
-           |                 |- Added account, balance resources
-           |                 |- Added account lookup functionality
-           |                 |- Added new scopes: subscription\_payment, account\_enhanced\_profile, account\_contacts, account\_balance
-           |                 |- Modified create subscription to require scope: subscription_payment
-           |                 |- **_2014-07-22_**
-           |                 |- Added Quick Signup functionality
-           |                 |- **_2014-06-17_**
-           |                 |- Added ability to list subscription invoices and subscription plans
-           |                 |- Added subscription invoice lookup
-           |                 |- Added subscription webhooks
-           |                 |- Added error codes: 20050
-           |                 |- Added new languages Greek \(el\_GR\), Korean \(ko\_KR\)
-           |                 |- Added new subscription status: pending
-           |                 |- **_2014-05-21_**
-           |                 |- Added ability to list invoices for a subscription
-           |                 |- Added support for resource expansion
-           |                 |- Added new currencies: Malaysian Riggit \(MYR\), Moroccan Dirham \(MAD\), Tunisia Dinar \(TND\) and Swiss Franc \(CHF\)
-           |                 |- Added error codes: 20102<
-           |                 |- **_2014-04-15_**
-           |                 |- Modified authentication to OAUTH2 authentication using client_credentials
-           |                 |- Added subscription billing support
-           |                 |- Added error codes: 20100, 20101
-
+|API Version|Minor Version    |Patch / Description|
+|---        |---              |---|
+|**v1**     |**2015-04-28**   |**_2018-01-27_**|
+|           |                 |- Added new currencies: Colombian Peso \(COP\)|
+|           |                 |**_2016-01-24_**|
+|           |                 |- Added new scope for account\_basic\_profile and updated the accountProfile object to restrict values returned|
+|           |                 |- Added new customer verify endpoint|
+|           |                 |- Added new payment list endpoint|
+|           |                 |- Updated paymentMethod to make NETELLER optional|
+|           |                 |**_2015-11-24_**|
+|           |                 |- Added transactionType to the the transaction object|
+|           |                 |**_2015-10-20_**|
+|           |                 |- Added payment method for NETELLERgo! \(paysafecard\)|
+|           |                 |- Removed deprecated payment method for NETELLERgo! \(ukash\)|
+|           |                 |- Added new currency: Emirati Dirham \(AED\)|
+|           |                 |**_2015-09-15_**|
+|           |                 |- Added payment methods for NETELLERgo! \(qiwi, yandex, webmoney\)|
+|           |                 |- Added F/X support for orders presented in different currencies|
+|           |                 |- Added support for one-step payments in NETELLERgo!|
+|           |                 |**_2015-08-11_**|
+|           |                 |- Added payment method for NETELLERgo! \(boku\)|
+|           |                 |**_2015-07-07_**|                  
+|           |                 |- Added ability to lookup all subscriptions for a customer|
+|           |                 |- Added new currencies: South African Rand \(ZAR\), Brazilian Real \(BRL\)|
+|           |                 |**_2015-06-02_**|                 
+|           |                 |- Added payment method for NETELLERgo! \(bitcoin\)|
+|           |                 |- Added pending status to NETELLERgo! and support for on_pending redirect|
+|           |                 |**_2015-04-28_**|                                   
+|           |                 |- Added status to order resource|
+|           |                 |- Added billingDetail resource|
+|           |                 |- Updated create order to take an optional array of billingDetail instead of payerProfile|
+|           |                 |- Updated lookup payment to return optional billingDetail if payment is made as a guest and not a NETELLER member|
+|           |                 |- Added invoiceId to invoice resource|
+|           |                 |- Replace customer reference in subscription/order invoice lookup with billingDetail|
+|           |                 |- Add HATEOAS link for corresponding customer detail for invoice lookup if they authenticated to NETELLER to pay|
+|           |                 |- Create subscription requires a customer id now instead of profile \(The customer id is obtained using the authorization flow\)|
+|           |                 |- Added error codes: 20009, 20301|
+|**v1**     |**2015-11-04**   |- **_2015-03-24_**|
+|           |                 |- Added additional webhooks for orders, payments|
+|           |                 |- Added payment methods for NETELLERgo! \(bradesco, bancodobrasil, itau, webpay\)|
+|           |                 |- Enhanced OAUTH authorization flow to return customer id for an authorization|
+|           |                 |- Added new currencies: Nigerian Naira \(NGN\), Taiwan New Dollar \(TWD\)|
+|           |                 |- **_2015-02-10_**|
+|           |                 |- Added payment methods for NETELLERgo! \(ideal\)|
+|           |                 |- Added multifactor authentication support to OAUTH / NETELLERgo! flows|
+|           |                 |- Added payment HATEOAS link to invoice resources|
+|           |                 |- Set subscription start times to 00:00:00 and end times to 23:59:59|
+|           |                 |- Ensure URLs returned from sandbox properly refer to sandbox host server|
+|           |                 |- Removed support for deprecated currencies: Latvian Lats \(LVL\), Lithuanian Litus \(LTL\)|
+|           |                 |- **_2014-12-09_**|
+|           |                 |- Added support for NETELLERgo!|
+|           |                 |- Added payment methods for NETELLERgo! \(sofort, poli, giropay, ukash\)|
+|           |                 |- Added order, paymentMethod, redirect resources|
+|           |                 |- Modified invoice resource to support order invoices|
+|           |                 |- Added order lookup|
+|           |                 |- Added lookup invoice for an order|
+|           |                 |- Added error codes: 20016|
+|           |                 |- **_2014-11-04_**|
+|           |                 |- Renamed account resource to customer|
+|           |                 |- Updated customer lookup to new resource uris \(/v1/account -> /v1/customer\)|
+|           |                 |- Removed linkbackurl from accountProfile resource and moved to root of create customer request|
+|           |                 |- Return customer resource instead of accountProfile on payment, subscriptions, invoices resources|
+|           |                 |- Renamed subscriptionPlan resource to plan|
+|           |                 |- Renamed invoice amountDue to totalAmount|
+|           |                 |- Lists no longer contain un-necessary object wrapper, rather returns a list of the appropriate object.|
+|**v1**     |**2014-04-15**   |- **_2014-09-30_**|
+|           |                 |- Added API minor version support|
+|           |                 |- **_2014-09-03_**|
+|           |                 |- Added OAUTH2 authorization grant|
+|           |                 |- Added account, balance resources|
+|           |                 |- Added account lookup functionality|
+|           |                 |- Added new scopes: subscription\_payment, account\_enhanced\_profile, account\_contacts, account\_balance|
+|           |                 |- Modified create subscription to require scope: subscription_payment|
+|           |                 |- **_2014-07-22_**|
+|           |                 |- Added Quick Signup functionality|
+|           |                 |- **_2014-06-17_**|
+|           |                 |- Added ability to list subscription invoices and subscription plans|
+|           |                 |- Added subscription invoice lookup|
+|           |                 |- Added subscription webhooks|
+|           |                 |- Added error codes: 20050|
+|           |                 |- Added new languages Greek \(el\_GR\), Korean \(ko\_KR\)|
+|           |                 |- Added new subscription status: pending|
+|           |                 |- **_2014-05-21_**|
+|           |                 |- Added ability to list invoices for a subscription|
+|           |                 |- Added support for resource expansion|
+|           |                 |- Added new currencies: Malaysian Riggit \(MYR\), Moroccan Dirham \(MAD\), Tunisia Dinar \(TND\) and Swiss Franc \(CHF\)|
+|           |                 |- Added error codes: 20102<|
+|           |                 |- **_2014-04-15_**|
+|           |                 |- Modified authentication to OAUTH2 authentication using client_credentials|
+|           |                 |- Added subscription billing support|
+|           |                 |- Added error codes: 20100, 20101|
 
 ***
 
@@ -863,34 +864,35 @@ payment\_succeeded    |Payment is successful.
 
 <a name="currencies"></a>
 
-Currency Code|Description            |Decimal Places
----          |---                    |---
-AED          |Emirati Dirham         |2
-AUD          |Australian Dollar      |2
-BRL          |Brazilian Real         |2
-GBP          |British Pound          |2
-BGN          |Bulgarian Lev          |2
-CAD          |Canadian Dollar        |2
-DKK          |Danish Krone           |2
-EUR          |Euro                   |2
-HUF          |Hungarian Forint       |0
-INR          |Indian Rupee           |2
-JPY          |Japanese Yen           |0
-MYR          |Malaysian Ringgit      |2
-MAD          |Moroccan Dirham        |2
-MXN          |Mexican Peso           |2
-NGN          |Nigerian Naira         |2
-NOK          |Norwegian Kroner       |2
-PLN          |Polish Zloty           |2
-RON          |Romanian New Leu       |2
-RUB          |Russian Ruble          |2
-SGD          |Singapore Dollar       |2
-SEK          |Swedish Krona          |2
-CHF          |Swiss Franc            |2
-TWD          |Taiwan New Dollar      |2
-TND          |Tunisia Dinar          |3
-USD          |United States Dollar   |2
-ZAR          |South African Rand     |2
+|Currency Code|Description            |Decimal Places|
+|---          |---                    |---|
+|AED          |Emirati Dirham         |2|
+|AUD          |Australian Dollar      |2|
+|BRL          |Brazilian Real         |2|
+|GBP          |British Pound          |2|
+|BGN          |Bulgarian Lev          |2|
+|CAD          |Canadian Dollar        |2|
+|COP          |Colombian Peso         |2|
+|DKK          |Danish Krone           |2|
+|EUR          |Euro                   |2|
+|HUF          |Hungarian Forint       |0|
+|INR          |Indian Rupee           |2|
+|JPY          |Japanese Yen           |0|
+|MYR          |Malaysian Ringgit      |2|
+|MAD          |Moroccan Dirham        |2|
+|MXN          |Mexican Peso           |2|
+|NGN          |Nigerian Naira         |2|
+|NOK          |Norwegian Kroner       |2|
+|PLN          |Polish Zloty           |2|
+|RON          |Romanian New Leu       |2|
+|RUB          |Russian Ruble          |2|
+|SGD          |Singapore Dollar       |2|
+|SEK          |Swedish Krona          |2|
+|CHF          |Swiss Franc            |2|
+|TWD          |Taiwan New Dollar      |2|
+|TND          |Tunisia Dinar          |3|
+|USD          |United States Dollar   |2|
+|ZAR          |South African Rand     |2|
 
 Note: When specifying amounts in your API calls be aware of the number of decimal places (minor units) that 
 each currency supports.  You must change the formatting of the amount based on the minor units for the 
@@ -2526,6 +2528,7 @@ BGN|450424149137|netellertest_BGN@neteller.com|354380|NTt3st1!
 BRL|452124231445|netellertest_BRL@neteller.com|907916|NTt3st1!
 CAD|455781454840|netellertest_CAD@neteller.com|755608|NTt3st1!
 CHF|452324249609|netellertest_CHF@neteller.com|372993|NTt3st1!
+COP|458423552244|netellertest_COP@neteller.com|309874|NTt3st1!
 DKK|459734233011|netellertest_DKK@neteller.com|856751|NTt3st1!
 EUR|453501020503|netellertest_EUR@neteller.com|908379|NTt3st1!
 GBP|458591047553|netellertest_GBP@neteller.com|411392|NTt3st1!
