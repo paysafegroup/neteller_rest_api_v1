@@ -2574,7 +2574,7 @@ A device that you have successfully authenticated to your NETELLER account from.
 
 # Authorization [/oauth2]
 
-## Obtain an access token using client credentials [POST /oauth2/token?grant_type=client_credentials]
+## Obtain an access token using client credentials [POST /oauth2/token?grant_type={grantType}]
 
 The Authorization header should be constructed to pass a base64 encoded version of these values (client\_id:client\_secret).  
 If you are testing using cURL or a browser client, you can specify the HTTP Basic credentials by using the client\_id as your 
@@ -2582,6 +2582,10 @@ username and client\_secret as your password.
 
 > The client_secret for your application should not be shared with anyone or embedded in any code that you will distribute.  This exclusion also extends to an app binary that could be de-compiled.  This API call should only be made using server-side code over TLS.
 
++ Parameters
+
+    + grantType (required, string, `client_credentials`) - The specific grant\_type, set this value to client\_credentials.
+    
  
 + Request Obtain a token using your client credentials (multipart/form-data)
 
@@ -2589,15 +2593,13 @@ username and client\_secret as your password.
 
             Authorization: Basic YOUR-BASE64-ENCODED-CREDENTIALS
 
-
 + Response 201 (application/json)
 
     + Attributes
+        + Include accessToken    
 
-        + Include accessToken
-            
 
-## Obtain an access token using auth code [GET /oauth2/authorize?client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}&lang={lang}]
+## Obtain an access token using auth code [GET /oauth2/authorize?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}&lang={lang}]
 
 The authorization grant flow has two parts and utilizes two authorization server endpoints.  
 
@@ -2622,8 +2624,8 @@ REST API calls.  This process can be repeated until authorization is revoked by 
 
 + Parameters
 
-    + client_id (required, string) - Your APP client id
-    + redirect_uri (optional, string) - The uri that the users browser will be redirected back to once app authorization is completed. 
+    + clientId (required, string) - Your APP client id
+    + redirectUri (optional, string) - The uri that the users browser will be redirected back to once app authorization is completed. 
     
         <br/><br/>If supplied during this authorization request, the same uri must be supplied in the call to the token endpoint.  When not supplied, the default registered redirect uri will be used. The redirect\_uri must secured over TLS \(https://\)
       
@@ -2663,23 +2665,20 @@ REST API calls.  This process can be repeated until authorization is revoked by 
 
 + Response 200 (application/json)
 
-### Exchange your authorization code for an access token [POST /oauth2/token?grant_type={grant_type}&code={code}&redirect_uri={redirect_uri}]
+### Exchange your authorization code for an access token [POST /oauth2/token?grant_type={grantType}&code={code}&redirect_uri={redirectUri}]
 
 Once you have received member authorization, you can exchange your authorization_code for an access token.  
 
 + Parameters
 
-    + grant_type (required, string) - The type of grant
-    + code (required,string) - Set to the auth_code previously received from the authorization server.
-    + redirect_uri (optional, string) - The TLS enabled redirection uri that will be returned to. 
+    + grantType: `authorization_code` (required, string) - The type of grant
+    + code: `0.AgAAAUnPnWEeAAAAB1jwsOAq6iK0G2op1zi_sQC3KE22.oD4wHNZjuF5tWOZh2ozEpi2E7BE` (required,string) - Set to the auth_code previously received from the authorization server.
+    + redirectUri (optional, string) - The TLS enabled redirection uri that will be returned to. 
     
         This value must match the uri used to obtain authorization, If not supplied during the authorization flow then the redirect\_uri will be the registered redirect uri for your application \(as set in the merchant.com portal under the APPS section\) and should not be passed.
- 
-+ Request Obtain authorization (application/json)
 
-    + Parameters
-        + grant_type: `authorization_code` (required, string) - The type of grant
-        + code: `0.AgAAAUnPnWEeAAAAB1jwsOAq6iK0G2op1zi_sQC3KE22.oD4wHNZjuF5tWOZh2ozEpi2E7BE` (required,string) - Set to the auth_code previously received from the authorization server.
+
++ Request Obtain authorization (application/json)
 
     + Headers
         
@@ -2693,15 +2692,15 @@ Once you have received member authorization, you can exchange your authorization
         + Include refreshToken
 
 
-### Exchange your refresh token for an access token [POST /oauth2/token?grant_type={grant_type}&refresh_token={refresh_token}]
+### Exchange your refresh token for an access token [POST /oauth2/token?grant_type={grantType}&refresh_token={refreshToken}]
 
 If the previously issued access token has expired (obtained from the authorization grant flow) 
 and you receive a HTTP 401 - Unauthorized error, you can utilize the refresh token that was issued to you with the 
 initial authorization response to obtain a new one.
 
 + Parameters
-    + grant_type (required, string) - The type of grant
-    + refresh_token (required,string) - The refresh token previously issued to the client
+    + grantType (required, string) - The type of grant
+    + refreshToken (required,string) - The refresh token previously issued to the client
 
 + Request Obtain authorization (application/json)
 
@@ -3100,11 +3099,12 @@ one of numerous alternative payment methods.
 **Expandable Resources**|none
 **Related Resources (if applicable)**|hosted_payment
 
-+ Request (application/json)
++ Attributes
+    + Include order
+    + Include billingDetails
+    + Include links
 
-    + Attributes
-        + Include order
-        + Include billingDetails
++ Request (application/json)
 
     + Headers
         
@@ -3161,19 +3161,6 @@ one of numerous alternative payment methods.
 
 + Response 201 (application/json)
 
-    + Attributes
-    
-        + orderId (string, required) - Unique NETELLER reference for the order. `ie: ORD_7915d463-ccc8-4305-9d33-9e5c9310f12e, SUB_c46645ea-b7b0-4a91-87f7-88c00ec0dea1`
-        + merchantRefId (string, required) - The associated merchant reference id from the initial request.
-        + totalAmount (number, required) - The total amount due for the order.
-        + currency (string, required) - The currency of the total amount due.  The order must have the same currency for all items, fees and taxes.
-        + lang (string) - The preferred language of the customer.
-        + items ([object]) - Specific line items (products/fees or services) for the order.
-        + fees ([object]) - Specific fees (setup/shipping&handling, etc...) for the order.
-        + taxes ([object]) - Specific taxes(VAT, GST, PST, etc...) for the order.
-        + paymentMethods ([object]) - This allows you to define which payment options you would like to use.
-        + redirects ([object]) - This allows you to add redirects to the order. Redirects cause a connection back to your merchant system via the customer's browser.
- 
     + Body
 
             {
@@ -4539,6 +4526,19 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
 
 # Data Structures
 
+## `accessToken`
++ `tokenType`: `Bearer` (string) - The type of access token that was issued.  Currently only 'Bearer' tokens are supported.
+
+    _Read Only_
+    
++ `expiresIn`: `1000` (number) - How much time in seconds until the token expires.
+
+    _Read Only_
+    
++ `accessToken`: `0.AQAAAVF-mqsiAAAAAAAbd0A71bIG8IUwcgHV7mAYiG7J.EAAQsWDnpqRj7WwyFVLTsdo0yXWh9L4` (string) - The access token to pass in the API call to access the protected resource.
+
+    _Read Only_
+
 ## `accountPreferences`
 + `lang`: `en` (string) - The preferred language of the member. See [Languages](http://paysafegroup.github.io/neteller_rest_api_v1/#/introduction/technical-introduction/languages) for complete list.
 + `currency`: `EUR` (string) - The preferred wallet currency of the member. See [Currencies](#currencies) for complete list.
@@ -4683,7 +4683,6 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
     + customerIp (string) - The value should be the incoming IP address of your customer, which will restrict the payment page to being viewable only from this IP address.
     + Include paymentMethods
     + Include redirects
-    + Include links
 
 ## `payment`
 + `customer` (customer) - NETELLER member account details for this transaction (if applicable).
@@ -4782,17 +4781,28 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
     + `taxAmount` (number, required) - The amount of the tax. Amount fields reflect the smallest unit of currency with no decimals. Eg. $25.00 USD should be formatted as 2500.
     + `taxCurrency` (string, required) - The currency the tax is in. See Currencies for complete list.
 
-## `accessToken`
-+ `tokenType`: `Bearer` (string) - The type of access token that was issued.  Currently only 'Bearer' tokens are supported.
-+ `expiresIn`: `1000` (number) - How much time in seconds until the token expires.
-+ `accessToken`: `0.AQAAAVF-mqsiAAAAAAAbd0A71bIG8IUwcgHV7mAYiG7J.EAAQsWDnpqRj7WwyFVLTsdo0yXWh9L4` (string) - The access token to pass in the API call to access the protected resource.
 
 ## `refreshToken`
 + `tokenType`: `Bearer` (string) - The type of access token that was issued.  Currently only 'Bearer' tokens are supported.
+
+    _Read Only_
+    
 + `expiresIn`: `1000` (number) - How much time in seconds until the token expires.
+
+    _Read Only_
+    
 + `accessToken`: `0.AQAAAVF-mqsiAAAAAAAbd0A71bIG8IUwcgHV7mAYiG7J.EAAQsWDnpqRj7WwyFVLTsdo0yXWh9L4` (string) - The access token to pass in the API call to access the protected resource.
+
+    _Read Only_
+    
 + `refreshToken`: `0.AgAAAUgUGIkyAAAAB1jwsODI5PCkVNOZul5AJ01mYtdh.ezGCYhN5YD22-BCOPX6U-muc72o` (string) - The token to use to obtain a new access token with the same permissions (scope) previously authorized.
+
+    _Read Only_
+    
 + `scope`: `subscription_payment` (string)
+
+    _Read Only_
+    
 
 ## `paymentMethod`
 - type: `neteller` (string) - Identifies the type of payment method.
