@@ -507,13 +507,9 @@ authorization is revoked by the member or until different permissions are requir
 **The flow consists of the following steps:**
 
 1. The client app requests authorization by redirecting the user to the authorization endpoint. 
-  
 2. The resource owner (member) must verify their identity via a hosted authentication page.
-   
 3. The resource owner (member) is prompted to authorize the application.  The requested scopes are displayed and the member must Allow or Deny the authorization.
-   
 4. If the member authorized the requested scope, an auth_code is returned to your redirect uri.  This code will have a limited lifetime for you to complete the callback to redeem the access token.
-   
 5. Now you need to authorize your app.  Call the token endpoint with a grant type of authorization_code and provide the auth code from step 4. If successful, an access token is returned that can be used to make API requests on the users behalf.
 
 > When invoking this flow, you must pass in the redirect\_uri that the user's browser will be redirected back to once app authorization is completed. The redirect_uri must be the same URI you specify when registering your web application OR must be the same one that was passed in the original authorization call.
@@ -2609,12 +2605,15 @@ The authorization grant flow has two parts and utilizes two authorization server
 Your application redirects the member to NETELLER where they are asked to grant the requested permissions.  if the member approves, 
 NETELLER will post back to your redirect uri with a unique authorization code that represents this members acknowledgement of your request.
 
+
 ![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/auth_code-grant-type-1.png)
+
 
 ![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/auth_code-grant-type-2.png)
 
 2) Token Endpoint - used to exchange the auth\_code, or previously issued refresh\_token for an new access token to use with your 
 REST API calls.  This process can be repeated until authorization is revoked by the member or until different permissions are required.
+
  
 > When invoking this flow, you must pass in the redirect\_uri that the user's browser will be redirected back to once app authorization is completed. The redirect_uri must be the same URI you specify when registering your web application OR must be the same one that was passed in the original authorization call.
 
