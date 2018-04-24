@@ -423,10 +423,10 @@ The client must be capable of interacting with the resource owner's user agent \
 
 You can request an access token using only your client credentials \(client\_id:client\_secret\). 
 
-> Your client credentials consist of a unique client_id and client_secret that can be found under the registered APPs section of your NETELLER Merchant Account. 
-> The Authorization header should be constructed to pass a base64 encoded version of these values \(client_id:client_secret\).  If you are testing using cURL or a browser client, you can specify the HTTP Basic credentials by using the client_id as your username and client_secret as your password.
+> Your client credentials consist of a unique client_id and client_secret that can be found under the registered APPs section of your NETELLER Merchant Account. 
+> The Authorization header should be constructed to pass a base64 encoded version of these values \(client_id:client_secret\).  If you are testing using cURL or a browser client, you can specify the HTTP Basic credentials by using the client_id as your username and client_secret as your password.
 > <br/><br/>
-> The client_secret for your application should not be shared with anyone or embedded in any code that you will distribute.  This exclusion also extends to an app binary that could be de-compiled.  This API call should only be made using server-side code over TLS.
+> The client_secret for your application should not be shared with anyone or embedded in any code that you will distribute.  This exclusion also extends to an app binary that could be de-compiled.  This API call should only be made using server-side code over TLS.
 
 **Request Parameters**
 
@@ -714,7 +714,7 @@ Error                           |Error Reason
 **unsupported_response_type**   |The authorization server does not support obtaining an authorization code using this method.
 **invalid_scope**               |The requested scope is invalid, unknown, or malformed.
 **server_error**                |The authorization server encountered an unexpected condition that prevented it from fulfilling the request.\(This error code is needed because a 500 Internal Server Error HTTP status code cannot be returned to the client via an HTTP redirect.\)
-**temporarily_unavailable**     |The authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server.  \(This error code is needed because a 503.  Service Unavailable HTTP status code cannot be returned to the client via an HTTP redirect.\)
+**temporarily_unavailable**     |The authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server.  \(This error code is needed because a 503.  Service Unavailable HTTP status code cannot be returned to the client via an HTTP redirect.\)
 
 Sample Response
 
@@ -1955,7 +1955,7 @@ links                   |array of [link](#link)   |Associated HATEOAS links for 
 
 Element                 |Type                       |Description
 ---                     |---                        |---
-feeName                 |string<br/>`length<=50`    |The name that will display in history and invoice details for this fee item.  \(ie: Setup Fee, Shipping & Handling Fee...etc\).
+feeName                 |string<br/>`length<=50`    |The name that will display in history and invoice details for this fee item.  \(ie: Setup Fee, Shipping & Handling Fee...etc\).
 feeType                 |string<br/>`length<=100`   |The type of fee. `ie: service_fee`
 feeAmount               |number<br/>`length<=10`    |The fee amount that was deducted.<br/>Amount fields reflect the smallest unit of currency with no decimals. Eg. $25.00 USD should be formatted as 2500.
 feeCurrency             |string<br/>`length<=3 `    |The currency the fee is in. See [Currencies](#currencies) for complete list.
@@ -2150,7 +2150,7 @@ Element                 |Type                                       |Description
 orderId                 |string<br/>`length<=100`                   |Unique NETELLER reference for the order. `ie: ORD_7915d463-ccc8-4305-9d33-9e5c9310f12e, SUB_c46645ea-b7b0-4a91-87f7-88c00ec0dea1`
 merchantRefId           |string<br/>`length<=50`                    |The associated merchant reference id from the initial request.
 totalAmount             |number                                     |The total amount due for this order, including all items, fees, taxes.
-currency                |string<br/>`length<=3`                     |The currency of the total amount due.  The order must have the same currency for all items, fees and taxes. <br/>see [Currencies](#currencies) for complete list
+currency                |string<br/>`length<=3`                     |The currency of the total amount due.  The order must have the same currency for all items, fees and taxes. <br/>see [Currencies](#currencies) for complete list
 status                  |string<br/>`length<=20`                    |**pending**<br/>**cancelled**<br/>**failed** - The order was not paid.<br/>**paid**<br/>**expired** - The order had expired \(default: 15 mins\)
 lang                    |string<br/>`length<=5`                     |The language that the Quick Checkout pages should be displayed in.<br/>see Languages for complete list
 items                   |Array of [item](#item)                     |Specific line items \(products/fees or services\) that you are requesting payment for.
@@ -2163,72 +2163,72 @@ links                   |Array of [link](#link)                     |Array of HA
 
 ```apib
 {
-    "orderId": "ORD_0d676b4b-0eb8-4d78-af25-e41ab431e325",
-    "merchantRefId": "124124910192",
-    "totalAmount": 3599,
-    "currency": "EUR",
-    "lang": "en_US",
-    "items": [
-        {
-            "quantity": 1,
-            "name": "Item A",
-            "description": "Lorem ipsum nunc eget venenatis diam. Integer euismod magna dui, a accumsan elit interdum.",
-            "sku": "XYZPART1",
-            "amount": 2500
-        },
-        {
-            "quantity": 2,
-            "name": "Item B",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet congue orci, ac euismod.",
-            "amount": 200
-        }
-    ],
-    "fees": [
-        {
-            "feeName": "Setup Fee",
-            "feeAmount": 500
-        }
-    ],
-    "taxes": [
-        {
-            "taxName": "VAT",
-            "taxAmount": 199
-        }
-    ],
-    "paymentMethods": [
-       {
-           "type": "voucher",
-           "value": "ukash"
-       }
-    ],
-    "redirects": [
-        {
-            "rel": "on_success",
-            "returnKeys": [
-                "id"
-            ],
-            "uri": "https://example.com/success.html"
-        },
-        {
-            "rel": "on_cancel",
-            "returnKeys": [
-                "id"
-            ],
-            "uri": "https://example.com/cancel.html"
-        }
-    ],
-    "links": [
-        {
-            "url": "https://api.neteller.com/v1/checkout/ORD_959b1148-704d-4d92-9a7d-14a18990a648",
-            "rel": "hosted_payment",
-            "method": "GET"
-        },
-        {
-            "url": "https://api.neteller.com/v1/orders/ORD_959b1148-704d-4d92-9a7d-14a18990a648",
-            "rel": "self",
-            "method": "GET"
-        }
-    ]
+    "orderId": "ORD_0d676b4b-0eb8-4d78-af25-e41ab431e325",
+    "merchantRefId": "124124910192",
+    "totalAmount": 3599,
+    "currency": "EUR",
+    "lang": "en_US",
+    "items": [
+        {
+            "quantity": 1,
+            "name": "Item A",
+            "description": "Lorem ipsum nunc eget venenatis diam. Integer euismod magna dui, a accumsan elit interdum.",
+            "sku": "XYZPART1",
+            "amount": 2500
+        },
+        {
+            "quantity": 2,
+            "name": "Item B",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet congue orci, ac euismod.",
+            "amount": 200
+        }
+    ],
+    "fees": [
+        {
+            "feeName": "Setup Fee",
+            "feeAmount": 500
+        }
+    ],
+    "taxes": [
+        {
+            "taxName": "VAT",
+            "taxAmount": 199
+        }
+    ],
+    "paymentMethods": [
+       {
+           "type": "voucher",
+           "value": "ukash"
+       }
+    ],
+    "redirects": [
+        {
+            "rel": "on_success",
+            "returnKeys": [
+                "id"
+            ],
+            "uri": "https://example.com/success.html"
+        },
+        {
+            "rel": "on_cancel",
+            "returnKeys": [
+                "id"
+            ],
+            "uri": "https://example.com/cancel.html"
+        }
+    ],
+    "links": [
+        {
+            "url": "https://api.neteller.com/v1/checkout/ORD_959b1148-704d-4d92-9a7d-14a18990a648",
+            "rel": "hosted_payment",
+            "method": "GET"
+        },
+        {
+            "url": "https://api.neteller.com/v1/orders/ORD_959b1148-704d-4d92-9a7d-14a18990a648",
+            "rel": "self",
+            "method": "GET"
+        }
+    ]
 }
 ```
 
@@ -2346,9 +2346,9 @@ carrierbilling     |boku                                                        
 
 ```apib
 {
-    "type": "voucher",
-    "value": "ukash"
-} 
+    "type": "voucher",
+    "value": "ukash"
+} 
 ```
 
 <a name="plan"></a>
@@ -2360,7 +2360,7 @@ Element                 |Type                       |Description
 planId                  |string<br/>`length<=50`    |A unique identifier for the plan that you will use to identify which plan you want to enroll your customer in.
 planName                |string<br/>`length<=200`   |The display name for the plan.
 interval                |number<br/>`length<=3`     |The number of intervals between each billing attempt.<br/>\(ie: to bill every 15 days, you would select an interval of 15 and a type of daily\).
-intervalType            |string<br/>`length<=10`    |The type of interval you wish want to define. <br/>**daily**<br/>**weekly**<br/>**monthly**<br/>**yearly**
+intervalType            |string<br/>`length<=10`    |The type of interval you wish want to define. <br/>**daily**<br/>**weekly**<br/>**monthly**<br/>**yearly**
 intervalCount           |number<br/>`length<=3`     |The length of the contract in intervals, or how many recurring billings will be attempted.<br/>intervalCount * interval = Total Subscription Term \(duration)<br/>(ie: For a yearly subscription billing every 3 months, this would be 4\)
 amount                  |number                     |The amount to bill for each re-ocurrence.
 currency                |string<br/>`length=3`      |The currency of the amount to be billed.
@@ -2370,14 +2370,14 @@ numberofSubscriptions   |number                     |The number of subscriptions
 
 ```apib
 {
-    "planId": "SAMPLEMONTHLY",
-    "planName": "Sample Premier Monthly Plan",
-    "interval": 3
-    "intervalType": "monthly",
-    "intervalCount": 4,
-    "amount": 2495,
-    "currency": "EUR".
-    "status": "active",
+    "planId": "SAMPLEMONTHLY",
+    "planName": "Sample Premier Monthly Plan",
+    "interval": 3
+    "intervalType": "monthly",
+    "intervalCount": 4,
+    "amount": 2495,
+    "currency": "EUR".
+    "status": "active",
     "numberOfSubscriptions": 2
 }
 ```
@@ -2388,7 +2388,7 @@ numberofSubscriptions   |number                     |The number of subscriptions
 
 Element                 |Type                              |Description
 ---                     |---                               |---
-rel                     |string<br/>`length<=15`           |This is the redirect type, allowing different endpoints to be targeted depending on the end state of the transaction. <br/>Possible values are:<br/>**on_success**<br/>**on_pending**<br/>**on_error**<br/>**on_decline**<br/>**on_cancel**<br/>**on_timeout**
+rel                     |string<br/>`length<=15`           |This is the redirect type, allowing different endpoints to be targeted depending on the end state of the transaction. <br/>Possible values are:<br/>**on_success**<br/>**on_pending**<br/>**on_error**<br/>**on_decline**<br/>**on_cancel**<br/>**on_timeout**
 url                     |string                            |
 
 ```apib
@@ -2407,12 +2407,12 @@ Element                       |Type                       |Description
 subscriptionId                |string<br/>`length<=50`    |A system generated value that uniquely identifies this subscription.
 plan                          |[plan](#plan)              |The associated subscription plan that the subscription is for.
 customer                      |[customer](#customer)      |The associated customer for this subscription.
-status                        |string<br/>`length<=15`    |**pending** - A subscription has been requested and is pending activation upon the requested start date<br/>**active** - The subscription is currently active<br/>**cancelled** - The subscription was cancelled by the subscriber or by the merchant application<br/>**ended** - The subscription has lapsed<br/>**failed** - The subscription request failed.  This status will only be set if the subscription was created with no startDate supplied and the immediate billing failed.
-startDate                     |string<br/>`length=20`<br/>> current date |Date the subscription should start.  If startDate is not supplied, the customer will be billed immediately.  If supplying a subscription startDate, the date must be greater then the current date.<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ
+status                        |string<br/>`length<=15`    |**pending** - A subscription has been requested and is pending activation upon the requested start date<br/>**active** - The subscription is currently active<br/>**cancelled** - The subscription was cancelled by the subscriber or by the merchant application<br/>**ended** - The subscription has lapsed<br/>**failed** - The subscription request failed.  This status will only be set if the subscription was created with no startDate supplied and the immediate billing failed.
+startDate                     |string<br/>`length=20`<br/>> current date |Date the subscription should start.  If startDate is not supplied, the customer will be billed immediately.  If supplying a subscription startDate, the date must be greater then the current date.<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ
 endDate                       |string<br/>`length=20`     |If the subscription has ended (either because it was canceled or because the customer was switched to a subscription to a new plan), the date the subscription ended<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ
 currentPeriodStart            |string<br/>`length=20`     |Start of the current period that the subscription has been invoiced for.<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ
 currentPeriodEnd              |string<br/>`length=20`     |End of the current period that the subscription has been invoiced for. At the end of this period, a new invoice will be created<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ
-cancelAtPeriodEnd             |boolean                    |If the subscription has been canceled with the atPeriodEnd flag set to true, then this value on the subscription will be true. You can use this attribute to determine whether a subscription that has a status of active is scheduled to be canceled at the end of the current period.
+cancelAtPeriodEnd             |boolean                    |If the subscription has been canceled with the atPeriodEnd flag set to true, then this value on the subscription will be true. You can use this attribute to determine whether a subscription that has a status of active is scheduled to be canceled at the end of the current period.
 canceledDate                  |string<br/>`length=20`     |If the subscription has been canceled, the date of that cancellation. If the subscription was canceled with cancelAtPeriodEnd, canceledDate will still reflect the date of the initial cancellation request, not the end of the subscription period when the subscription is automatically moved to a canceled state.<br/>ISO 8601 format (UTC)<br/>YYYY-MM-DDThh:mm:ssZ
 lastCompletedPaymentDate      |string<br/>`length=20`     |The date the last successful payment was processed for this subscription<br/>ISO 8601 format \(UTC\)<br/>YYYY-MM-DDThh:mm:ssZ
 
@@ -2450,7 +2450,7 @@ lastCompletedPaymentDate      |string<br/>`length=20`     |The date the last suc
 
 Element                 |Type                       |Description
 ---                     |---                        |---
-taxName                 |string<br/>`length<=50`    |The name that will display in history and invoice details for this tax item.  \(ie: VAT, GST, PST...etc\)
+taxName                 |string<br/>`length<=50`    |The name that will display in history and invoice details for this tax item.  \(ie: VAT, GST, PST...etc\)
 taxAmount               |number<br/>`length<=10`    |The amount of the tax.<br/>Amount fields reflect the smallest unit of currency with no decimals. Eg. $25.00 USD should be formatted as 2500.
 taxCurrency             |string<br/>`length<=3`     |The currency the tax is in.<br/>See [Currencies](#currencies) for complete list.
 
@@ -2468,7 +2468,7 @@ taxCurrency             |string<br/>`length<=3`     |The currency the tax is in.
 
 Element                  |Type                       |Description
 ---                      |---                        |---
-tokenType                |string<br/>`length<=50`    |The type of access token that was issued.  Currently only 'Bearer' tokens are supported.
+tokenType                |string<br/>`length<=50`    |The type of access token that was issued.  Currently only 'Bearer' tokens are supported.
 expiresIn                |number                     |How much time in seconds until the token expires.
 accessToken              |string<br/>`length<=200`   |The access token to pass in the API call to access the protected resource.
 refreshToken             |string<br/>`length<=200`   |The token to use to obtain a new access token with the same permissions \(scope\) previously authorized.
@@ -2494,7 +2494,7 @@ currency                |string<br/>`length<=3`     |The currency of the transac
 errorCode               |string<br/>`length<=100`   |If applicable, the corresponding code for why this transaction was not accepted.<br/>see REST API Errors
 errorMessage            |string<br/>`length<=250`   |If applicable, the corresponding reason for why this transaction was not accepted.<br/>see REST API Errors
 fees                    |array of [fee](#fee)       |List of fees associated with this transaction.
-id                      |number                     |The transaction id that identifies this transaction within the NETELLER system.  The returned id is considered a transaction group id and can be used to identify both sides of a transfer.
+id                      |number                     |The transaction id that identifies this transaction within the NETELLER system.  The returned id is considered a transaction group id and can be used to identify both sides of a transfer.
 merchantRefId           |string<br/>`length<=50`    |The external merchant transaction id that uniquely identifies this transaction within the merchant system.
 status                  |string<br/>`length<=20`    |**accepted**<br/>**pending**<br/>**declined**<br/>**cancelled**<br/>**failed**
 transactionType         |string<br/>`length<=50`    |Indicates the type of transaction or specific product for the transaction.
@@ -3114,49 +3114,49 @@ one of numerous alternative payment methods.
     + Body            
 
             {
-                "order": {
-                    "merchantRefId": "123456666",
-                    "totalAmount": 3599,
-                    "currency": "EUR",
-                    "lang": "en_US",
-                    "items": [
-                        {
-                            "quantity": 1,
-                            "name": "Item A",
-                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget venenatis diam. Integer euismod magna dui, a accumsan elit interdum.",
-                            "sku": "XYZPART1",
-                            "amount": 2500
-                        },
-                        {
-                            "quantity": 2,
-                            "name": "Item B",
-                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet congue orci, ac euismod.",
-                            "amount": 200
-                        }
-                    ],
-                    "fees": [
-                        {
-                            "feeName": "Setup Fee",
-                            "feeAmount": 500
-                        }
-                    ],
-                    "taxes": [
-                        {
-                            "taxName": "VAT",
-                            "taxAmount": 199
-                        }
-                    ],
-                    "redirects": [
-                        {
-                            "rel": "on_success",
-                            "uri": "https://example.com/success.html"
-                        },
-                        {
-                            "rel": "on_cancel",
-                            "uri": "https://example.com/cancel.html"
-                        }
-                    ]
-                }
+                "order": {
+                    "merchantRefId": "123456666",
+                    "totalAmount": 3599,
+                    "currency": "EUR",
+                    "lang": "en_US",
+                    "items": [
+                        {
+                            "quantity": 1,
+                            "name": "Item A",
+                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget venenatis diam. Integer euismod magna dui, a accumsan elit interdum.",
+                            "sku": "XYZPART1",
+                            "amount": 2500
+                        },
+                        {
+                            "quantity": 2,
+                            "name": "Item B",
+                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet congue orci, ac euismod.",
+                            "amount": 200
+                        }
+                    ],
+                    "fees": [
+                        {
+                            "feeName": "Setup Fee",
+                            "feeAmount": 500
+                        }
+                    ],
+                    "taxes": [
+                        {
+                            "taxName": "VAT",
+                            "taxAmount": 199
+                        }
+                    ],
+                    "redirects": [
+                        {
+                            "rel": "on_success",
+                            "uri": "https://example.com/success.html"
+                        },
+                        {
+                            "rel": "on_cancel",
+                            "uri": "https://example.com/cancel.html"
+                        }
+                    ]
+                }
             }
 
 + Response 201 (application/json)
@@ -3674,52 +3674,52 @@ Return a list of all subscription for the customer.
     + Body
 
             {
-                "list": [
-                    {
-                        "subscriptionId": "SUB_0d676b4b-0ab3-4d78-af25-e452ab431e522",
-                        "plan": {
-                            "link": {
-                                "url": "https://api.neteller.com/v1/plans/MONTHLYGREENPLAN",
-                                "rel": "plan",
-                                "method": "GET"
-                            }
-                        },
-                        "customer": {
-                            "link": {
-                                "url": "https://api.neteller.com/v1/customers/CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325",
-                                "rel": "customer",
-                                "method": "GET"
-                            }
-                        },
-                        "status": "active",
-                        "startDate": "2014-06-01T00:00:00Z",
-                        "endDate": "2014-12-31T00:00:00Z",
-                        "currentPeriodStart": "2014-07-01T00:00:00Z",
-                        "currentPeriodEnd": "2014-07-31T00:00:00Z",
-                        "cancelAtPeriodEnd": false,
-                        "cancelDate": null,
-                        "lastCompletedPaymentDate": "2014-06-31T00:00:00Z"
-                    },
-                    {},
-                    {}
-                ],
-                "links": [
-                    {
-                        "url": "https://api.neteller.com/v1/customers/CUS_0d676b4b-0ab3-4d78-af25-e452ab431e522/subscriptions?session=1212&limit=10&offset=10",
-                        "rel": "self",
-                        "method": "GET"
-                    },
-                    {
-                        "url": "https://api.neteller.com/v1/customers/CUS_0d676b4b-0ab3-4d78-af25-e452ab431e522/subscriptions?session=1212&limit=10&&offset=0",
-                        "rel": "prev_offset",
-                        "method": "GET"
-                    },
-                    {
-                        "url": "https://api.neteller.com/v1/customers/CUS_0d676b4b-0ab3-4d78-af25-e452ab431e522/subscriptions?session=1212&limit=10&offset=20",
-                        "rel": "next_offset",
-                        "method": "GET"
-                    }
-                ]
+                "list": [
+                    {
+                        "subscriptionId": "SUB_0d676b4b-0ab3-4d78-af25-e452ab431e522",
+                        "plan": {
+                            "link": {
+                                "url": "https://api.neteller.com/v1/plans/MONTHLYGREENPLAN",
+                                "rel": "plan",
+                                "method": "GET"
+                            }
+                        },
+                        "customer": {
+                            "link": {
+                                "url": "https://api.neteller.com/v1/customers/CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325",
+                                "rel": "customer",
+                                "method": "GET"
+                            }
+                        },
+                        "status": "active",
+                        "startDate": "2014-06-01T00:00:00Z",
+                        "endDate": "2014-12-31T00:00:00Z",
+                        "currentPeriodStart": "2014-07-01T00:00:00Z",
+                        "currentPeriodEnd": "2014-07-31T00:00:00Z",
+                        "cancelAtPeriodEnd": false,
+                        "cancelDate": null,
+                        "lastCompletedPaymentDate": "2014-06-31T00:00:00Z"
+                    },
+                    {},
+                    {}
+                ],
+                "links": [
+                    {
+                        "url": "https://api.neteller.com/v1/customers/CUS_0d676b4b-0ab3-4d78-af25-e452ab431e522/subscriptions?session=1212&limit=10&offset=10",
+                        "rel": "self",
+                        "method": "GET"
+                    },
+                    {
+                        "url": "https://api.neteller.com/v1/customers/CUS_0d676b4b-0ab3-4d78-af25-e452ab431e522/subscriptions?session=1212&limit=10&&offset=0",
+                        "rel": "prev_offset",
+                        "method": "GET"
+                    },
+                    {
+                        "url": "https://api.neteller.com/v1/customers/CUS_0d676b4b-0ab3-4d78-af25-e452ab431e522/subscriptions?session=1212&limit=10&offset=20",
+                        "rel": "next_offset",
+                        "method": "GET"
+                    }
+                ]
             }
 
 
@@ -4556,7 +4556,7 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
 + `countrySubdivisionCode`: `AB` - The ISO 3166-2 code indicating the state/province/district or other value denoting the clients country subdivision (e.g. BE=Berlin. 13=Tôkyô [Tokyo], AB=Alberta)
 + `country`: `CA` (string) - The ISO 3166-1 Alpha 2-code for the clients country of residence (e.g. Germany = DE, JP=Japan. CA=Canada).
 + `postCode`: `T3H3B2` (string) - The zip code, or postal code, of the clients residence.
-+ `contactDetail` ([contactDetail]) - An array of contact numbers. Can accept up to 2 phone numbers, the first number will be considered primary. Phone numbers should contain no special characters.
++ `contactDetail` ([contactDetail]) - An array of contact numbers. Can accept up to 2 phone numbers, the first number will be considered primary. Phone numbers should contain no special characters.
 + `gender`: `m` (string) - m \- male, f \- female
 + `dateOfBirth` (date) - Registered birthdate for the account holder.
 + `accountPreferences` (accountPreferences)
