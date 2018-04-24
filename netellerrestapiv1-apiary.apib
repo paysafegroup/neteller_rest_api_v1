@@ -2811,7 +2811,7 @@ NETELLER will notify the sender via email of the completed payment.
             Authorization: Bearer YOUR-ACCESS-TOKEN
     
     + Body            
-
+```
             {
                 "paymentMethod": {
                     "type": "neteller",
@@ -2824,7 +2824,7 @@ NETELLER will notify the sender via email of the completed payment.
                 },
                 "verificationCode": "234124"
             }
-
+```
 
 + Response 201 (application/json)
 
@@ -2834,7 +2834,7 @@ NETELLER will notify the sender via email of the completed payment.
         + links ([string], optional) - Array of HATEOAS links (if applicable).
         
     + Body
-
+```
             {
                 "customer": {
                     "link": {
@@ -2867,6 +2867,7 @@ NETELLER will notify the sender via email of the completed payment.
                     }
                 ]
             }
+```
 
 ## Lookup a payment [GET /payments/{id}?refType={refType}&expand={expand}]
 
@@ -2924,7 +2925,7 @@ querying with your merchant reference ID and not the NETELLER Transaction ID.
 
 
     + Body
-
+```
             {
                 "customer": {
                     "link": {
@@ -2957,7 +2958,7 @@ querying with your merchant reference ID and not the NETELLER Transaction ID.
                     }
                 ]
             }
-
+```
 
 ## List payments [GET /payments/?&startDate={startDate}&endDate={endDate}&sortOrder={sortOrder}&limit={limit}&offset={offset}]
 
@@ -3005,7 +3006,7 @@ This API request returns a list of [payment](#payment) objects.
 
 
     + Body
-
+```
             {
                 "meta": {
                     "numberOfRecords": 77,
@@ -3050,7 +3051,7 @@ This API request returns a list of [payment](#payment) objects.
                     "method": "GET"
                 }]
             }
-
+```
 
 # Orders [/orders]
 
@@ -3081,21 +3082,19 @@ one of numerous alternative payment methods.
 |**Expandable Resources**|none|
 |**Related Resources (if applicable)**|hosted_payment|
 
-+ Request (application/json)
-
-    + Attributes
++ Attributes
+    + Include order
+    + Include billingDetails
+    + Include links
     
-        + order (object, required) -The details for this order..
-        + billingDetails (object, optional) -Provide the billing details for your customer and the checkout pages will be pre-filled for them.  Currently only 1 recipient is supported.
-        + attributes ([string], optional) - This allows you to specify additional data \(e.g., affiliate codes, session IDs, etc.\) to be stored against the transaction and returned to you in status calls, reports, etc.
++ Request (application/json)
 
     + Headers
         
             Authorization: Bearer YOUR-ACCESS-TOKEN
-
             
     + Body            
-
+```    
             {
                 "order": {
                     "merchantRefId": "123456666",
@@ -3141,11 +3140,13 @@ one of numerous alternative payment methods.
                     ]
                 }
             }
+```
 
 + Response 201 (application/json)
 
-    + Body
 
+    + Body
+```        
             {
                 "orderId": "ORD_959b1148-704d-4d92-9a7d-14a18990a648",
                 "merchantRefId": "20141022142300",
@@ -3210,7 +3211,7 @@ one of numerous alternative payment methods.
                     }
                 ]
             }
-
+```
 
 ## Lookup an order [GET /v1/orders/{orderId}]
 
@@ -3237,10 +3238,12 @@ a GET request on the order id:
             Authorization: Bearer YOUR-ACCESS-TOKEN
             
 
+
 + Response 200 (application/json)
 
-    + Body
 
+    + Body
+```
             {
                 "orderId": "ORD_7915d463-ccc8-4305-9d33-9e5c9310f12e",
                 "merchantRefId": "123456666",
@@ -3307,7 +3310,8 @@ a GET request on the order id:
                     }
                 ]
             }
-            
+```
+
 ## Lookup invoice for an order [GET /orders/{orderId}/invoice]
 
 |Item|Value|
@@ -3336,7 +3340,7 @@ a GET request on the order id:
 + Response 200 (application/json)
 
     + Body
-
+```
             {
                 "invoiceId": "INV_259e0052-a345-48e9-835c-4f6a8dcaeeb9"
                 "invoiceNumber": "2915",
@@ -3380,6 +3384,7 @@ a GET request on the order id:
                     }
                 ]
             }
+```
 
 # Customers [/customers]
                                                                                                                                                                                                                                                                                                                       
@@ -3415,7 +3420,7 @@ Sample account confirmation screen
             Authorization: Bearer YOUR-ACCESS-TOKEN
             
     + Body            
-
+```
             {
                 "accountProfile": {
                     "firstName": "John",
@@ -3452,11 +3457,12 @@ Sample account confirmation screen
                 "linkBackUrl": "https://[YOUR_SITE]/cashier?TOKEN=234AJ242K22KMJKP",
                 "btag": "A_234B_345C_"
             }
+```
 
 + Response 201 (application/json)
 
     + Body
-
+```
             {
                 "links": [
                     {
@@ -3466,7 +3472,7 @@ Sample account confirmation screen
                     }
                 ]
             }   
-
+```
 
 
             
@@ -3502,7 +3508,7 @@ Return details about a particular customer.
 + Response 200 (application/json)
 
     + Body            
-
+```
             {
                "customerId": "CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325",
                "accountProfile": {
@@ -3511,6 +3517,7 @@ Return details about a particular customer.
                 },
                 "verificationLevel": "01"
             }
+```
 
 + Request  With account\_basic\_profile authorization (application/json)
 
@@ -3595,7 +3602,7 @@ increased likelyhood of finding a match.
 + Response 200 (application/json)
 
     + Body
-
+```
             {
                 "email": "MATCH",
                 "firstName": "NO_MATCH",
@@ -3606,6 +3613,7 @@ increased likelyhood of finding a match.
                 "country": "MATCH",  
                 "verificationLevel": "01"
             }
+```
 
 + Request No account found (application/json)
 
@@ -3626,13 +3634,14 @@ increased likelyhood of finding a match.
             X-Application-Status-Code: 5269
 
     + Body
-
+```
             {
                 "error": {
                     "code": "5269",
                     "message": "Entity Not Found"
                 }
             }
+```
                 
 ## Lookup subscription for a customer [GET /customers/{customerId}/subscriptions?limit={limit}&offset={offset}]
 
@@ -3654,7 +3663,7 @@ Return a list of all subscription for the customer.
 + Response 200 (application/json)
 
     + Body
-
+```
             {
                 "list": [
                     {
@@ -3703,7 +3712,7 @@ Return a list of all subscription for the customer.
                     }
                 ]
             }
-
+```
 
 # Plans [/plans]
 
@@ -3739,7 +3748,7 @@ Creating a subscription plan allows you to define a plan for having automatic pa
             Authorization: Bearer YOUR-ACCESS-TOKEN
             
     + Body
-
+```
             {
                 "planId": "MONTHLYGREENPLAN",
                 "planName": "Sample Premier Monthly Membership",
@@ -3749,13 +3758,13 @@ Creating a subscription plan allows you to define a plan for having automatic pa
                 "amount": 2995,
                 "currency": "EUR"
             } 
-
+```
 
 + Response 201 (application/json)
 
 
     + Body
-
+```
             {
                 "planId": "MONTHLYGREENPLAN",
                 "planName": "Sample Premier Monthly Membership",
@@ -3774,7 +3783,7 @@ Creating a subscription plan allows you to define a plan for having automatic pa
                     }
                 ]
             }
-
+```
 
 ## Lookup a plan [GET /plans/{planId}]
 
@@ -3808,7 +3817,7 @@ Creating a subscription plan allows you to define a plan for having automatic pa
         + availableBalance (object) - Member's currently available account balance.
 
     + Body
-        
+```        
             {
                 "planId": "MONTHLYGREENPLAN",
                 "planName": "Sample Premier Monthly Membership",
@@ -3827,6 +3836,7 @@ Creating a subscription plan allows you to define a plan for having automatic pa
                     }
                 ]
             }
+```
 
 ## Cancel a plan [POST /plans/{planId}/cancel]
 
@@ -3854,7 +3864,7 @@ Creating a subscription plan allows you to define a plan for having automatic pa
 
 
     + Body
-        
+```        
             {
                 "planId": "SAMPLEMONTHLY",
                 "planName": "Sample Premier Monthly Plan",
@@ -3873,7 +3883,7 @@ Creating a subscription plan allows you to define a plan for having automatic pa
                     }
                 ]
             }
-
+```
 
 ## Delete a plan [DELETE /plans/{planId}]
 
@@ -3913,13 +3923,14 @@ Any existing subscriptions on a cancelled plan will continue to be charged until
 + Response 200 (application/json)
 
     + body
-
+```
             {
               "error": {
                 "code": "20101",
                 "message": "Cannot delete a subscribed to plan"
               }
             }
+```
 
 ## List all your plans [GET /plans?limit={limit}&offset={offset}]
 
@@ -3946,7 +3957,7 @@ Any existing subscriptions on a cancelled plan will continue to be charged until
 + Response 200 (application/json)
     
     + Body
-    
+ ```   
                 {
                     "meta": {
                         "numberOfRecords": 5,
@@ -3986,6 +3997,7 @@ Any existing subscriptions on a cancelled plan will continue to be charged until
                         }
                     ]
                 }
+```
 
 # Subscriptions [/subscriptions]
 
@@ -4017,18 +4029,18 @@ In order to create a subscription you must first obtain member authorization for
             Authorization: Bearer YOUR-ACCESS-TOKEN
             
     + Body
-
+```
             {
                 "planId": "MYGOLDPLAN",
                 "customerId": "CUS_0d676b4b-0eb8-4d78-af25-e41ab431e325",
                 "startDate": "2014-06-01T00:00:00Z"
             }
-
+```
 
 + Response 201 (application/json)
 
     + Body
-
+```
             {
                 "subscriptionId": "SUB_0d676b4b-0ab3-4d78-af25-e452ab431e522",
                 "plan": {
@@ -4065,6 +4077,7 @@ In order to create a subscription you must first obtain member authorization for
                     }
                 ]
             }
+```
 
 ## Lookup subscription [GET /subscriptions/{subscriptionId}?expand={expand}]
 
@@ -4104,7 +4117,7 @@ Retrieve information about a previously created subscription by passing the rele
 + Response 200 (application/json)
     
     + Body
-    
+ ```   
             {
                 "subscriptionId": "SUB_0d676b4b-0ab3-4d78-af25-e452ab431e522",
                 "plan": {
@@ -4137,6 +4150,7 @@ Retrieve information about a previously created subscription by passing the rele
                     }
                 ]
             }    
+```
 
 + Request (application/json)
 
@@ -4153,7 +4167,7 @@ Retrieve information about a previously created subscription by passing the rele
 + Response 200 (application/json)
 
     + Body
-
+```
             {
                 "subscriptionId": "SUB_0d676b4b-0ab3-4d78-af25-e452ab431e522",
                 "plan": {
@@ -4190,6 +4204,7 @@ Retrieve information about a previously created subscription by passing the rele
                     }
                 ]
             }    
+```
 
 ## Cancel subscription [POST /subscriptions/{subscriptionId}/cancel]
 
@@ -4218,7 +4233,7 @@ By default when you cancel a subscription, the NETELLER subscription status is u
 
 
     + Body
-        
+```        
             {
                 "subscriptionId": "SUB_0d676b4b-0ab3-4d78-af25-e452ab431e522",
                 "plan": {
@@ -4251,6 +4266,7 @@ By default when you cancel a subscription, the NETELLER subscription status is u
                     }
                 ]
             }
+```
 
 ## List subscriptions [GET /subscriptions?limit={limit}&offset={offset}]
 
@@ -4279,7 +4295,7 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
 + Response 200 (application/json)
     
     + Body
-    
+```    
             {
                 "meta": {
                     "numberOfRecords": 14,
@@ -4333,6 +4349,7 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
                     }
                 ]
             }
+```
 
 ## Lookup invoice for a subscription [GET /subscriptions/{subscriptionId}/invoices/{invoiceNumber}]
 
@@ -4359,7 +4376,7 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
 + Response 200 (application/json)
     
     + Body
-    
+```   
             {
                "invoiceId": "INV_259e0052-a345-48e9-835c-4f6a8dcaeeb9",
                "invoiceNumber": 3020,
@@ -4412,6 +4429,7 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
                    }
                ]
             }
+```
 
 ## List all invoices for a subscription [GET /subscriptions/{subscriptionId}/invoices?limit={limit}&offset={offset}]
 
@@ -4439,7 +4457,7 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
 + Response 200 (application/json)
     
     + Body
-    
+```    
             {
                 "meta": {
                     "numberOfRecords": 16,
@@ -4503,7 +4521,7 @@ You can obtain a list of all your active subscriptions.  Newest subscriptions wi
                     }
                 ]
             }
-
+```
 
 # Data Structures
 
