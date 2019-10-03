@@ -476,6 +476,7 @@ If the request failed client authentication or is invalid, the authorization ser
 
 > *Is member authorization required?*
 > If the API resource does not require member authorization \(identified by a scope of *'default'*\), you can Obtain an access token using the client_credentials grant type instead.
+
 The authorization grant flow has two parts and utilizes two authorization server endpoints.  
 
 *1\) Authorization Endpoint* - used to obtain authorization \(auth_code\) from the resource owner via user-agent redirection.  
@@ -500,6 +501,7 @@ authorization is revoked by the member or until different permissions are requir
 5. Now you need to authorize your app.  Call the token endpoint with a grant type of authorization_code and provide the auth code from step 4. If successful, an access token is returned that can be used to make API requests on the users behalf.
 
 > When invoking this flow, you must pass in the redirect\_uri that the user's browser will be redirected back to once app authorization is completed. The redirect_uri must be the same URI you specify when registering your web application OR must be the same one that was passed in the original authorization call.
+
 **Obtain an authorization code**
 
 ```
@@ -678,6 +680,7 @@ Pragma: no-cache
 If the member does not authorize your request, or the request fails for reasons other then a missing or invalid redirection URI  NETELLER will redirect \(via HTTP 400 - Bad Request\) the user's browser by adding the following parameters to the query component of the redirection URL using the "application/x-www-form-urlencoded" format.
 
 > There are some error situations in which you will not receive the error back on your redirect_uri.   For example, if you attempt to supply an insecure http:// redirect.  In this case the customer would see an invalid request error.  For this reason it is important to validate your integration!
+
 |Parameter Name                 |Description|
 |---                            |---|
 |error                          |The error that occurred|
@@ -732,7 +735,9 @@ The following list identifies the authorized scopes that are available in the NE
 For API requests that permit default scope, you may not require member authorization if the fields you are concerned with are offered as part of the default response.   In this instance you should use your client credentials to obtain the required access token as there is no required member authorization.
 
 > The permissions associated with an access token are set in the /v1/oauth2/authorize call.   
+
 Some API methods will limit their response data dependent upon which authorized scopes have been granted.  See the JSON Objects reference for details around which fields are returned by default and which ones require member authorization. 
+
 |Permission              |Authorized Scope             |Description|
 |---                     |---                          |---|
 |Subscription Payment    |subscription_payment         |Permits access to setup a subscription and automatically receive recurring payments from a NETELLER account holder<br/>**Member Prompt: Allow access to setup a subscription and receive recurring payments from your NETELLER account.**|
@@ -747,13 +752,17 @@ Some API methods will limit their response data dependent upon which authorized 
 ## Webhooks
 
 A webhook allows you to define an HTTP callback that will be POST to when an event occurs that you would like to be notified of.  You can define the notification URL and select which events you wish to be notified of from your merchant account portal.
+
 > Webhooks will be sent whenever the state of the resource changes. Certain activity may lead to the same event being sent more than once.
+
 ![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/merchant-dashboard-webhooks.png)
 
 **Responding to a webhook**
 
 To acknowledge that you received the webhook without any problem, your server should return a 200 HTTP status code. Any other information you return in the request headers or request body will be ignored. Any response code outside the 200 range, including 3xx codes, will indicate to NETELLER that you did not receive the webhook.
+
 > If your system did not respond with a valid HTTP 200 status, NETELLER will continue to retry the request with an escalating time delay for up to 48 hours
+
 **Secure webhooks \(recommended\)**
 
 NETELLER recommends that you use one of the following forms of authentication on your webhook URLs
@@ -769,6 +778,7 @@ Format : https://{webhook_url}
 Example : https://example.com/netellerwebhook
 
 > The secret key should not be shared with anyone.
+
 **Sample webhook response**
 
 ```
@@ -895,599 +905,6 @@ such.  ie: 50 JPY would pass 50 in the amount, 50.00 USD would be an amount of 5
 |zh_CN        |Simplified Chinese|
 
 
-# Getting Started
-
-## Overview
-
-This section outlines some common use scenarios of the NETELLER REST API. <br />
-
-All examples in this section use cURL, which is a command line tool for transferring data using protocols such as HTTPS.
-
-## Obtain your sandbox or production account details
-
-The NETELLER REST API implements the OAUTH2 standard for authentication.  Below are the steps to follow when first setting up your
-application. The same steps should be completed on both sandbox [https://test.merchant.neteller.com/](https://test.merchant.neteller.com/) and production [https://merchant.neteller.com/](https://merchant.neteller.com/) environments. 
-
-You must complete all of these steps **before** you can attempt to obtain an access token for use in your REST API request.
-
-### 1) Verify that NETELLER REST API is enabled for your merchant account.
-
-If the API is not enabled, please contact [NETELLER Merchant Support](mailto:merchantsupport@optimalpayments.com) to have it enabled.
-
-![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/api-enabled.png)
-
-### 2) Register the IP addresses that will be allowed to access the API
-
-> When registering your secure API IP addresses, you must ensure you are using the IP\(s\) of your networks outbound gateway. If you are working within a corporate network, or are sitting behind a proxy, you may have to contact your administrator to help identify the appropriate IP address\(es\)_
-
-![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/ip-whitelisted.png)
-
-### 3) Register your application to obtain your API credentials
-
-Your must register your application by providing the appropriate detail about its name, where it will be hosted, and what the primary contact email is to be. You may also choose to upload an application logo that will provide your customers brand recognition if you are planning to implement the authorization flow.
-
-![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/application-added.png)
-
-You are now ready to obtain an access token to use in your REST API request. Please refer to the 'Authentication' section for more information on how to obtain an access token. 
-
-
-## Setup Subscription Billing
-
-NETELLER offers recurring billing support through the REST API with the plan and subscription resources.
-
-### Create a subscription plan
-
-To get started, you must first define your subscription plan.  The plan provides details about your recurring billing such as the charge amount, currency and frequency of the billing.   
-You can provide a custom plan id to identify the subscription plan, however the planid must be unique across all active subscription plans.
-
-**Sample request**
-
-```
-POST /v1/plans HTTP/1.1
-Host: test.api.neteller.com
-Authorization: Bearer 0.AQAAAUjshWvyAAAAAAAEk-Cj7vq1mEuIVz-2TomxIvnu.a4ixcq15cM6lCShJMIL7orHCI5w
-Content-Type: application/json
-Cache-Control: no-cache
-Postman-Token: 01f33640-4ecb-370b-fe23-0f9b2d972b91
-{
-    "planId": "DEMOGOLDPLAN",
-    "planName": "Sample Gold Plan",
-    "interval": 1,
-    "intervalType": "monthly",
-    "intervalCount": 12,
-    "amount": 2995,
-    "currency": "EUR"
-}
-```
-
-**Sample response**
-
-```
-{
-    "planId": "DEMOGOLDPLAN",
-    "planName": "Sample Gold Plan",
-    "interval": 1,
-    "intervalType": "monthly",
-    "intervalCount": 12,
-    "amount": 2995,
-    "currency": "EUR",
-    "status": "active",
-    "numberOfSubscriptions": 0,
-    "links": [
-        {
-            "url": "https://api.neteller.com/v1/plans/DEMOGOLDPLAN",
-            "rel": "self",
-            "method": "GET"
-        }
-    ]
-}
-```
-
-### Obtain member authorization to enroll them in your subscription plan
-
-Once you have created a plan, you will want to enroll members \(subscribe them\) to the plan. Before this can be done, you must first obtain authorization from the member so that NETELLER can issue re-curring payments on the member's behalf.   
-Obtain member authorization by redirecting the customer to the hosted authorization flow with scope of 'subscription\_payment', where they can approve your request.
-
-> See [Obtain an access token using the auth\_code grant type](#authcodegrant)for more information.
-
-**Sample request**
-
-```
-GET https://test.api.neteller.com/v1/oauth2/authorize?client_id=AAABRbRHwWkslo-u&redirect_uri=http://requestb.in/1kk4mrn1&scope=subscription_payment&response_type=code
-```
-
-![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/member-authorization-1.png)
-
-![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/member-authorization-2.png)
-
-Upon successful authorization, you will be returned the authorization code on your specified redirect uri along with the customer id.    The customer id can be used to identify the customer when you request to enrol them with the /subscription endpoint.
-
-**Sample response**
-
-```
-http://requestb.in/1kk4mrn1?auth_code=0.AAAAAVCNkWu3AAAAAAAEk-Azr8ttdq9qHdd74U2sed4J.cv1lK7A1riN9qykt-aFP7SWELj8&customer_id=CUS_A6B8F672-BA13-4AA5-8613-BA6018AF9B75
-```
-
-
-### Subscribe a NETELLER customer to your plan
-
-Once you have obtained the required authorization, you can proceed to subscribe the member in your plan through the create subscription call. 
-
-Subscriptions can be post dated to start at a later date by passing in an optional start date, but by default will start immediately and will attempt to collect payment as soon as you sent the request.
- 
-The first step in this process is to obtain a new access token.  This is completed by exchanging the members authorization\_code for an access token. Or by exchanging a previously issued refresh token if you have already obtained subscription_payment authorization from the NETELLER member.
-
-**Sample request**
-
-```
-POST /v1/oauth2/token?grant_type=authorization_code&code=0.AAAAAUjxrXbeAAAAAAAEk-AMxBtcId3NytItAJjLUG6C.JDOulU_E5v2wSOvoqrSldXFv49Y HTTP/1.1
-Host: test.api.neteller.com
-Content-Type: application/json
-Authorization: Basic QUFBQlJiUkh3V2tzbG8tdTowLmtnOG1wSnhOeER5ZUx2SVNVZ04wbHFsWWVWQS1UeFZSWlVFWThIdWljOEEuUzRuRnpPWS0wLTF3bW1qd3lGV2l0aUZwRGxz
-Cache-Control: no-cache
-Postman-Token: b22baf1f-256c-52c0-a52f-b6e1e04f19ec
-```
-
-**Sample response**
-
-```
-{
-  "accessToken": "0.AQAAAUjxrhKmAAAAAAA27oDRqZ5aM7mnxrr7cgwhVFt3.3RdQp5PrOlirCqhmHybKsRUBINI",
-  "expiresIn": 3600,
-  "refreshToken": "0.AgAAAUjxrhKfAAAAB1jwsOBSE_xJsAYmavHS30lwvJ1B.YwlwdWKjPSa12NXvqvgV_C2922E",
-  "scope": "subscription_payment"
-}
-```
-
-Next, use the access token to subscribe the member to your subscription plan.  Here we supply the optional startDate so the plan will start as the beginning of the month.
-
-**Sample request**
-
-```
-POST /v1/subscriptions HTTP/1.1
-Host: test.api.neteller.com
-Authorization: Bearer 0.AQAAAUjxrhKmAAAAAAA27oDRqZ5aM7mnxrr7cgwhVFt3.3RdQp5PrOlirCqhmHybKsRUBINI
-Content-Type: application/json
-Cache-Control: no-cache
-Postman-Token: 5b2d14b3-963f-6ca4-d008-2952a013f7b8
- 
-{
-    "planId": "DEMOGOLDPLAN",
-    "customerId": "CUS_A6B8F672-BA13-4AA5-8613-BA6018AF9B75",
-    "startDate": "2014-06-01T00:00:00Z"
-}
-```
-
-**Sample response**
-
-```
-{
-    "subscriptionId": "SUB_0d676b4b-0ab3-4d78-af25-e452ab431e522",
-    "plan": {
-        "link": {
-            "url": "https://api.neteller.com/v1/plans/DEMOGOLDPLAN",
-            "rel": "plan",
-            "method": "GET"
-        }
-    },
-    "customer": {
-        "link": {
-            "url": "https://api.neteller.com/v1/customers/CUS_FCBB852E-CAF6-4109-8AE1-40100D3ECE12",
-            "rel": "customer",
-            "method": "GET"
-        }
-    },
-    "status": "active",
-    "startDate": "2014-11-20T23:52:37Z",
-    "endDate": "2015-11-19T23:52:37Z",
-    "currentPeriodStart": "2014-11-20T23:52:35Z",
-    "currentPeriodEnd": "2014-11-27T23:52:35Z",
-    "cancelAtPeriodEnd": "false",
-    "cancelDate": null,
-    "links": [
-        {
-            "url": "https://api.neteller.com/v1/subscriptions/SUB_0d676b4b-0ab3-4d78-af25-e452ab431e522",
-            "rel": "self",
-            "method": "GET"
-        },
-        {
-            "url": "https://api.neteller.com/v1/payments/138416527555633",
-            "rel": "payment",
-            "method": "GET"
-        }
-    ]
-}
-```
-
-Customers that have a subscription will be able to see the subscription details in their member account settings.
-
-![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/member-subscription-details.png)
-
-
-### Setup Webhooks to receive updates about subscription payments
-
-A webhook allows you to define an HTTP callback that will be POST to when an event occurs that you would like to be notified of.  You can enable webhooks through your merchant account portal.  Start by saving your webhook URL and selecting the specific events you wish to receive notification for.
- 
-See [Webhooks](#Webhooks) for more information.
-
-![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/setup-webhooks.png)
-
-You can trigger sample webhook event through the Test Webhooks function to ensure your service is properly exposed to capture the event.
-
-![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/trigger-sample-webhook.png)
-
-
-### Billing Process
-
-NETELLER will automatically attempt to collect payment for all your subscriptions on their due date.  In the event the member has insufficient account balance to process the payment, NETELLER will re-try payment collection 3 times over a 7 day period.  \(1st, 3rd, 7th day after initial charge attempt\).  The member will be notified that they have insufficient funds in their account and that they need to top up their balance before the next retry.
-
-**Failed charge notification email**
-
-In the unlikely event that NETELLER is unable to collect payment for the current period billing, you will receive an email notification with an attached CSV file detailing any failed payments for the current day.
-
-![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/failed-charge-notification-email.png)
-
-**Sample CSV attachment:**
-
-![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/sample-csv-attachment.png)
-
-
-
-## Create a NETELLERgo! Hosted Payment
-
-### Create an order
-
-The first step in using the NETELLERGO! hosted payment flow, is to create an order.  The order may, or may not, contain a detailed list of all items / fees / taxes that you wish to collect payment for.  NETELLER recommends you provide as much detail as possible in the order request, as the more detail you can provide, the more likely you customer is to complete the payment as they will have a better understanding of how the total purchase amount was calculated.
-
-> Your request should include redirect_urls for where you would like your customer to be returned depending on the outcome of the attempt to collect payment.
-
-**Sample request**
-
-```
-POST /v1/orders HTTP/1.1
-Host: test.api.neteller.com
-Authorization: Bearer 0.AQAAAUpkOdfxAAAAAAA27oCvz0-Y9rEevMOnlll8yDtB.3ukRggt_VV1zXjFNd1h8-TGrMcI
-Content-Type: application/json
-Cache-Control: no-cache
- 
-{  
-   "order":{  
-      "merchantRefId":"20141231120800",
-      "totalAmount":3599,
-      "currency":"EUR",
-      "lang":"en_US",
-      "items":[  
-         {  
-            "amount":2500,
-            "quantity":1,
-            "sku":"XYZPART1",
-            "name":"Item A",
-            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget venenatis diam. Integer euismod magna dui, a accumsan elit interdum."
-         },
-         {  
-            "amount":200,
-            "quantity":2,
-            "sku":"",
-            "name":"Item B",
-            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet congue orci, ac euismod."
-         }
-      ],
-      "fees":[  
-         {  
-            "feeAmount":500,
-            "feeName":"Setup Fee"
-         }
-      ],
-      "taxes":[  
-         {  
-            "taxAmount":199,
-            "taxName":"VAT"
-         }
-      ],
-      "redirects":[  
-         {  
-            "rel":"on_success",
-            "uri":"http://requestb.in/16bf0vr1?result=success"
-         },
-         {  
-            "rel":"on_cancel",
-            "uri":"http://requestb.in/16bf0vr1?result=cancel"
-         }
-      ]
-   }
-}
-```
-
-**Sample response**
-
-```
-{
-  "orderId": "ORD_2d8ab7f0-dc97-472f-96c7-16b4488fab35",
-  "merchantRefId": "20141219132605",
-  "totalAmount": 3599,
-  "currency": "EUR",
-  "customerIp": "192.168.0.1",
-  "lang": "en_US",
-  "items":
-  [
-    {
-      "amount": 2500,
-      "quantity": 1,
-      "sku": "XYZPART1",
-      "name": "Item A",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget venenatis diam. Integer euismod magna dui, a accumsan elit interdum."
-    },
-    {
-      "amount": 200,
-      "quantity": 2,
-      "sku": "",
-      "name": "Item B",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet congue orci, ac euismod."
-    }
-  ],
-  "fees":
-  [
-    {
-      "feeAmount": 500,
-      "feeName": "Setup Fee"
-    }
-  ],
-  "taxes":
-  [
-    {
-      "taxAmount": 199,
-      "taxName": "VAT"
-    }
-  ],
-  "redirects":
-  [
-    {
-      "rel": "on_success",
-      "uri": "https://example.com/success.html"
-    },
-    {
-      "rel": "on_cancel",
-      "uri": "https://example.com/cancel.html"
-    }
-  ],
-  "links":
-  [
-    {
-      "url": "https://api.neteller.com/v1/checkout/ORD_2d8ab7f0-dc97-472f-96c7-16b4488fab35",
-      "rel": "hosted_payment",
-      "method": "GET"
-    },
-    {
-      "url": "https://api.neteller.com/v1/orders/ORD_2d8ab7f0-dc97-472f-96c7-16b4488fab35",
-      "rel": "self",
-      "method": "GET"
-    }
-  ]
-}
-```
-
-### Redirect customer to hosted_payment URL
-
-NETELLER will respond with a unique order id, details of the order request, and a HATEOAS link for the *hosted\_payment* flow that you redirect your customer to.
-
-![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/go-1-choose-payment.png)
-
-![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/go-2-success.png)
-
-Once NETELLER has completed the request, the customer will be directed to the appropriate redirection url as supplied in your create order request.
-
-### Verify status of payment invoice
-
-When you enable webhooks from your merchant account portal, NETELLER will notify when the status of the order changes and allow you to take appropriate action.   Additionally you can query for the order status or order invoice status to verify your payment.  Refer to the order and invoice object for more information on the various status definitions.  
-
-> The order lookup will also provide related HATEOAS links, including the related invoice and payment.
-
-```
-GET /v1/orders/ORD_2ed9d95b-3361-4144-b702-64010c1afdfa HTTP/1.1
-Host: api.neteller.com
-Authorization: Bearer 0.AQAAAUqh0lkiAAAAAAA27oCpkpXuJBSTHQW1c4gp5NUa.ch314cvao60L3lBsUEERdEY-k58
-Content-Type: application/json
-Cache-Control: no-cache
- 
-{  
-    "orderId": "ORD_2ed9d95b-3361-4144-b702-64010c1afdfa",
-    "merchantRefId": "123456666",
-    "totalAmount": 3599,
-    "currency": "EUR",
-    "status": "pending",
-    "lang": "en_US",
-    "items": [
-        {
-            "quantity": 2,
-            "name": "Item B",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet congue orci, ac euismod.",      
-            "amount": 200
-        }
-    ],
-    "fees": [
-        {
-            "feeName" : "Setup Fee",
-            "feeAmount": 500
-        }
-    ],
-    "taxes": [
-        {
-            "taxName": "VAT"
-            "taxAmount": 199,
-        }
-    ],
-    "paymentMethods": [
-       {
-           "type": "voucher",
-           "value": "ukash"
-       }
-    ],
-    "redirects": [
-        {
-            "rel": "on_success",
-            "returnKeys": [
-                "id"
-            ],
-            "uri": "https://example.com/success.html"
-        },
-        {
-            "rel": "on_cancel",
-            "returnKeys": [
-                "id"
-            ],
-            "uri": "https://example.com/cancel.html"
-        }
-    ],
-    "links": [
-        {
-           "url": "https://api.neteller.com/v1/orders/ORD_2ed9d95b-3361-4144-b702-64010c1afdfa",
-           "rel": "self",
-           "method": "GET"
-        },
-        {
-            "url": "https://api.neteller.com/v1/checkout/ja3l3i_289lGk_3k2390",
-            "rel": "hosted_payment",
-            "method": "GET"
-        },
-        {
-            "url": "https://api.neteller.com/v1/orders/ORD_2ed9d95b-3361-4144-b702-64010c1afdfa/invoice",
-            "rel": "invoice",
-            "method": "GET"
-        },
-        {
-            "url": "https://api.neteller.com/v1/payments/154391457301406",
-            "rel": "payment",
-            "method": "GET"
-        }
-    ]
-}
-```
-
-> A HATEOAS link to the corresponding payment object will be available on the invoice *only* when the customer has completed their checkout.
-
-You can check the status of the order or review order details by using the Lookup order function
-
-```
-GET /v1/orders/ORD_2d8ab7f0-dc97-472f-96c7-16b4488fab35 HTTP/1.1
-Host: test.api.neteller.com
-Authorization: Bearer 0.AQAAAVCNnA9HAAAAAAA27oBWw1Cf97jNe_jhOqKOIbKG._dML1Cm-RxMzrWbwBoe8cRXSa7A
-Content-Type: application/json
-Cache-Control: no-cache
-Postman-Token: d174ed94-c737-e4fe-0ff2-44fc90abfe74
- 
-{
-  "orderId": "ORD_2d8ab7f0-dc97-472f-96c7-16b4488fab35",
-  "merchantRefId": "20141219132605",
-  "totalAmount": 3599,
-  "currency": "EUR",
-  "status": "expired",
-  "items":
-  [
-    {
-      "amount": 2500,
-      "quantity": 1,
-      "sku": "XYZPART1",
-      "name": "Item A",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget venenatis diam. Integer euismod magna dui, a accumsan elit interdum."
-    },
-    {
-      "amount": 200,
-      "quantity": 2,
-      "sku": "",
-      "name": "Item B",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet congue orci, ac euismod."
-    }
-  ],
-  "fees":
-  [
-    {
-      "feeAmount": 500,
-      "feeName": "Setup Fee"
-    }
-  ],
-  "taxes":
-  [
-    {
-      "taxAmount": 199,
-      "taxName": "VAT"
-    }
-  ],
-  "links":
-  [
-    {
-      "url": "https://test.api.neteller.com/v1/orders/ORD_2d8ab7f0-dc97-472f-96c7-16b4488fab35",
-      "rel": "self",
-      "method": "GET"
-    },
-    {
-      "url": "https://test.api.neteller.com/v1/checkout/ORD_2d8ab7f0-dc97-472f-96c7-16b4488fab35",
-      "rel": "hosted_payment",
-      "method": "GET"
-    }
-  ]
-}
-```
-
-You can check the payment status by looking up the related invoice for the order.
-
-```
-GET /v1/orders/ORD_2ed9d95b-3361-4144-b702-64010c1afdfa/invoice HTTP/1.1
-Host: api.neteller.com
-Authorization: Bearer 0.AQAAAUqh0lkiAAAAAAA27oCpkpXuJBSTHQW1c4gp5NUa.ch314cvao60L3lBsUEERdEY-k58
-Content-Type: application/json
-Cache-Control: no-cache
- 
-{
-  "invoiceNumber": 101,
-  "invoiceDate": "2014-12-31T19:17:35Z",
-  "invoiceType": "order",
-  "customer": {
-    "link": {
-      "url": "https://api.neteller.com/v1/customers/CUS_1E91F0F6-FF9A-4BE3-8487-E09114C00DFF",
-      "rel": "customer",
-      "method": "GET"
-    }
-  },
-  "order": {
-    "url": "https://api.neteller.com/v1/orders/ORD_2ed9d95b-3361-4144-b702-64010c1afdfa",
-    "rel": "order",
-    "method": "GET"
-  },
-  "status": "paid",
-  "totalAmount": 3599,
-  "currency": "EUR",
-  "links":
-  [
-    {
-      "url": "https://api.neteller.com/v1/orders/ORD_2ed9d95b-3361-4144-b702-64010c1afdfa/invoice",
-      "rel": "self",
-      "method": "GET"
-    },
-    {
-      "url": "https://api.neteller.com/v1/payments/298420053918144",
-      "rel": "payment",
-      "method": "GET"
-    }
-  ]
-}
-```
-
-If the order was not completed and/or the customer abandoned their checkout, then no invoice will be found.
-
-```
-GET /v1/orders/ORD_2d8ab7f0-dc97-472f-96c7-16b4488fab35/invoice HTTP/1.1
-Host: api.neteller.com
-Authorization: Bearer 0.AQAAAUpkXyaoAAAAAAA27oBNGVPlEe3DZ5kPbUwaUvXU.sybYAd-Wzg3o5IAhhz7ErotMjeI
-Content-Type: application/json
-Cache-Control: no-cache
- 
-{
-  "error": {
-    "code": "5269",
-    "message": "Entity not found"
-  }
-}
-```
 
 
 # HTTP Responses
@@ -1536,7 +953,9 @@ error code will be returned in the header so it can be easily used by an applica
 |details|Array|This is a detailed description|
 |fieldErrors|Array|This is a list of fields that have problems|
 
+
 **Error message example with details**
+
 
 ```
     {
@@ -1578,6 +997,7 @@ error code will be returned in the header so it can be easily used by an applica
        }
     }
 ```
+
 
 ## Error Codes
 
@@ -1647,6 +1067,7 @@ These errors are specific to the NETELLER REST API.
 |400         |20301  |NETELLER declined                  |NETELLER has declined to process the transaction.|
 |401         |20900  |Request not authorized             |Your request was not authorized as the API requires member authorization.  Please use the authorization_grant flow to obtain member permission for the required scope.|
 |503         |20999  |Service unavailable due to scheduled maintentance |The API is currently unavailable due to maintenance activities.|
+
 
 
 # Complex JSON Objects
@@ -2283,28 +1704,11 @@ Sample payment from guest
 
 > For outgoing transfers you can only use NETELLER Account ID to identify the recipient whey they already have a registered NETELLER account, for non-account holders you must specify the recipients email address.
 > When in doubt, use of email will ensure the recipient can still complete the signup process and receive their funds.
-<br/><br/>
-> When specifying neteller as paymentMethod for a NETELLERgo! order, the value will be ignored as your checkout
+> When specifying neteller as paymentMethod for a NETELLERgo order, the value will be ignored as your checkout
 > will be prefilled from supplied billingDetails instead.
+
 Permitted Values
 
-|Type               |Value                                                       |Logo           |Supported Processing Currencies|
-|---                |---                                                         |---            |---|
-|neteller           |The NETELLER account holders email address \(preferred\)<br/>**OR**<br/>The account holders 12 digit NETELLER account ID| ![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/neteller.png)  |See Currencies|
-|voucher            |paysafecard                                                 |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/paysafecard.png)               |EUR, GBP, CHF, BGN, CZK, DKK, HRK, HUF, NOK, PLN, RON, SEK|
-|onlinebanking      |sofortbanking                                               |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/sofort.png)                    |EUR|
-|onlinebanking      |poli                                                        |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/poli.png)                      |AUD|
-|onlinebanking      |giropay                                                     |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/giropay.png)                   |EUR|
-|onlinebanking      |ideal                                                       |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/ideal.png)                     |EUR|
-|onlinebanking      |bradesco                                                    |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/bradesco.png)                  |USD<br/>Max $500 transaction, $3000 month per customer|
-|onlinebanking      |itau                                                        |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/itau.png)                      |USD|
-|onlinebanking      |bancodobrasil                                               |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/banco-do-brasil.png)           |USD<br/>Max $500 transaction, $3000 month per customer|
-|onlinebanking      |webpay                                                      |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/webpay.png)                    |USD|
-|onlinebanking      |qiwi                                                        |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/qiwi.png)                      |RUB|
-|onlinebanking      |webmoney                                                    |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/webmoney.png)                  |RUB|
-|onlinebanking      |yandex                                                      |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/yandex_en.png)                 |RUB|
-|digitalcurrency    |bitcoin                                                     |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/bitcoin.png)                   |GBP, USD, EUR|
-|carrierbilling     |boku                                                        |![](https://github.com/paysafegroup/neteller_rest_api_v1/raw/master/images/payment_icons/boku.png)                      |DKK, SEK, CHF, GBP|
 
 ```
 {
@@ -2532,7 +1936,9 @@ A refresh token is valid until the member removes the permission or authorizes n
 A device that you have successfully authenticated to your NETELLER account from.  Your trusted devices are visible and can be managed through the member portal settings page.
 
 
+
 # Authorization [/oauth2]
+
 
 ## Obtain an access token using client credentials [POST /oauth2/token?grant_type={grantType}]
 
@@ -2541,6 +1947,7 @@ If you are testing using cURL or a browser client, you can specify the HTTP Basi
 username and client\_secret as your password.
 
 > The client_secret for your application should not be shared with anyone or embedded in any code that you will distribute.  This exclusion also extends to an app binary that could be de-compiled.  This API call should only be made using server-side code over TLS.
+
 + Parameters
 
     + grantType (required, string, `client_credentials`) - The specific grant\_type, set this value to client\_credentials.
@@ -2574,7 +1981,8 @@ NETELLER will post back to your redirect uri with a unique authorization code th
 2) Token Endpoint - used to exchange the auth\_code, or previously issued refresh\_token for an new access token to use with your 
 REST API calls.  This process can be repeated until authorization is revoked by the member or until different permissions are required.
  
-> When invoking this flow, you must pass in the redirect\_uri that the user's browser will be redirected back to once app authorization is completed. The redirect_uri must be the same URI you specify when registering your web application OR must be the same one that was passed in the original authorization call.
+> When invoking this flow, you must pass in the redirect\_uri that the user's browser will be redirected back to once app authorization is completed. The redirect_uri must be the same URI you specify when registering 
+> your web application OR must be the same one that was passed in the original authorization call.
 
 + Parameters
 
@@ -2672,9 +2080,13 @@ initial authorization response to obtain a new one.
     
         + Include refreshToken
 
+
+
 # Payments [/]
 
-The payments resource is available to facilitate the transfer of funds between accounts within the NETELLER system. A payment to a non-registered NETELLER member can optionally include profile information (including email, name, address, phone, birthdate)  that will be used to enhance the signup experience for new members, so they do not have to re-key in information that is already available in your system.
+The payments resource is available to facilitate the transfer of funds between accounts within the NETELLER system. A payment to a non-registered NETELLER member can optionally include profile 
+information (including email, name, address, phone, birthdate)  that will be used to enhance the signup experience for new members, so they do not have to re-key in information that is already available in your system.
+
 
 ## Send Payment [POST /transferOut]
 
@@ -3449,7 +2861,9 @@ Sample account confirmation screen
 
 Return details about a particular customer.
 
-> Note: A customer object will only be returned if the customer has completed their account setup.  The level of detail returned is dependant upon what scope authorization you have received from the member, see the authorization grant flow for more information.
+> Note: A customer object will only be returned if the customer has completed their account setup.  The level of detail returned is dependant upon what scope authorization you have received from the member, see 
+> the authorization grant flow for more information.
+
 |Item|Value|
 |---|---|
 |**Scope required to initiate request**|none|
