@@ -905,8 +905,6 @@ such.  ie: 50 JPY would pass 50 in the amount, 50.00 USD would be an amount of 5
 |zh_CN        |Simplified Chinese|
 
 
-
-
 # HTTP Responses
 
 HTTP response codes are used to indicate the status of a request.To ease integration and support for developers 
@@ -1707,7 +1705,25 @@ Sample payment from guest
 > When specifying neteller as paymentMethod for a NETELLERgo order, the value will be ignored as your checkout
 > will be prefilled from supplied billingDetails instead.
 
-Permitted Values
+*Permitted Values:*
+
+|Type               |Value                                                       |Supported Processing Currencies|
+|---                |---                                                         |---|
+|neteller           |The NETELLER account holders email address \(preferred\)<br/> <b>OR</b> <br/>The account holders 12 digit NETELLER account ID|See Currencies|
+|voucher            |paysafecard                                                 |EUR, GBP, CHF, BGN, CZK, DKK, HRK, HUF, NOK, PLN, RON, SEK|
+|onlinebanking      |sofortbanking                                               |EUR|
+|onlinebanking      |poli                                                        |AUD|
+|onlinebanking      |giropay                                                     |EUR|
+|onlinebanking      |ideal                                                       |EUR|
+|onlinebanking      |bradesco                                                    |USD<br/>Max $500 transaction, $3000 month per customer|
+|onlinebanking      |itau                                                        |USD|
+|onlinebanking      |bancodobrasil                                               |USD<br/>Max $500 transaction, $3000 month per customer|
+|onlinebanking      |webpay                                                      |USD|
+|onlinebanking      |qiwi                                                        |RUB|
+|onlinebanking      |webmoney                                                    |RUB|
+|onlinebanking      |yandex                                                      |RUB|
+|digitalcurrency    |bitcoin                                                     |GBP, USD, EUR|
+|carrierbilling     |boku                                                        |DKK, SEK, CHF, GBP|
 
 
 ```
