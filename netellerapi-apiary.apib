@@ -47,7 +47,9 @@ response object notation.
 
 |API Version|Minor Version    |Patch / Description|
 |---        |---              |---|
-|<b>v1</b>  |<b>2015-04-28</b>|**_2018-06-18_**|
+|<b>v1</b>  |<b>2015-04-28</b>|**_2020-11-02_**|
+|           |                 |- AccountId added to response on customer verification|
+|           |                 |**_2018-06-18_**|
 |           |                 |- Added new currencies: Chinese Yuan Renminbi \(CNY\)|
 |           |                 |- Added Simplified Chinese (zh_CN)|
 |           |                 |**_2018-01-27_**|
@@ -3021,7 +3023,8 @@ increased likelyhood of finding a match.
                 "houseNumber": "MATCH",
                 "postCode": "MATCH",
                 "country": "MATCH",  
-                "verificationLevel": "01"
+                "verificationLevel": "01",
+                "accountId": "45000100001"
             }
 ```
 
