@@ -3,20 +3,24 @@ HOST: https://api.neteller.com/v1
 
 # Integrating the NETELLER REST API
 
-> **!!ATTENTION!! - Mandatory NETELLER API Change Reminder** <br/><br/>
+> **!!ATTENTION!!- Mandatory NETELLER API Change Reminder** <br/><br/>
 > Paysafe will no longer accept transactions requested through this API as of 15 May 2020.  In order to continue transaction processing
 > via the NETELLER service you must integrate these new functions via the Paysafe Payments API prior to this date.
 > <br/><br/>
+> **On 16 November 2020, Paysafe will deactivate the Customer Lookup, Orders, Subscriptions and Plans functions currently available via the NETELLER REST API.**
+> <br/><br/>
+> Please note, the Customer Verification tool, https://api.neteller.com/v1/customers/verify/{ID}, will remain unaffected.  This tool will continue to allow you 
+> to confirm whether the customer profile in your system matches the account details held within the NETELLER system.
+> <br/><br/>
 > Please see the <a href="https://developer.paysafe.com/en/additional-documentation/neteller-migration-guide/overview/">NETELLER Migration Guide</a> for more information.
->
 
 
 The NETELLER REST API is comprehensive api that allows you to securely manage and facilitate your online payment needs.
-The _**RESTful API**_ ([REpresentational State Transfer](http://en.wikipedia.org/wiki/Representational_state_transfer)) 
+The _RESTful API_ ([REpresentational State Transfer](http://en.wikipedia.org/wiki/Representational_state_transfer)) 
 provides predictable, resource based URI's that removes the complexity that often comes with implementing
 traditional SOAP or XML driven APIs.
 <br/><br/>
-This API leverages _**OAUTH2**_ as a token based authorization framework and works with JSON request and 
+This API leverages _OAUTH2_ as a token based authorization framework and works with JSON request and 
 response object notation.
 
 > The cURL samples included in this documentation are for reference purposes only. Substitute your own 
@@ -43,7 +47,7 @@ response object notation.
 
 |API Version|Minor Version    |Patch / Description|
 |---        |---              |---|
-|**v1**     |**2015-04-28**   |**_2018-06-18_**|
+|<b>v1</b>  |<b>2015-04-28</b>|**_2018-06-18_**|
 |           |                 |- Added new currencies: Chinese Yuan Renminbi \(CNY\)|
 |           |                 |- Added Simplified Chinese (zh_CN)|
 |           |                 |**_2018-01-27_**|
@@ -81,7 +85,7 @@ response object notation.
 |           |                 |- Add HATEOAS link for corresponding customer detail for invoice lookup if they authenticated to NETELLER to pay|
 |           |                 |- Create subscription requires a customer id now instead of profile \(The customer id is obtained using the authorization flow\)|
 |           |                 |- Added error codes: 20009, 20301|
-|**v1**     |**2015-11-04**   |- **_2015-03-24_**|
+|<b>v1</b>  |<b>2015-11-04</b>|- **_2015-03-24_**|
 |           |                 |- Added additional webhooks for orders, payments|
 |           |                 |- Added payment methods for NETELLERgo! \(bradesco, bancodobrasil, itau, webpay\)|
 |           |                 |- Enhanced OAUTH authorization flow to return customer id for an authorization|
@@ -109,7 +113,7 @@ response object notation.
 |           |                 |- Renamed subscriptionPlan resource to plan|
 |           |                 |- Renamed invoice amountDue to totalAmount|
 |           |                 |- Lists no longer contain un-necessary object wrapper, rather returns a list of the appropriate object.|
-|**v1**     |**2014-04-15**   |- **_2014-09-30_**|
+|<b>v1</b>  |<b>2014-04-15</b>|- **_2014-09-30_**|
 |           |                 |- Added API minor version support|
 |           |                 |- **_2014-09-03_**|
 |           |                 |- Added OAUTH2 authorization grant|
@@ -290,7 +294,7 @@ By adding an **expand** query parameter to the query you are effectively telling
 <br/><br/>
 
 For resources that have multiple expandable children, you can specify which resources to expand in a comma separated list. <br />
-Eg. <strong>?expand=resource1,resource2</strong>
+Eg. <b>?expand=resource1,resource2</b>
 
 <br/>
 
