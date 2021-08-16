@@ -173,7 +173,7 @@ Upgrade Procedure
 
 # Technical introduction
 
-This section provides a technical introduction to the NETELLER REST API. 
+This section provides a technical introduction to the NETELLER REST API.  
 
 ## API Endpoints
 
@@ -1156,7 +1156,6 @@ These errors are specific to the NETELLER REST API.
     }
 }
 ```
-
 <a name="attribute"></a>
 
 ## attribute
@@ -1172,6 +1171,17 @@ These errors are specific to the NETELLER REST API.
     "value": "test12345"
 }
 ```
+<a name="accountPreferences"></a>
+
+## accountBalance
+
+|Element                 |Type                   |Description|
+|---                     |---                    |---|
+|accountId               |Integer                |The ID of the currency account.|
+|currency                |string<br/>`lenght=3`  |The currency of the account (ISO code).|
+|legalEntity             |string<br/>`length=3`  |The region of the account. It can be either EEA for the European economic area or ROW for the rest of the world.
+|balance                 |decimal                |The balance available in the currency account.|                
+
 
 <a name="balance"></a>
 
@@ -2110,9 +2120,82 @@ initial authorization response to obtain a new one.
     
         + Include refreshToken
 
+# Balances [/]
 
 
-# Payments [/]
+## GET Balances [GET /balances/]
+
+A merchant can look-up the total balances in their accounts using the Balances API endpoint. The call is a GET request to /v1/balances returning an array of AccountBalance objects in json format.
+
+> Authorization header with valid Bearer token is required.  
+
+> There is an optional "accountId" query parameter to limit the results to only a specific account.  
+
+> The legalEntity field distinguishes if the account is for the following: European Economic Area (EEA) and Rest Of the World (ROW)
+
++ Parameters
+
+    + accountId (optional, number, `int64`) 
+    + currency (optional, string, `3 letter ISO code`)
+    + legalEntity (optional, enum, `EEA, ROW`)
+    + balance (optional, floating-point, `22.05`)
+
+    
++ Request 
+
+    + Headers
+
+            Content-Type:  application/json
+            Authorization: Bearer YOUR-ACCESS-TOKEN
+            
++ Response 201 (application/json)
+
+    + Body
+```
+[{
+"accountId": 4,
+"currency": "USD",
+"legalEntity": "ROW",
+"balance": 40005.0045
+},{
+"accountId": 6,
+"currency": "USD",
+"legalEntity": "EEA",
+"balance": 0
+},{
+"accountId": 14,
+"currency": "EUR",
+"legalEntity": "ROW",
+"balance": 512
+},{
+"accountId": 17,
+"currency": "EUR",
+"legalEntity": "EEA",
+"balance": 1534.2
+}]
+```
+
++ Request with accountId
+
+    + Headers
+
+            Content-Type:  application/x-www-form-urlencoded' -H 'Accept: application/json' -H 
+            Authorization: Bearer YOUR-TOKEN-HERE' 'https://test.api.neteller.com/v1/balances?accountId=17'
+            
++ Response 201 (application/json)
+
+    + Body
+```
+[{
+"accountId": 17,
+"currency": "EUR",
+"legalEntity": "EEA",
+"balance": 1534.2
+}]
+```
+
+    
+# Payments [//]
 
 The payments resource is available to facilitate the transfer of funds between accounts within the NETELLER system. A payment to a non-registered NETELLER member can optionally include profile 
 information (including email, name, address, phone, birthdate)  that will be used to enhance the signup experience for new members, so they do not have to re-key in information that is already available in your system.
