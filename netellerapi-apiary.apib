@@ -2144,6 +2144,8 @@ A merchant can look-up the total balances in their accounts using the Balances A
 
 > The legalEntity field distinguishes if the account is for the following: European Economic Area (EEA) and Rest Of the World (ROW)
 
+> Conventional APIs return amounts converted to the minor unit of currency. For example,  an amount of $12.34 is returned as 1234. The new <i>Balances</i> resource does not follow this standard and returns amounts only in decimal format.
+
 + Parameters
 
     + accountId (optional, number, `int64`) 
