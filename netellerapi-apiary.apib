@@ -2561,6 +2561,84 @@ This API request returns a list of [payment](#payment) objects.
             }
 ```
 
+## Accounts 
+
+A merchant can look-up the total balances in their accounts using the Balances API endpoint. The call is a GET request to /v1/balances returning an array of AccountBalance objects in json format.
+
+> Authorization header with valid Bearer token is required.  
+
+> There is an optional "accountId" query parameter to limit the results to only a specific account.  
+
+> There is an optional "accountId" query parameter to limit the results to only a specific account.
+
++ AccountBalance objects:
+
+    + accountId (number, `int64;)
+    + currency (string, `3 letter ISO code;)
+    + legalEntity (string, enum, "EEA", "ROW")
+    + balance (number, floating-point;)
+
+The legalEntity field distinguishes if the account is for the 
+
+> European Economic Area (EEA) or the.  
+
+> Rest Of the World (ROW).  
+
++ Request 
+
+    + Headers
+           
+            Content-Type:  application/x-www-form-urlencoded' -H
+            Accept: application/json' -H  
+            Authorization: Bearer YOUR-ACCESS-TOKEN (https://test.api.neteller.com/v1/balances)
+            
++ Response 201 (application/json)
+
+    + Body
+```
+[{
+"accountId": 4,
+"currency": "USD",
+"legalEntity": "ROW",
+"balance": 40005.0045
+},{
+"accountId": 6,
+"currency": "USD",
+"legalEntity": "EEA",
+"balance": 0
+},{
+"accountId": 14,
+"currency": "EUR",
+"legalEntity": "ROW",
+"balance": 512
+},{
+"accountId": 17,
+"currency": "EUR",
+"legalEntity": "EEA",
+"balance": 1534.2
+}]
+```
+
++ Request with accountId
+
+    + Headers
+
+            Content-Type:  application/x-www-form-urlencoded' -H 
+            Accept: application/json' -H 
+            Authorization: Bearer YOUR-TOKEN-HERE' 'https://test.api.neteller.com/v1/balances?accountId=17'
+            
++ Response 201 (application/json)
+
+    + Body
+```
+[{
+"accountId": 17,
+"currency": "EUR",
+"legalEntity": "EEA",
+"balance": 1534.2
+}]
+```
+
 # Orders [/orders]
 
 Order processing utilizes a hosted payment solution, also known as NETELLERgo!.  This hosted solution allows you 
